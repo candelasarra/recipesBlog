@@ -1,0 +1,23 @@
+/* notable */
+* {
+  font-family: "Notable", sans-serif !important;
+}
+hr {
+  background: #d3d3d34a !important ;
+  border: none !important;
+  height: 2px !important ;
+}
+html {
+  background-color: #1f1f1f;
+}
+.MuiGrid-item {
+  box-shadow: 0 0 0 1px #231f20, inset 0 0 0 1px #231f20;
+}
+/* .border {
+  border-image-slice: 389 fill;
+  border-image-width: 83px;
+  /* border-image-source: url(https://www.pinclipart.com/picdir/big/46-465098_black-star-border-clip-art-simple-black-and.png); */
+/* border-image-repeat: space; */
+.svg {
+  fill: #e25a5f !important;
+}
