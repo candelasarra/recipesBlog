@@ -4,7 +4,7 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Candela's Recipes`,
+    title: `the cherry chronicles`,
     author: `Candela`,
     menuLinks: [
       {
@@ -42,15 +42,15 @@ module.exports = {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ["Notable"],
+          families: ["Barrio"],
         },
       },
     },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Candela's`,
-        short_name: `Candela's`,
+        name: `Cherry Chronicles`,
+        short_name: `Cherry Chronicles`,
         start_url: `/`,
         background_color: `#a58da4`,
         theme_color: `#a58da4`,

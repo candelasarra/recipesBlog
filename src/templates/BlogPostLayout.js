@@ -29,12 +29,18 @@ const BlogPostLayout = props => {
       },
       { label: `Post`, variant: "body2" },
     ]
+  } else {
+    breadcrumbArray = [
+      { label: "Home", link: "/", variant: "body2" },
+      { label: "All Posts", link: `/posts`, variant: "body2" },
+      { label: `Post`, variant: "body2" },
+    ]
   }
 
   return (
     <MainWrapper>
       <Header titleStyle="h4" />
-      {service && <CustomBreadcrumbs array={breadcrumbArray} />}
+      <CustomBreadcrumbs array={breadcrumbArray} location={props.location} />
       <BlogPostLayoutContent edges={edges} />
       <Subscribe />
     </MainWrapper>

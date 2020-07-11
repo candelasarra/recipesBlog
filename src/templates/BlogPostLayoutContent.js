@@ -20,10 +20,10 @@ const useStyles = makeStyles(theme => ({
   bodyText: {
     marginTop: theme.spacing(8),
     minHeight: "100vh",
-    color: theme.palette.primary.contrastText,
+    color: theme.palette.primary.main,
   },
   footerLink: {
-    color: theme.palette.primary.contrastText,
+    color: theme.palette.secondary.main,
   },
 }))
 

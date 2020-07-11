@@ -7,7 +7,8 @@ import {
   makeStyles,
   Divider,
   Slide,
-  Grid,
+  div,
+  useTheme,
 } from "@material-ui/core"
 import LanguageContext from "../templates/LanguageContext"
 import usFlag from "../images/usflag.jpg"
@@ -17,7 +18,8 @@ import IconButton from "@material-ui/core/IconButton"
 import NavigateNextIcon from "@material-ui/icons/NavigateNext"
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore"
 import { graphql } from "gatsby"
-
+import Symbol from "../vectors/symbol.svg"
+import Title from "../vectors/title.svg"
 const LanguageSwitch = withStyles(theme => ({
   root: {
     //width of entire switch
@@ -98,6 +100,7 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       color: theme.palette.secondary.dark,
     },
+    fontFamily: " 'Barrio', cursive",
   },
   doc: {
     color: theme.palette.primary.contrastText,
@@ -108,14 +111,14 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(3),
   },
   linksContainer: {
-    height: "fit-content",
-    width: "60%",
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
+    justifyContent: "space-around",
     flexWrap: "wrap-reverse",
-    marginBottom: "auto",
-    marginTop: "auto",
+    [theme.breakpoints.up(700)]: {
+      flexDirection: "column",
+    },
   },
   activeLink: {
     color: theme.palette.primary.main,
@@ -131,6 +134,7 @@ const Header = ({ titleStyle }) => {
   const [checked, setChecked] = useState(false)
   const { setLanguage, language } = useContext(LanguageContext)
   const [open, setOpen] = useState(false)
+
   const query = useStaticQuery(
     graphql`
       query {
@@ -210,60 +214,43 @@ const Header = ({ titleStyle }) => {
   //   }
 
   return (
-    <Grid
-      container
-      direction="row"
-      className={classes.mainDiv}
-      style={{ height: "calc(5vw * 2)" }}
-    >
+    <div className={`${classes.mainDiv} header shadow`}>
       {/* <div style={{ display: "flex", justifyContent: "space-between" }}> */}
-      <Grid item xs={2} />
-      <Grid item xs={8}>
-        <div className={classes.headerTitle}>
-          <Link to="/" replace style={{ textDecoration: "none" }}>
-            <Typography
-              variant={titleStyle}
-              color="primary"
-              className={classes.title}
-            >
-              {query.site.siteMetadata.title}
-            </Typography>
-          </Link>
-          <Typography className={classes.doc}></Typography>
-        </div>
-      </Grid>
-      <Grid item xs={2}>
-        <div className={classes.linksContainer}>
-          <Link
-            to="/"
-            className={classes.links}
-            activeClassName={classes.activeLink}
-          >
-            <Typography variant="button">HOME</Typography>
-          </Link>
-          <Link
-            to="/posts"
-            className={classes.links}
-            activeClassName={classes.activeLink}
-          >
-            <Typography variant="button">ALL</Typography>
-          </Link>
-          <Link
-            to="/lasjd"
-            className={classes.links}
-            activeClassName={classes.activeLink}
-          >
-            <Typography variant="button">...</Typography>
-          </Link>
-          <LanguageSwitch
-            checked={checked}
-            onChange={handleSwitch}
-            name="checkedA"
-            inputProps={{ "aria-label": "secondary checkbox" }}
-          />
-        </div>
-      </Grid>
-    </Grid>
+      <div className="headerCherryLogo">
+        <Symbol style={{ margin: 20 }} />
+      </div>
+      <div className={`${classes.headerTitle} headerTitle shadow`}>
+        <Link to="/" replace style={{ textDecoration: "none" }}>
+          <Title style={{ margin: "20px 10px 10px 10px" }} />
+        </Link>
+      </div>
+      <div className={`${classes.linksContainer} linksContainer shadow`}>
+        {/* <Link
+          to="/"
+          className={classes.links}
+          activeClassName={classes.activeLink}
+        >
+          <Typography variant="button">HOME</Typography>
+        </Link> */}
+        <Typography style={{ width: "fit-content" }}>PLANT</Typography>
+        <Typography style={{ width: "fit-content" }}>BASED</Typography>
+        <Typography style={{ width: "fit-content" }}>RECIPES</Typography>
+
+        {/* <Link
+          to="/lasjd"
+          className={classes.links}
+          activeClassName={classes.activeLink}
+        >
+          <Typography variant="button">...</Typography>
+        </Link> */}
+        <LanguageSwitch
+          checked={checked}
+          onChange={handleSwitch}
+          name="checkedA"
+          inputProps={{ "aria-label": "secondary checkbox" }}
+        />
+      </div>
+    </div>
   )
 }
 

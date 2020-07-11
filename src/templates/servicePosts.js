@@ -36,7 +36,7 @@ const ServicePosts = props => {
   return (
     <MainWrapper>
       <Header titleStyle="h3" />
-      <CustomBreadcrumbs array={breadcrumbArray} />
+      <CustomBreadcrumbs array={breadcrumbArray} location={props.location} />
       <ServicePostsContent
         usPosts={usPosts}
         esPosts={esPosts}

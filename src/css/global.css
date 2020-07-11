@@ -1,11 +1,15 @@
 /* notable */
 * {
-  font-family: "Notable", sans-serif !important;
+  /* font-family: "Barrio", cursive !important; */
+  box-sizing: border-box;
 }
 hr {
   background: #d3d3d34a !important ;
   border: none !important;
   height: 2px !important ;
+}
+body {
+  margin: 0;
 }
 html {
   background-color: #1f1f1f;
@@ -20,4 +24,113 @@ html {
 /* border-image-repeat: space; */
 .svg {
   fill: #e25a5f !important;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-areas:
+    /* "header header header header header header header header header header header header" */
+    "salty salty salty salty salty salty sweets sweets sweets sweets sweets sweets"
+    "dozen dozen dozen dozen dozen dozen dozen dozen dozen drinks drinks drinks"
+    "general general  general  general  general  general  buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee"
+    "general  general  general  general  general  general  contactMe contactMe contactMe contactMe contactMe contactMe";
+}
+.header {
+  display: grid;
+  grid-template-columns: 1fr 7fr 2fr;
+  grid-template-areas: "headerCherryLogo headerTitle linksContainer";
+}
+@media (max-width: 700px) {
+  .container {
+    grid-template-areas:
+      /* "header header header header header header header header header header header header" */
+      "salty salty salty salty salty salty salty salty salty salty salty salty"
+      "sweets sweets sweets sweets sweets sweets sweets sweets sweets sweets sweets sweets"
+      "drinks drinks drinks drinks drinks drinks empty empty empty empty empty empty"
+      "dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen"
+      "buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee  contactMe contactMe contactMe contactMe contactMe contactMe"
+      "general  general  general  general  general  general general  general  general  general  general  general";
+  }
+  .milkshakeSvg {
+    height: unset !important;
+  }
+  .makeStyles-border-2 {
+    border-image-width: 20px;
+    border-image-slice: 543 fill;
+  }
+  .header {
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "headerTitle headerTitle headerTitle"
+      "linksContainer linksContainer linksContainer";
+  }
+}
+@media (max-width: 600px) {
+  .walnuts {
+    height: 90px;
+  }
+}
+.milkshakeSvg {
+  height: 100%;
+  width: 100%;
+}
+
+.salty {
+  grid-area: salty;
+  /* grid-column: 1 / 7;
+  grid-row: 1 / 2; */
+}
+.sweets {
+  grid-area: sweets;
+  /* grid-column: 7 / 13;
+  grid-row: 1 / 2; */
+}
+.dozen {
+  grid-area: dozen;
+  /* grid-column: 1 / 10;
+  grid-row: 2 / 3; */
+}
+.walnuts {
+  float: left;
+  height: 150px;
+}
+.drinks {
+  grid-area: drinks;
+  /* grid-column: 10 / 13;
+  grid-row: 2 / 3; */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.empty {
+  grid-area: empty;
+}
+.general {
+  grid-area: general;
+  /* grid-column: 1 / 7;
+  grid-row: 3 / 5; */
+}
+.contactMe {
+  grid-area: contactMe;
+  /* grid-column: 7 / 13;
+  grid-row: 4 / 5; */
+}
+.buyMeCoffee {
+  grid-area: buyMeCoffee;
+  /* grid-column: 7 / 13;
+  grid-row: 3 / 4; */
+}
+.shadow {
+  box-shadow: 0 0 0 1px #231f20, inset 0 0 0 1px #231f20;
+}
+
+.headerCherryLogo {
+  grid-area: headerCherryLogo;
+}
+.headerTitle {
+  grid-area: headerTitle;
+}
+.linksContainer {
+  grid-area: linksContainer;
 }

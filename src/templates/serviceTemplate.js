@@ -7,7 +7,7 @@ import { Link } from "gatsby"
 import { NavigateNext } from "@material-ui/icons"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 
-const ServiceTemplate = ({ data, path, pageContext }) => {
+const ServiceTemplate = ({ data, path, pageContext, location }) => {
   const theme = useTheme()
   console.log(data)
   const service = data.allContentfulBlogPost.edges[0].node.service[0].toLowerCase()
@@ -19,7 +19,7 @@ const ServiceTemplate = ({ data, path, pageContext }) => {
   return (
     <MainWrapper>
       <Header titleStyle="h3" />
-      <CustomBreadcrumbs array={breadcrumbArray} />
+      <CustomBreadcrumbs array={breadcrumbArray} location={location} />
       <ServiceTemplateContent data={category} path={path} />
     </MainWrapper>
   )

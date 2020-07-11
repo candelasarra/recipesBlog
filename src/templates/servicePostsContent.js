@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     color: "lightgray",
   },
   postTitle: {
-    color: theme.palette.primary.contrastText,
+    color: theme.palette.secondary.main,
     fontWeight: "bold",
     marginBottom: theme.spacing(1),
     width: "fit-content",

@@ -15,7 +15,7 @@ const ServiceCheckbox = ({ checked, handleCheckbox, name, label }) => {
           checked={checked || false}
           onChange={handleCheckbox}
           name={name}
-          color="primary"
+          color="secondary"
         />
       }
       label={
