@@ -21,40 +21,13 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "space-between",
   },
 }))
-const WEEK_DAYS = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-]
-const MONTHS = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-]
+
 const CustomBreadcrumbs = ({ array, location }) => {
   const classes = useStyles()
   const theme = useTheme()
   const urlText = location.pathname === "/posts" ? "CATEGORIES" : "ALL"
   const url = location.pathname === "/posts" ? "/" : "/posts"
   const [breadcrumbs, setBreadcrumbs] = useState([])
-  const date = new Date()
-  const day = date.toDateString().split(" ")[2]
-  const month = MONTHS[date.getMonth()]
-  const year = date.getFullYear()
-  const weekDay = WEEK_DAYS[date.getDay()]
   console.log(location)
 
   useEffect(() => {
@@ -112,9 +85,6 @@ const CustomBreadcrumbs = ({ array, location }) => {
       >
         <Typography variant="button">{urlText}</Typography>
       </Link>
-      <Typography>
-        {weekDay}, {month} {day}, {year}
-      </Typography>
     </div>
   )
 }

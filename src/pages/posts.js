@@ -57,6 +57,10 @@ export const query = graphql`
           name
           title
         }
+        tags {
+          name
+          title
+        }
       }
     }
     all: allContentfulBlogPost {

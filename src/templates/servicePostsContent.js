@@ -11,13 +11,14 @@ import LanguageContext from "../templates/LanguageContext"
 import { Link } from "gatsby"
 import { Search, SentimentVeryDissatisfied } from "@material-ui/icons"
 import ServiceCheckbox from "../components/serviceCheckbox"
-
+import Symbol from "../vectors/symbol.svg"
+import Pagination from "../components/pagination"
 const useStyles = makeStyles(theme => ({
   postDescriptionText: {
-    color: "lightgray",
+    color: theme.palette.primary.main,
   },
   postTitle: {
-    color: theme.palette.secondary.main,
+    color: theme.palette.primary.main,
     fontWeight: "bold",
     marginBottom: theme.spacing(1),
     width: "fit-content",
@@ -39,7 +40,10 @@ const useStyles = makeStyles(theme => ({
   },
   searchBar: {
     marginBottom: theme.spacing(5),
-    width: "40%",
+    width: "50%",
+    [theme.breakpoints.down("xs")]: {
+      width: "80%",
+    },
   },
   searchResults: {
     width: "fit-content",
@@ -48,6 +52,13 @@ const useStyles = makeStyles(theme => ({
   },
   formGroup: {
     marginBottom: theme.spacing(5),
+  },
+  postsContainer: {
+    margin: "20px 10%",
+    flexWrap: "wrap",
+    [theme.breakpoints.down("xs")]: {
+      margin: "20px 5%",
+    },
   },
 }))
 
@@ -65,6 +76,9 @@ const ServicePostsContent = ({
   const [arrayOfPosts, setArrayOfPosts] = useState([])
   const [searched, setSearched] = useState("")
   const [searchedPosts, setSearchedPosts] = useState(null)
+  const [numberOfPages, setNumberOfPages] = useState(0)
+  const itemsPerPage = 8
+  const [page, setPage] = useState(1)
   const searchResultString = data.results.edges.filter(
     edge =>
       edge.node.node_locale === language &&
@@ -107,47 +121,58 @@ const ServicePostsContent = ({
 
   useEffect(() => {
     if (posts) {
-      const array = posts.map(post => {
-        return (
-          <div
-            key={post.node.slug}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              maxWidth: "60%",
-              marginBottom: theme.spacing(6),
-            }}
-          >
-            <Link
-              to={`/${serviceNow.toLowerCase()}/${category.toLowerCase()}/${
-                post.node.slug
-              }`}
-              variant="h5"
-              style={{
-                textDecoration: "none",
-                color: "black",
-                width: "fit-content",
-              }}
-            >
-              <Typography variant="h5" className={classes.postTitle}>
-                {post.node.blogTitle}
-              </Typography>
-            </Link>
+      setNumberOfPages(Math.ceil(posts.length / itemsPerPage))
+      const array = posts
+        .slice((page - 1) * itemsPerPage, page * itemsPerPage)
+        .map(post => {
+          return (
+            <div style={{ display: "flex", marginBottom: theme.spacing(6) }}>
+              <Symbol style={{ width: 30 }} />
+              <div
+                key={post.node.slug}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  maxWidth: "60%",
+                  marginLeft: 20,
+                }}
+              >
+                <Link
+                  to={`/${serviceNow.toLowerCase()}/${category.toLowerCase()}/${
+                    post.node.slug
+                  }`}
+                  variant="h5"
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    width: "fit-content",
+                  }}
+                >
+                  <Typography variant="h5" className={classes.postTitle}>
+                    {post.node.blogTitle}
+                  </Typography>
+                </Link>
 
-            <Typography variant="caption" className={classes.dateText}>
-              {" "}
-              {post.node.createdAt}
-            </Typography>
-            <Typography variant="body1" className={classes.postDescriptionText}>
-              {post.node.descriptionOfPost}
-            </Typography>
-          </div>
-        )
-      })
+                <Typography variant="caption" className={classes.dateText}>
+                  {" "}
+                  {post.node.createdAt}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  className={classes.postDescriptionText}
+                >
+                  {post.node.descriptionOfPost}
+                </Typography>
+              </div>
+            </div>
+          )
+        })
       setArrayOfPosts(array)
     }
   }, [
     posts,
+    page,
+    itemsPerPage,
     classes.dateText,
     classes.postDescriptionText,
     classes.postTitle,
@@ -157,8 +182,16 @@ const ServicePostsContent = ({
   ])
 
   return (
-    <div className={classes.mainContainer}>
-      <div>
+    <div className={`${classes.mainContainer} shadow`}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: 20,
+          justifyContent: "space-around",
+        }}
+      >
         <TextField
           value={searched}
           className={classes.searchBar}
@@ -173,15 +206,24 @@ const ServicePostsContent = ({
           }}
         />
       </div>
-      {searched && searchedPosts && searchedPosts.length === 0 ? (
-        <>
-          <SentimentVeryDissatisfied className={classes.sadFace} />
-          <Typography variant="h4" className={classes.searchResults}>
-            {searchResultString[0].node.string}
-          </Typography>
-        </>
-      ) : (
-        arrayOfPosts
+      <div className={classes.postsContainer}>
+        {searched && searchedPosts && searchedPosts.length === 0 ? (
+          <>
+            <SentimentVeryDissatisfied className={classes.sadFace} />
+            <Typography variant="h4" className={classes.searchResults}>
+              {searchResultString[0].node.string}
+            </Typography>
+          </>
+        ) : (
+          arrayOfPosts
+        )}
+      </div>
+      {posts && posts.length > itemsPerPage && (
+        <Pagination
+          page={page}
+          setPage={setPage}
+          numberOfPages={numberOfPages}
+        />
       )}
     </div>
   )

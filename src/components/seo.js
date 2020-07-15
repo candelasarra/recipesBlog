@@ -14,7 +14,7 @@ function SEO({ description, lang, meta, title }) {
       // htmlAttributes={{
       //   lang,
       // }}
-      title="Candela's"
+      title="Cherry Chronicles"
       //   titleTemplate={`%s | ${site.siteMetadata.title}`}
     />
   )

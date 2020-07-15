@@ -18,6 +18,12 @@ module.exports = {
         link: "/salty",
       },
     ],
+    tags: [
+      {
+        name: "gluten-free",
+        title: "Gluten Free",
+      },
+    ],
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

@@ -191,7 +191,13 @@ const Index = props => {
                     <div
                       className={`${classes.border} ${classes.rowOneItemInside}`}
                     >
-                      <Typography style={{ color: "#e25a5f" }}>
+                      <Typography
+                        style={{
+                          color: "#e25a5f",
+                          fontFamily: "'Cookie', cursive",
+                        }}
+                        variant="h1"
+                      >
                         {title}
                       </Typography>
                       {image}
@@ -204,7 +210,12 @@ const Index = props => {
               <Typography>Salty</Typography>
             </div>
             <div className={`drinks shadow ${classes.color}`}>
-              <Typography>Drinks</Typography>
+              <Typography
+                variant="h3"
+                style={{ fontFamily: "'Cookie', cursive" }}
+              >
+                Drinks
+              </Typography>
               <Drink />
             </div>
             <div className={`${classes.color} ${classes.dozen} dozen shadow`}>

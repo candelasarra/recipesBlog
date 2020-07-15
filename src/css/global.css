@@ -37,8 +37,30 @@ html {
 }
 .header {
   display: grid;
-  grid-template-columns: 1fr 7fr 2fr;
+  grid-template-columns: 1fr 7fr 1fr;
   grid-template-areas: "headerCherryLogo headerTitle linksContainer";
+}
+.headerCherryLogo {
+  grid-area: headerCherryLogo;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px 0px 10px 0px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+@media (max-width: 800px) {
+  .header {
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "headerTitle headerTitle headerTitle"
+      "linksContainer linksContainer linksContainer";
+  }
+  .headerCherryLogo {
+    display: none;
+  }
 }
 @media (max-width: 700px) {
   .container {
@@ -57,12 +79,6 @@ html {
   .makeStyles-border-2 {
     border-image-width: 20px;
     border-image-slice: 543 fill;
-  }
-  .header {
-    grid-template-rows: auto auto;
-    grid-template-areas:
-      "headerTitle headerTitle headerTitle"
-      "linksContainer linksContainer linksContainer";
   }
 }
 @media (max-width: 600px) {
@@ -125,9 +141,6 @@ html {
   box-shadow: 0 0 0 1px #231f20, inset 0 0 0 1px #231f20;
 }
 
-.headerCherryLogo {
-  grid-area: headerCherryLogo;
-}
 .headerTitle {
   grid-area: headerTitle;
 }

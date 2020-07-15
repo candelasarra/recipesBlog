@@ -20,6 +20,16 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore"
 import { graphql } from "gatsby"
 import Symbol from "../vectors/symbol.svg"
 import Title from "../vectors/title.svg"
+import Eight from "../vectors/eight.svg"
+import Hash from "../vectors/hash.svg"
+import At from "../vectors/at.svg"
+//import Ce from "../vectors/cece.svg"
+const symbols = [
+  <Symbol style={{ margin: 10 }} />,
+  <Eight style={{ margin: 10 }} />,
+  <Hash style={{ margin: 10 }} />,
+  <At style={{ margin: 10 }} />,
+]
 const LanguageSwitch = withStyles(theme => ({
   root: {
     //width of entire switch
@@ -127,6 +137,29 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2),
   },
 }))
+const WEEK_DAYS = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+]
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+]
 
 const Header = ({ titleStyle }) => {
   const classes = useStyles()
@@ -134,7 +167,12 @@ const Header = ({ titleStyle }) => {
   const [checked, setChecked] = useState(false)
   const { setLanguage, language } = useContext(LanguageContext)
   const [open, setOpen] = useState(false)
-
+  const [selectedSymbol, setSelectedSymbol] = useState(0)
+  const date = new Date()
+  const day = date.toDateString().split(" ")[2]
+  const month = MONTHS[date.getMonth()]
+  const year = date.getFullYear()
+  const weekDay = WEEK_DAYS[date.getDay()]
   const query = useStaticQuery(
     graphql`
       query {
@@ -216,13 +254,34 @@ const Header = ({ titleStyle }) => {
   return (
     <div className={`${classes.mainDiv} header shadow`}>
       {/* <div style={{ display: "flex", justifyContent: "space-between" }}> */}
-      <div className="headerCherryLogo">
-        <Symbol style={{ margin: 20 }} />
+      <div
+        className="headerCherryLogo"
+        onClick={() =>
+          selectedSymbol < symbols.length - 1
+            ? setSelectedSymbol(state => state + 1)
+            : setSelectedSymbol(0)
+        }
+      >
+        {symbols[selectedSymbol]}
       </div>
       <div className={`${classes.headerTitle} headerTitle shadow`}>
+        <Typography
+          style={{
+            width: "fit-content",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          {weekDay}, {month} {day}, {year}
+        </Typography>
         <Link to="/" replace style={{ textDecoration: "none" }}>
           <Title style={{ margin: "20px 10px 10px 10px" }} />
         </Link>
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <Typography style={{ width: "fit-content" }}>PLANT</Typography>
+          <Typography style={{ width: "fit-content" }}>BASED</Typography>
+          <Typography style={{ width: "fit-content" }}>RECIPES</Typography>
+        </div>
       </div>
       <div className={`${classes.linksContainer} linksContainer shadow`}>
         {/* <Link
@@ -232,9 +291,6 @@ const Header = ({ titleStyle }) => {
         >
           <Typography variant="button">HOME</Typography>
         </Link> */}
-        <Typography style={{ width: "fit-content" }}>PLANT</Typography>
-        <Typography style={{ width: "fit-content" }}>BASED</Typography>
-        <Typography style={{ width: "fit-content" }}>RECIPES</Typography>
 
         {/* <Link
           to="/lasjd"

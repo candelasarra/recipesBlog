@@ -11,16 +11,25 @@ import LanguageContext from "../templates/LanguageContext"
 import { Link } from "gatsby"
 import { Search, SentimentVeryDissatisfied } from "@material-ui/icons"
 import ServiceCheckbox from "../components/serviceCheckbox"
-
+import "../css/global.css"
+import Symbol from "../vectors/symbol.svg"
+import Pagination from "../components/pagination"
+import border from "../images/greystars.svg"
+import strawBack from "../images/strawberryBackground.svg"
+import paperImage from "../images/paperImage.jpg"
 const useStyles = makeStyles(theme => ({
   postDescriptionText: {
-    color: "lightgray",
+    color: theme.palette.primary.light,
+    fontStyle: "italic",
+    textAlign: "center",
+    overflow: "scroll",
   },
   postTitle: {
     color: theme.palette.primary.main,
-    fontWeight: "bold",
+    fontWeight: "500",
     marginBottom: theme.spacing(1),
     width: "fit-content",
+    textAlign: "center",
   },
   dateText: {
     color: "lightgray",
@@ -34,12 +43,19 @@ const useStyles = makeStyles(theme => ({
   },
   mainContainer: {
     display: "flex",
-    minHeight: "50vh",
+    minHeight: "90vh",
     flexDirection: "column",
+    alignItems: "center",
+    padding: 10,
+    backgroundImage: `url(${strawBack})`,
+    backgroundSize: 600,
   },
   searchBar: {
     marginBottom: theme.spacing(5),
-    width: "40%",
+    width: "80%",
+    [theme.breakpoints.down("xs")]: {
+      width: "80%",
+    },
   },
   searchResults: {
     width: "fit-content",
@@ -49,6 +65,43 @@ const useStyles = makeStyles(theme => ({
   formGroup: {
     marginBottom: theme.spacing(5),
   },
+  postsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "20px 18%",
+    flexWrap: "wrap",
+    backgroundImage: `url(${paperImage})`,
+    [theme.breakpoints.down("sm")]: {
+      margin: "20px 5%",
+    },
+  },
+  postDiv: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderBottom: "7px double",
+    padding: 20,
+    maxHeight: 155,
+    // borderImageSource: `url(${border})`,
+    // borderImageRepeat: "round",
+    // borderImageWidth: "11px",
+    // borderImageSlice: "259 fill",
+    // borderStyle: "solid",
+    [theme.breakpoints.down("xs")]: {
+      width: "95%",
+      // border: "none",
+    },
+  },
+  // color: {
+  //   transition: "filter .9s",
+  //   filter: "brightness(0%) grayscale(0) contrast(100%)",
+  //   "&:hover": {
+  //     filter: "brightness(100%) grayscale(0) contrast(100%);",
+  //   },
+  // },
 }))
 
 const PostsContent = ({ data }) => {
@@ -60,11 +113,14 @@ const PostsContent = ({ data }) => {
   const [searched, setSearched] = useState(null)
   const [searchedPosts, setSearchedPosts] = useState(null)
   const [checked, setChecked] = useState(false)
+  const [numberOfPages, setNumberOfPages] = useState(0)
+  const itemsPerPage = 8
+  const [page, setPage] = useState(1)
+
   const checkboxesData = [
     ...data.site.siteMetadata.menuLinks,
-    ...data.usPosts.edges[0].node.tags,
+    ...data.site.siteMetadata.tags,
   ]
-  console.log(checkboxesData)
   const searchResultString = data.results.edges.filter(
     edge =>
       edge.node.node_locale === language &&
@@ -92,14 +148,15 @@ const PostsContent = ({ data }) => {
         const searchWord = searched ? searched.toLowerCase() : ""
         if (checkedValuesTrue.length !== 0 && searched) {
           return (
-            (service.filter(ser => checked[ser]).length ||
-              tags.filter(ser => checked[ser]).length) &&
+            ((service && service.filter(ser => checked[ser]).length) ||
+              (tags && tags.filter(ser => checked[ser]).length)) &&
             (lcTitle.includes(searchWord) || lcDescription.includes(searchWord))
           )
         } else if (checkedValuesTrue.length !== 0) {
           return (
-            service.filter(ser => checked[ser.toLowerCase()]).length ||
-            tags.filter(ser => checked[ser]).length
+            (service &&
+              service.filter(ser => checked[ser.toLowerCase()]).length) ||
+            (tags && tags.filter(ser => checked[ser]).length)
           )
         } else if (searched) {
           return (
@@ -140,45 +197,50 @@ const PostsContent = ({ data }) => {
 
   useEffect(() => {
     if (posts) {
-      const array = posts.map(post => {
-        return (
-          <div
-            key={post.node.slug}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              maxWidth: "60%",
-              marginBottom: theme.spacing(6),
-            }}
-          >
-            <Link
-              to={`/posts/${post.node.slug}`}
-              variant="h5"
-              style={{
-                textDecoration: "none",
-                color: "black",
-                width: "fit-content",
-              }}
+      setNumberOfPages(Math.ceil(posts.length / itemsPerPage))
+      const array = posts
+        .slice((page - 1) * itemsPerPage, page * itemsPerPage)
+        .map((post, idx) => {
+          return (
+            <div
+              key={post.node.slug}
+              className={`${classes.postDiv} ${classes.color}`}
+              style={{ borderTop: idx === 0 ? "7px double" : "unset" }}
             >
-              <Typography variant="h5" className={classes.postTitle}>
-                {post.node.blogTitle}
+              <div>
+                <Link
+                  to={`/posts/${post.node.slug}`}
+                  variant="h5"
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    width: "fit-content",
+                  }}
+                >
+                  <Typography variant="h5" className={classes.postTitle}>
+                    {post.node.blogTitle}
+                  </Typography>
+                </Link>
+              </div>
+              <Typography variant="caption" className={classes.dateText}>
+                {" "}
+                {post.node.createdAt}
               </Typography>
-            </Link>
-
-            <Typography variant="caption" className={classes.dateText}>
-              {" "}
-              {post.node.createdAt}
-            </Typography>
-            <Typography variant="body1" className={classes.postDescriptionText}>
-              {post.node.descriptionOfPost}
-            </Typography>
-          </div>
-        )
-      })
+              <Typography
+                variant="body1"
+                className={classes.postDescriptionText}
+              >
+                {post.node.descriptionOfPost}
+              </Typography>
+            </div>
+          )
+        })
       setArrayOfPosts(array)
     }
   }, [
     posts,
+    page,
+    itemsPerPage,
     classes.dateText,
     classes.postDescriptionText,
     classes.postTitle,
@@ -195,28 +257,37 @@ const PostsContent = ({ data }) => {
   //   label={label}
   //   />)
   // })
-
   return (
-    <div className={classes.mainContainer}>
-      <div>
+    <div className={`${classes.mainContainer} shadow`}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: 20,
+          justifyContent: "space-around",
+          width: "fit-content",
+        }}
+      >
         <TextField
+          variant="outlined"
           value={searched}
           className={classes.searchBar}
           placeholder={searchWord[0].node.string}
           onChange={handleChange}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment>
-                <Search disabled={!searched} style={{ color: "gray" }} />
-              </InputAdornment>
-            ),
-          }}
+          // InputProps={{
+          //   endAdornment: (
+          //     <InputAdornment>
+          //       <Search disabled={!searched} style={{ color: "gray" }} />
+          //     </InputAdornment>
+          //   ),
+          // }}
         />
         <FormGroup row className={classes.formGroup}>
-          {checkboxesData.length &&
+          {!!checkboxesData.length &&
             checkboxesData.map(value => {
-              const label = value.title ? value.title : value
-              const name = value.name ? value.name : value
+              const label = value.title
+              const name = value.name
               return (
                 <ServiceCheckbox
                   checked={checked[name]}
@@ -228,17 +299,29 @@ const PostsContent = ({ data }) => {
             })}
         </FormGroup>
       </div>
-      {(searched || checkedValuesTrue.length !== 0) &&
-      searchedPosts &&
-      searchedPosts.length === 0 ? (
-        <>
-          <SentimentVeryDissatisfied className={classes.sadFace} />
-          <Typography variant="h4" className={classes.searchResults}>
-            {searchResultString[0].node.string}
-          </Typography>
-        </>
-      ) : (
-        arrayOfPosts
+      <div>
+        {!!arrayOfPosts.length && (
+          <div className={`${classes.postsContainer} shadow`}>
+            {arrayOfPosts}
+          </div>
+        )}
+        {(searched || checkedValuesTrue.length !== 0) &&
+          searchedPosts &&
+          searchedPosts.length === 0 && (
+            <>
+              <SentimentVeryDissatisfied className={classes.sadFace} />
+              <Typography variant="h4" className={classes.searchResults}>
+                {searchResultString[0].node.string}
+              </Typography>
+            </>
+          )}
+      </div>
+      {posts && posts.length > itemsPerPage && (
+        <Pagination
+          page={page}
+          setPage={setPage}
+          numberOfPages={numberOfPages}
+        />
       )}
     </div>
   )
