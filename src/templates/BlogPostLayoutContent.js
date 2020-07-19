@@ -229,6 +229,22 @@ const BlogPostLayoutContent = ({ edges }) => {
                 options
               )}
             </Typography>
+            <div>
+              <Typography className={classes.bodyText}>
+                {documentToReactComponents(
+                  currentEdge.node
+                    .childContentfulBlogPostIngredientsRichTextNode.json,
+                  options
+                )}
+              </Typography>
+              <Typography className={classes.bodyText}>
+                {documentToReactComponents(
+                  currentEdge.node
+                    .childContentfulBlogPostInstructionsRichTextNode.json,
+                  options
+                )}
+              </Typography>
+            </div>
             {/* <section dangerouslySetInnerHTML={{ __html: post.html }} /> */}
             <hr
               style={{
