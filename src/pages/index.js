@@ -194,9 +194,9 @@ const Index = props => {
                       <Typography
                         style={{
                           color: "#e25a5f",
-                          fontFamily: "'Cookie', cursive",
+                          fontFamily: "'Shrikhand', cursive",
                         }}
-                        variant="h1"
+                        variant="h2"
                       >
                         {title}
                       </Typography>
@@ -211,15 +211,15 @@ const Index = props => {
             </div>
             <div className={`drinks shadow ${classes.color}`}>
               <Typography
-                variant="h3"
-                style={{ fontFamily: "'Cookie', cursive" }}
+                variant="h4"
+                style={{ fontFamily: "'Shrikhand', cursive" }}
               >
                 Drinks
               </Typography>
               <Drink />
             </div>
             <div className={`${classes.color} ${classes.dozen} dozen shadow`}>
-              <Walnuts className="walnuts" />
+              <Walnuts className={`walnuts ${classes.color}`} />
               <Typography>
                 djslfkj sdlfdjslfkj sdlfdjslfkjsdl fdjslfkjsdlf
                 djslfkjsdlfdjslfkjsdlf djslfkjsdlf djslfkjsdlf djslfkjsdlf

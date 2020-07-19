@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react"
 import LanguageContext from "./LanguageContext"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { Typography, useTheme } from "@material-ui/core"
-import { useStaticQuery, Link } from "gatsby"
+import { useStaticQuery, Link, graphql } from "gatsby"
 import { makeStyles } from "@material-ui/styles"
 import { INLINES, BLOCKS } from "@contentful/rich-text-types"
 
@@ -221,6 +221,7 @@ const BlogPostLayoutContent = ({ edges }) => {
                 {currentEdge.node.createdAt}
               </Typography>
             </header>
+            <Typography>Ingredients | Procedure</Typography>
             <Typography className={classes.bodyText}>
               {documentToReactComponents(
                 currentEdge.node.childContentfulBlogPostBlogPostBodyRichTextNode

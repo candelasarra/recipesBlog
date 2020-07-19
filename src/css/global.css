@@ -37,7 +37,7 @@ html {
 }
 .header {
   display: grid;
-  grid-template-columns: 1fr 7fr 1fr;
+  grid-template-columns: 1fr 7fr auto;
   grid-template-areas: "headerCherryLogo headerTitle linksContainer";
 }
 .headerCherryLogo {
@@ -51,14 +51,27 @@ html {
   -ms-user-select: none;
   user-select: none;
 }
-@media (max-width: 800px) {
+.linksContainer {
+  grid-area: linksContainer;
+}
+@media screen and (max-width: 900px) {
+  .header {
+    grid-template-rows: 1fr auto;
+    grid-template-areas: "headerCherryLogo headerTitle headerTitle";
+  }
+  .linksContainer {
+    display: none;
+  }
+}
+@media screen and (max-width: 800px) {
   .header {
     grid-template-rows: auto auto;
-    grid-template-areas:
-      "headerTitle headerTitle headerTitle"
-      "linksContainer linksContainer linksContainer";
+    grid-template-areas: "headerTitle headerTitle headerTitle";
   }
   .headerCherryLogo {
+    display: none;
+  }
+  .linksContainer {
     display: none;
   }
 }
@@ -144,6 +157,20 @@ html {
 .headerTitle {
   grid-area: headerTitle;
 }
-.linksContainer {
-  grid-area: linksContainer;
+
+@keyframes opacityAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+.opacityAn {
+  animation: opacityAnimation;
+  animation-duration: 0.5s;
+}
+.dog {
+  animation: opacityAnimation;
+  animation-duration: 0.5s;
 }

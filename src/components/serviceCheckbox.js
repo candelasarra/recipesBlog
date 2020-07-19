@@ -1,8 +1,18 @@
 import React from "react"
-import { FormControlLabel, Checkbox, useTheme } from "@material-ui/core"
-
+import {
+  FormControlLabel,
+  Checkbox,
+  useTheme,
+  makeStyles,
+} from "@material-ui/core"
+const useStyles = makeStyles(theme => ({
+  checkboxRoot: {
+    display: "none",
+  },
+}))
 const ServiceCheckbox = ({ checked, handleCheckbox, name, label }) => {
   const theme = useTheme()
+  const classes = useStyles()
   return (
     <FormControlLabel
       style={{
@@ -16,6 +26,7 @@ const ServiceCheckbox = ({ checked, handleCheckbox, name, label }) => {
           onChange={handleCheckbox}
           name={name}
           color="secondary"
+          classes={{ root: classes.checkboxRoot }}
         />
       }
       label={

@@ -1,19 +1,6 @@
 import { Link, useStaticQuery } from "gatsby"
-import React, { useContext, useEffect, useState } from "react"
-import {
-  Switch,
-  Typography,
-  withStyles,
-  makeStyles,
-  Divider,
-  Slide,
-  div,
-  useTheme,
-} from "@material-ui/core"
-import LanguageContext from "../templates/LanguageContext"
-import usFlag from "../images/usflag.jpg"
-import esFlag from "../images/esFlag.png"
-import MenuIcon from "@material-ui/icons/Menu"
+import React, { useState } from "react"
+import { Typography, makeStyles } from "@material-ui/core"
 import IconButton from "@material-ui/core/IconButton"
 import NavigateNextIcon from "@material-ui/icons/NavigateNext"
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore"
@@ -23,6 +10,7 @@ import Title from "../vectors/title.svg"
 import Eight from "../vectors/eight.svg"
 import Hash from "../vectors/hash.svg"
 import At from "../vectors/at.svg"
+import LangSwitch from "./LangSwitch"
 //import Ce from "../vectors/cece.svg"
 const symbols = [
   <Symbol style={{ margin: 10 }} />,
@@ -30,65 +18,6 @@ const symbols = [
   <Hash style={{ margin: 10 }} />,
   <At style={{ margin: 10 }} />,
 ]
-const LanguageSwitch = withStyles(theme => ({
-  root: {
-    //width of entire switch
-    width: 46,
-    height: 26,
-    padding: 0,
-    margin: theme.spacing(1),
-  },
-  switchBase: {
-    padding: 1,
-    "&$checked": {
-      //transform controls the circle thaty moves
-      transform: "translateX(20px)",
-      color: theme.palette.common.white,
-      "& + $track": {
-        background: `url(${esFlag})`,
-        backgroundSize: 37,
-        //   backgroundColor: "#52d869",
-        opacity: 1,
-        // border: "none",
-      },
-    },
-    "&$focusVisible $thumb": {
-      color: "white",
-      border: "6px solid #fff",
-    },
-  },
-  thumb: {
-    width: 24,
-    height: 24,
-    color: "white",
-  },
-  track: {
-    borderRadius: 26 / 2,
-    border: `1px solid ${theme.palette.primary.main}`,
-    background: `url(${usFlag})`,
-    backgroundSize: 80,
-    opacity: 1,
-    transition: theme.transitions.create(["background-color", "border"]),
-    height: "unset",
-  },
-  checked: {},
-  focusVisible: {},
-}))(({ classes, ...props }) => {
-  return (
-    <Switch
-      focusVisibleClassName={classes.focusVisible}
-      disableRipple
-      classes={{
-        root: classes.root,
-        switchBase: classes.switchBase,
-        thumb: classes.thumb,
-        track: classes.track,
-        checked: classes.checked,
-      }}
-      {...props}
-    />
-  )
-})
 
 const useStyles = makeStyles(theme => ({
   mainDiv: {
@@ -102,6 +31,7 @@ const useStyles = makeStyles(theme => ({
   },
   headerTitle: {
     //   marginBottom: theme.spacing(5)
+    padding: "10px 0px",
   },
   title: {
     transition: "color 1s",
@@ -117,21 +47,20 @@ const useStyles = makeStyles(theme => ({
   },
   links: {
     textDecoration: "none",
-    color: theme.palette.secondary.main,
-    marginRight: theme.spacing(3),
+    color: theme.palette.primary.main,
+    margin: theme.spacing(1),
   },
   linksContainer: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "center",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-around",
-    flexWrap: "wrap-reverse",
-    [theme.breakpoints.up(700)]: {
-      flexDirection: "column",
-    },
+    textAlign: "center",
+    margin: theme.spacing(3),
   },
   activeLink: {
-    color: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
   },
   divider: {
     marginBottom: theme.spacing(2),
@@ -164,8 +93,6 @@ const MONTHS = [
 const Header = ({ titleStyle }) => {
   const classes = useStyles()
   // false means US, true means ES
-  const [checked, setChecked] = useState(false)
-  const { setLanguage, language } = useContext(LanguageContext)
   const [open, setOpen] = useState(false)
   const [selectedSymbol, setSelectedSymbol] = useState(0)
   const date = new Date()
@@ -196,56 +123,6 @@ const Header = ({ titleStyle }) => {
     `
   )
 
-  useEffect(() => {
-    const cookie = getCookie("masLang")
-    if (cookie) {
-      if (cookie === "es-ES") {
-        setChecked(true)
-        setLanguage("es-ES")
-      } else if (cookie === "en-US") {
-        setChecked(false)
-        setLanguage("en-US")
-      }
-    }
-  }, [setLanguage])
-  useEffect(() => {
-    if (checked) {
-      setLanguage("es-ES")
-    } else if (!checked) {
-      setLanguage("en-US")
-    }
-  }, [checked, setLanguage])
-
-  useEffect(() => {
-    if (checked) {
-      setCookie("masLang", "es-ES", 365)
-    } else if (!checked) {
-      setCookie("masLang", "en-US", 365)
-    }
-  }, [checked])
-
-  function setCookie(name, value, days) {
-    var expires = ""
-    if (days) {
-      var date = new Date()
-      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
-      expires = "; expires=" + date.toUTCString()
-    }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/"
-  }
-  function getCookie(name) {
-    var nameEQ = name + "="
-    var ca = document.cookie.split(";")
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i]
-      while (c.charAt(0) == " ") c = c.substring(1, c.length)
-      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length)
-    }
-    return null
-  }
-  const handleSwitch = e => {
-    setChecked(e.target.checked)
-  }
   //  const handleChange = event => {
   //     setLanguage(event.target.value)
   //     console.log(event.target.value)
@@ -284,7 +161,12 @@ const Header = ({ titleStyle }) => {
         </div>
       </div>
       <div className={`${classes.linksContainer} linksContainer shadow`}>
-        {/* <Link
+        <Link
+          to="/posts"
+          className={classes.links}
+          activeClassName={classes.activeLink}
+        >
+          {/* <Link
           to="/"
           className={classes.links}
           activeClassName={classes.activeLink}
@@ -292,19 +174,17 @@ const Header = ({ titleStyle }) => {
           <Typography variant="button">HOME</Typography>
         </Link> */}
 
-        {/* <Link
+          {/* <Link
           to="/lasjd"
           className={classes.links}
           activeClassName={classes.activeLink}
         >
           <Typography variant="button">...</Typography>
         </Link> */}
-        <LanguageSwitch
-          checked={checked}
-          onChange={handleSwitch}
-          name="checkedA"
-          inputProps={{ "aria-label": "secondary checkbox" }}
-        />
+          <Typography>SEE</Typography>
+          <Typography>ALL</Typography>
+          <Typography>RECIPES</Typography>
+        </Link>
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import {
   ThemeProvider,
   createMuiTheme,
@@ -12,7 +12,7 @@ import SEO from "../components/seo"
 // terracota sheme: blue #4186f6, dark red #5c2118, bright red #bc463a, light red #d4a59b, "white" #f3e0dc
 let theme = createMuiTheme({
   typography: {
-    // fontFamily: " 'Barrio', cursive",
+    fontFamily: "'Inconsolata', monospace;",
   },
   palette: {
     primary: {
@@ -30,6 +30,41 @@ let theme = createMuiTheme({
         //  backgroundColor: "rgb(24,25,26)",
         backgroundImage:
           'url("https://cdn.inspirationhut.net/wp-content/uploads/2014/09/light-paper-fibers.jpg")',
+      },
+    },
+    MuiTypography: {
+      h6: {
+        fontFamily: "'Shrikhand', cursive;",
+      },
+      h5: {
+        fontFamily: "'Shrikhand', cursive;",
+      },
+      h4: {
+        fontFamily: "'Shrikhand', cursive;",
+      },
+      h3: {
+        fontFamily: "'Shrikhand', cursive;",
+      },
+      h2: {
+        fontFamily: "'Shrikhand', cursive;",
+      },
+      paragraph: {
+        fontFamily: "'Inconsolata', monospace;",
+      },
+      body1: {
+        fontFamily: "'Inconsolata', monospace;",
+      },
+      body2: {
+        fontFamily: "'Inconsolata', monospace;",
+      },
+      subtitle1: {
+        fontFamily: "'Inconsolata', monospace;",
+      },
+      subtitle2: {
+        fontFamily: "'Inconsolata', monospace;",
+      },
+      caption: {
+        fontFamily: "'Inconsolata', monospace;",
       },
     },
   },
@@ -53,7 +88,24 @@ const useStyles = makeStyles(() => ({
 }))
 const MainWrapper = ({ children }) => {
   const classes = useStyles()
+  function getCookie(name) {
+    var nameEQ = name + "="
+    var ca = document.cookie.split(";")
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i]
+      while (c.charAt(0) == " ") c = c.substring(1, c.length)
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length)
+    }
+    return null
+  }
   const [language, setLanguage] = useState("en-US")
+  useEffect(() => {
+    const cookie = getCookie("masLang")
+    if (cookie) {
+      setLanguage(cookie)
+    }
+  }, [])
+
   const value = { language, setLanguage }
 
   return (

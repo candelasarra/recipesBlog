@@ -7,18 +7,14 @@ import {
 } from "@material-ui/core"
 import { NavigateNext } from "@material-ui/icons"
 import { Link } from "gatsby"
+import MenuMobile from "../components/MenuMobile"
 const useStyles = makeStyles(theme => ({
-  activeLink: {
-    color: theme.palette.primary.main,
-  },
-  links: {
-    textDecoration: "none",
-    color: theme.palette.secondary.main,
-    marginRight: theme.spacing(3),
-  },
   container: {
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
   },
 }))
 
@@ -45,7 +41,7 @@ const CustomBreadcrumbs = ({ array, location }) => {
                 color: theme.palette.primary.main,
               }}
             >
-              <Typography variant={item.variant ? item.variant : "body1"}>
+              <Typography variant={item.variant ? item.variant : "subtitle1"}>
                 {" "}
                 {item.label}
               </Typography>
@@ -55,7 +51,7 @@ const CustomBreadcrumbs = ({ array, location }) => {
           return (
             <Typography
               key={item.label}
-              variant={item.variant ? item.variant : "body1"}
+              variant={item.variant ? item.variant : "subtitle1"}
               style={{ color: theme.palette.secondary.dark }}
             >
               {item.label}
@@ -78,13 +74,10 @@ const CustomBreadcrumbs = ({ array, location }) => {
       >
         {breadcrumbs}
       </Breadcrumbs>
-      <Link
-        to={url}
-        className={classes.links}
-        activeClassName={classes.activeLink}
-      >
-        <Typography variant="button">{urlText}</Typography>
-      </Link>
+
+      <div className="langswitch">
+        <MenuMobile url={url} urlText={urlText} />
+      </div>
     </div>
   )
 }

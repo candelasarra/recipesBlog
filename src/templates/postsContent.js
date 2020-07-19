@@ -17,6 +17,7 @@ import Pagination from "../components/pagination"
 import border from "../images/greystars.svg"
 import strawBack from "../images/strawberryBackground.svg"
 import paperImage from "../images/paperImage.jpg"
+import Dog from "../vectors/dog.svg"
 const useStyles = makeStyles(theme => ({
   postDescriptionText: {
     color: theme.palette.primary.light,
@@ -32,13 +33,11 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center",
   },
   dateText: {
-    color: "lightgray",
+    color: theme.palette.primary.light,
   },
   sadFace: {
     alignSelf: "center",
     marginTop: "auto",
-    fontSize: 200,
-    color: "#80808054",
     position: "relative",
   },
   mainContainer: {
@@ -60,10 +59,13 @@ const useStyles = makeStyles(theme => ({
   searchResults: {
     width: "fit-content",
     alignSelf: "center",
-    color: "#80808054",
+    marginTop: theme.spacing(2),
+    textAlign: "center",
+    color: "#3a3a3a",
   },
   formGroup: {
     marginBottom: theme.spacing(5),
+    justifyContent: "center",
   },
   postsContainer: {
     display: "flex",
@@ -71,7 +73,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     margin: "20px 18%",
     flexWrap: "wrap",
-    backgroundImage: `url(${paperImage})`,
+    //backgroundImage: `url(${paperImage})`,
     [theme.breakpoints.down("sm")]: {
       margin: "20px 5%",
     },
@@ -82,9 +84,11 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    borderBottom: "7px double",
+    // borderBottom: "7px double",
     padding: 20,
     maxHeight: 155,
+    backgroundImage: `url(${paperImage})`,
+    marginBottom: theme.spacing(3),
     // borderImageSource: `url(${border})`,
     // borderImageRepeat: "round",
     // borderImageWidth: "11px",
@@ -95,6 +99,10 @@ const useStyles = makeStyles(theme => ({
       // border: "none",
     },
   },
+  // input: {
+  //   padding: 0,
+  //   color: "red",
+  // },
   // color: {
   //   transition: "filter .9s",
   //   filter: "brightness(0%) grayscale(0) contrast(100%)",
@@ -110,7 +118,7 @@ const PostsContent = ({ data }) => {
   const { language } = useContext(LanguageContext)
   const [posts, setPosts] = useState(null)
   const [arrayOfPosts, setArrayOfPosts] = useState([])
-  const [searched, setSearched] = useState(null)
+  const [searched, setSearched] = useState("")
   const [searchedPosts, setSearchedPosts] = useState(null)
   const [checked, setChecked] = useState(false)
   const [numberOfPages, setNumberOfPages] = useState(0)
@@ -191,7 +199,7 @@ const PostsContent = ({ data }) => {
     if (target.value.length !== 0 || target.value.trim()) {
       setSearched(target.value)
     } else if (target.value.length === 0 || !target.value.trim()) {
-      setSearched(null)
+      setSearched("")
     }
   }
 
@@ -204,8 +212,8 @@ const PostsContent = ({ data }) => {
           return (
             <div
               key={post.node.slug}
-              className={`${classes.postDiv} ${classes.color}`}
-              style={{ borderTop: idx === 0 ? "7px double" : "unset" }}
+              className={`${classes.postDiv} ${classes.color} shadow`}
+              // style={{ borderTop: idx === 0 ? "7px double" : "unset" }}
             >
               <div>
                 <Link
@@ -217,7 +225,7 @@ const PostsContent = ({ data }) => {
                     width: "fit-content",
                   }}
                 >
-                  <Typography variant="h5" className={classes.postTitle}>
+                  <Typography variant="h4" className={classes.postTitle}>
                     {post.node.blogTitle}
                   </Typography>
                 </Link>
@@ -270,11 +278,18 @@ const PostsContent = ({ data }) => {
         }}
       >
         <TextField
-          variant="outlined"
+          variant="filled"
           value={searched}
           className={classes.searchBar}
+          // InputProps={{
+          //   className: classes.input,
+          // }}
+          inputProps={{
+            style: { padding: "5px 10px 5px 10px " },
+          }}
           placeholder={searchWord[0].node.string}
           onChange={handleChange}
+          InputProps={{ padding: "0px 0px 0px 10px" }}
           // InputProps={{
           //   endAdornment: (
           //     <InputAdornment>
@@ -294,28 +309,28 @@ const PostsContent = ({ data }) => {
                   handleCheckbox={handleCheckbox}
                   name={name}
                   label={label}
+                  key={name}
                 />
               )
             })}
         </FormGroup>
       </div>
-      <div>
+      <div style={{ width: "100%" }}>
         {!!arrayOfPosts.length && (
-          <div className={`${classes.postsContainer} shadow`}>
-            {arrayOfPosts}
+          <div className={`${classes.postsContainer}`}>{arrayOfPosts}</div>
+        )}
+      </div>
+      {(searched || checkedValuesTrue.length !== 0) &&
+        searchedPosts &&
+        searchedPosts.length === 0 && (
+          <div className="opacityAn">
+            <Dog className={`${classes.sadFace}`} />
+            {/* <SentimentVeryDissatisfied className={classes.sadFace} /> */}
+            <Typography variant="h3" className={classes.searchResults}>
+              {searchResultString[0].node.string}
+            </Typography>
           </div>
         )}
-        {(searched || checkedValuesTrue.length !== 0) &&
-          searchedPosts &&
-          searchedPosts.length === 0 && (
-            <>
-              <SentimentVeryDissatisfied className={classes.sadFace} />
-              <Typography variant="h4" className={classes.searchResults}>
-                {searchResultString[0].node.string}
-              </Typography>
-            </>
-          )}
-      </div>
       {posts && posts.length > itemsPerPage && (
         <Pagination
           page={page}

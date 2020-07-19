@@ -58,6 +58,12 @@ export const query = graphql`
           childContentfulBlogPostBlogPostBodyRichTextNode {
             json
           }
+          childContentfulBlogPostIngredientsRichTextNode {
+            json
+          }
+          childContentfulBlogPostInstructionsRichTextNode {
+            json
+          }
           createdAt(formatString: "dddd DD MMMM YYYY")
         }
       }
