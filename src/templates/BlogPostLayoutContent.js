@@ -10,20 +10,71 @@ const useStyles = makeStyles(theme => ({
   titleText: {
     color: theme.palette.primary.main,
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+    marginBottom: theme.spacing(4),
+    textAlign: "center",
+    width: "fit-content",
   },
   createdAtText: {
     display: `block`,
     marginBottom: theme.spacing(1),
-    color: "lightgray",
+    color: "#666565",
+    marginLeft: "auto",
+    width: "fit-content",
   },
-  bodyText: {
-    marginTop: theme.spacing(8),
-    minHeight: "100vh",
+  bodyTextDes: {
+    marginTop: theme.spacing(4),
     color: theme.palette.primary.main,
+    textAlign: "center",
   },
   footerLink: {
-    color: theme.palette.secondary.main,
+    color: "#666565",
+  },
+  titleContainerPost: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  aTags: {
+    textDecoration: "underline",
+    color: theme.palette.primary.main,
+  },
+  ingredientsInstructions: {
+    padding: 20,
+    minHeight: 500,
+  },
+  instructionsInd: {
+    flex: 1,
+    // [theme.breakpoints.down("sm")]: {
+    //   flexDirection: 'column'
+    // },
+  },
+  ingredientsInd: {
+    flex: 0.7,
+    [theme.breakpoints.down("sm")]: {
+      flex: 1,
+    },
+  },
+  ingInsContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    padding: 20,
+    marginTop: theme.spacing(6),
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+    },
+  },
+  postImage: {
+    maxWidth: "80%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    borderRadius: "4px",
+  },
+  color: {
+    transition: "filter .9s",
+    filter: "grayscale(1)",
+    "&:hover": {
+      filter: "grayscale(0)",
+    },
   },
 }))
 
@@ -129,11 +180,7 @@ const BlogPostLayoutContent = ({ edges }) => {
           return (
             <img
               src={file[language].url}
-              style={{
-                maxWidth: "100%",
-                marginLeft: "auto",
-                marginRight: "auto",
-              }}
+              className={`${classes.postImage} ${classes.color} shadow`}
             />
           )
         }
@@ -207,57 +254,94 @@ const BlogPostLayoutContent = ({ edges }) => {
   }, [usPost, esPost, language])
 
   return (
-    <div>
+    <div className="shadow" style={{ padding: 20 }}>
       {currentEdge && (
         <div>
           {/* <Layout location={location} title={siteTitle}> */}
-          <div style={{ minHeight: "100vh" }}>
-            <header>
+          <div
+            style={{
+              minHeight: "100vh",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Typography className={classes.createdAtText}>
+              {currentEdge.node.createdAt}
+            </Typography>
+            <header className={classes.titleContainerPost}>
               <Typography variant="h3" className={classes.titleText}>
                 {" "}
                 {currentEdge.node.blogTitle}
               </Typography>
-              <Typography className={classes.createdAtText}>
-                {currentEdge.node.createdAt}
-              </Typography>
+
+              <div>
+                <a href="#ingredients" className={classes.aTags}>
+                  Ingredients
+                </a>{" "}
+                |{" "}
+                <a href="#instructions" className={classes.aTags}>
+                  Procedure
+                </a>
+              </div>
             </header>
-            <Typography>Ingredients | Procedure</Typography>
-            <Typography className={classes.bodyText}>
+
+            <Typography className={classes.bodyTextDes}>
               {documentToReactComponents(
                 currentEdge.node.childContentfulBlogPostBlogPostBodyRichTextNode
                   .json,
                 options
               )}
             </Typography>
-            <div>
-              <Typography className={classes.bodyText}>
-                {documentToReactComponents(
-                  currentEdge.node
-                    .childContentfulBlogPostIngredientsRichTextNode.json,
-                  options
-                )}
-              </Typography>
-              <Typography className={classes.bodyText}>
-                {documentToReactComponents(
-                  currentEdge.node
-                    .childContentfulBlogPostInstructionsRichTextNode.json,
-                  options
-                )}
-              </Typography>
+            <div className={`${classes.ingInsContainer} shadow`}>
+              <div
+                className={`${classes.ingredientsInstructions} ${classes.ingredientsInd} shadow`}
+                id="ingredients"
+              >
+                <Typography
+                  variant="h6"
+                  style={{ width: "fit-content", margin: "0px auto" }}
+                >
+                  Ingredients
+                </Typography>
+                <div className={classes.bodyText}>
+                  {documentToReactComponents(
+                    currentEdge.node
+                      .childContentfulBlogPostIngredientsRichTextNode.json,
+                    options
+                  )}
+                </div>
+              </div>
+              <div
+                className={`${classes.ingredientsInstructions} ${classes.instructionsInd} shadow`}
+                id="instructions"
+              >
+                <Typography
+                  variant="h6"
+                  style={{ width: "fit-content", margin: "0px auto" }}
+                >
+                  Instructions
+                </Typography>
+                <Typography className={classes.bodyText}>
+                  {documentToReactComponents(
+                    currentEdge.node
+                      .childContentfulBlogPostInstructionsRichTextNode.json,
+                    options
+                  )}
+                </Typography>
+              </div>
             </div>
             {/* <section dangerouslySetInnerHTML={{ __html: post.html }} /> */}
-            <hr
-              style={{
-                marginBottom: theme.spacing(3),
-                marginTop: theme.spacing(3),
-              }}
-            />
             {/* <footer>
               <Typography>Footerrrr</Typography>
         
             </footer> */}
           </div>
-
+          {/* <hr
+            style={{
+              marginBottom: theme.spacing(3),
+              marginTop: theme.spacing(3),
+            }}
+          /> */}
           <nav>
             <ul
               style={{
@@ -267,6 +351,8 @@ const BlogPostLayoutContent = ({ edges }) => {
                 listStyle: `none`,
                 padding: 0,
                 marginLeft: 0,
+                marginTop: 50,
+                marginBottom: 30,
               }}
             >
               <li style={{ marginRight: "10px" }}>

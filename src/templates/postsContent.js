@@ -86,7 +86,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     // borderBottom: "7px double",
     padding: 20,
-    maxHeight: 155,
+    height: 200,
     backgroundImage: `url(${paperImage})`,
     marginBottom: theme.spacing(3),
     // borderImageSource: `url(${border})`,

@@ -73,6 +73,8 @@ theme = responsiveFontSizes(theme)
 
 const useStyles = makeStyles(() => ({
   deepDiv: {
+    display: "flex",
+    flexDirection: "column",
     paddingTop: theme.spacing(10),
     paddingBottom: theme.spacing(10),
     paddingLeft: theme.spacing(4),

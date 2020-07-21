@@ -3,6 +3,9 @@
   /* font-family: "Barrio", cursive !important; */
   box-sizing: border-box;
 }
+p {
+  font-family: "Inconsolata", monospace;
+}
 hr {
   background: #d3d3d34a !important ;
   border: none !important;
@@ -173,4 +176,7 @@ html {
 .dog {
   animation: opacityAnimation;
   animation-duration: 0.5s;
+}
+a {
+  font-family: "Inconsolata", monospace;
 }

@@ -144,7 +144,7 @@ const Subscribe = () => {
   }
 
   return (
-    <div>
+    <div style={{ marginTop: 50 }}>
       <Snackbar
         anchorOrigin={{
           vertical: "top",
@@ -174,7 +174,7 @@ const Subscribe = () => {
           </IconButton>,
         ]}
       />
-      <Card raised="true" className={classes.cardRoot}>
+      <Card raised={true} className={classes.cardRoot}>
         <Typography className={classes.text} variant="h5" align="center">
           {cardGetNotifiedText[0].node.string}
         </Typography>

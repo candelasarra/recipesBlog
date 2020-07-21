@@ -36,6 +36,7 @@ const BlogPostLayout = props => {
       { label: `Post`, variant: "body2" },
     ]
   }
+  console.log(props)
 
   return (
     <MainWrapper>

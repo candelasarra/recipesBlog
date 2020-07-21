@@ -52,7 +52,7 @@ const CustomBreadcrumbs = ({ array, location }) => {
             <Typography
               key={item.label}
               variant={item.variant ? item.variant : "subtitle1"}
-              style={{ color: theme.palette.secondary.dark }}
+              style={{ color: theme.palette.primary.main, fontWeight: "bold" }}
             >
               {item.label}
             </Typography>
