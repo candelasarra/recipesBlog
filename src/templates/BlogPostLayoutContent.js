@@ -44,17 +44,22 @@ const useStyles = makeStyles(theme => ({
   },
   instructionsInd: {
     flex: 1,
+    margin: 5,
+    borderRadius: 4,
     // [theme.breakpoints.down("sm")]: {
     //   flexDirection: 'column'
     // },
   },
   ingredientsInd: {
     flex: 0.7,
+    margin: 5,
+    borderRadius: 4,
     [theme.breakpoints.down("sm")]: {
       flex: 1,
     },
   },
   ingInsContainer: {
+    borderRadius: 4,
     display: "flex",
     flexWrap: "wrap",
     padding: 20,

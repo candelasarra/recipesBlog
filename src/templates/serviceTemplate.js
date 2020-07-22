@@ -11,7 +11,14 @@ const ServiceTemplate = ({ data, path, pageContext, location }) => {
   const theme = useTheme()
   console.log(data)
   const service = data.allContentfulBlogPost.edges[0].node.service[0].toLowerCase()
-  const category = data.allContentfulBlogPost.edges[0].node[service]
+  const category = []
+  data.allContentfulBlogPost.edges.map(edge => {
+    edge.node[service].map(element => {
+      if (!category.includes(element)) {
+        category.push(element)
+      }
+    })
+  })
   const breadcrumbArray = [
     { label: "Home", link: "/" },
     { label: pageContext.title },
