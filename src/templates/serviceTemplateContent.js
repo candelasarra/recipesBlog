@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react"
 import { makeStyles } from "@material-ui/styles"
 import { Slide, Card, Typography } from "@material-ui/core"
 import { navigate } from "gatsby"
-import Cookies from "../vectors/cherry.svg"
-import Cakes from "../vectors/divorceCake.svg"
-import Pies from "../vectors/justMilkshake.svg"
-import Drink from "../vectors/drink.svg"
+import Cookies from "../vectors/cookies.svg"
+import Cakes from "../vectors/twoCakes.svg"
+import Cupcakes from "../vectors/cupcakes.svg"
+import Dessert from "../vectors/desserts.svg"
+import Breakfast from "../vectors/breakfast.svg"
+import Rice from "../vectors/rice.svg"
 const useStyles = makeStyles(theme => ({
   serviceContainer: {
     textAlign: "center",
@@ -25,11 +27,18 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: "rgba(211, 211, 211, 0.1)",
     },
   },
-  categoriesContainer: {
-    columnCount: 3,
-    columnGap: 0,
-    [theme.breakpoints.down("sm")]: {
-      columnCount: 2,
+  category: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    cursor: "pointer",
+  },
+  color: {
+    transition: "filter .9s",
+    filter: "brightness(0%) grayscale(0) contrast(100%)",
+    "&:hover": {
+      filter: "brightness(100%) grayscale(0) contrast(100%);",
     },
   },
 }))
@@ -37,14 +46,15 @@ const imageStyle = {
   //width: "fit-content",
   maxHeight: "500px",
   display: "inline-block",
-  padding: 20,
+  padding: 10,
   width: "100%",
 }
 const images = {
   cookies: <Cookies style={imageStyle} />,
   cakes: <Cakes style={imageStyle} />,
-  pies: <Pies style={imageStyle} />,
-  cupcakes: <Drink style={imageStyle} />,
+  desserts: <Dessert style={imageStyle} />,
+  cupcakes: <Cupcakes style={imageStyle} />,
+  breakfast: <Breakfast style={imageStyle} />,
 }
 
 const ServiceTemplateContent = ({ data, path }) => {
@@ -56,8 +66,19 @@ const ServiceTemplateContent = ({ data, path }) => {
     if (data) {
       const serviceCards = data.map(category => {
         return (
-          <div className="shadow">
+          <div
+            className={`${classes.category} ${
+              classes.color
+            } shadow ${category.toLowerCase()}`}
+            onClick={() => navigate(`${path}/${category.toLowerCase()}`)}
+          >
             {/* <div style={{ width: "fit-content", margin: "0px auto" }}> */}
+            <Typography
+              variant="h3"
+              style={{ width: "fit-content", margin: 20 }}
+            >
+              {category}
+            </Typography>
             {images[category.toLowerCase()]}
             {/* </div> */}
           </div>
@@ -88,7 +109,10 @@ const ServiceTemplateContent = ({ data, path }) => {
     //   }}
     // >
     <div className="shadow" style={{ padding: 20 }}>
-      <div className={`${classes.categoriesContainer} shadow`} style={{}}>
+      <div
+        className={`${classes.categoriesContainer} categoriesContainer shadow`}
+        style={{}}
+      >
         {cards}
       </div>
     </div>

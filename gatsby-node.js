@@ -87,6 +87,7 @@ exports.createPages = async function({ actions, graphql, reporter }) {
   if (result.errors) {
     reporter.panic("failed to create pages", result.errors)
   }
+
   resultServices.data.site.siteMetadata.menuLinks.forEach(edge => {
     const { name, link, title } = edge
     console.log(edge)
@@ -116,14 +117,23 @@ exports.createPages = async function({ actions, graphql, reporter }) {
     reporter.panic("failed to create pages", result.errors)
   }
   console.log(serviceResults)
+
   categoriesResult.data.allContentfulBlogPost.edges.forEach(edge => {
-    console.log(edge)
+    const categories = []
     const service = edge.node.service[0]
+    console.log("HEREEE SERVICE", service)
     const category = edge.node[service.toLowerCase()][0]
-    actions.createPage({
-      path: `/${service.toLowerCase()}/${category.toLowerCase()}`,
-      component: require.resolve(`./src/templates/servicePosts`),
-      context: { service: service, category: category },
+    categoriesResult.data.allContentfulBlogPost.edges.map(inner => {
+      inner.node[service.toLowerCase()].map(element => {
+        if (!categories.includes(element)) {
+          categories.push(element)
+          actions.createPage({
+            path: `/${service.toLowerCase()}/${element.toLowerCase()}`,
+            component: require.resolve(`./src/templates/servicePosts`),
+            context: { service: service, category: element },
+          })
+        }
+      })
     })
   })
 }

@@ -18,14 +18,14 @@ const ServicePosts = props => {
   const usPosts = data.usPosts.edges.filter(edge => {
     return (
       edge.node.service[0] === service &&
-      edge.node[service.toLowerCase()][0] === category
+      edge.node[service.toLowerCase()].includes(category)
     )
   })
   console.log("USPOSTS", usPosts)
   const esPosts = data.esPosts.edges.filter(edge => {
     return (
       edge.node.service[0] === service &&
-      edge.node[service.toLowerCase()][0] === category
+      edge.node[service.toLowerCase()].includes(category)
     )
   })
   const breadcrumbArray = [

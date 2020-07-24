@@ -15,7 +15,7 @@ import { navigate, useStaticQuery, Link } from "gatsby"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 import BurgerHome from "../vectors/burgerHome.svg"
 import TrendyMilkshake from "../vectors/milkshake.svg"
-import Drink from "../vectors/drink.svg"
+import Drink from "../vectors/drinks.svg"
 import border from "../images/star.svg"
 import Walnuts from "../vectors/walnuts.svg"
 const useStyles = makeStyles(() => ({
@@ -218,9 +218,9 @@ const Index = props => {
               </Typography>
               <Drink />
             </div>
-            <div className={`${classes.color} ${classes.dozen} dozen shadow`}>
+            <div className={`${classes.dozen} dozen shadow`}>
               <Walnuts className={`walnuts ${classes.color}`} />
-              <Typography>
+              <Typography variant="body1" className="homeTextNuts">
                 djslfkj sdlfdjslfkj sdlfdjslfkjsdl fdjslfkjsdlf
                 djslfkjsdlfdjslfkjsdlf djslfkjsdlf djslfkjsdlf djslfkjsdlf
                 djslfkjsdlfdjsl fkjsdlfdjslfkj sdlfdjslfkjsdlf djslfkjsdlf
@@ -233,8 +233,6 @@ const Index = props => {
                 sdlfdjslfkj sdlfdjslfkjsdl fdjslfkjsdlf djslfkjsdlfdjslfkjsdlf
                 djslfkjsdlf djslfkjsdlf djslfkjsdlf djslfkjsdlfdjsl
                 fkjsdlfdjslfkj sdlfdjslfkjsdlf djslfkjsdlf
-                djslfkjsdlfddjslfkjsdlf djslfkjsdlf djslfkjsdlfjslfkjsd
-                lfdjslfkjsdlf djslfkjsdlfdjslfkjsdlf
               </Typography>
             </div>
             <div className="contactMe shadow">

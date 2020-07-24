@@ -17,6 +17,10 @@ body {
 html {
   background-color: #1f1f1f;
 }
+.walnuts {
+  float: left;
+  height: 175px;
+}
 .MuiGrid-item {
   box-shadow: 0 0 0 1px #231f20, inset 0 0 0 1px #231f20;
 }
@@ -27,6 +31,30 @@ html {
 /* border-image-repeat: space; */
 .svg {
   fill: #e25a5f !important;
+}
+.categoriesContainer {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: minmax(0, 500px) minmax(0, 400px) minmax(0, 100px);
+  grid-template-areas:
+    "cakes cakes cakes cakes cakes cakes breakfast breakfast breakfast breakfast breakfast breakfast"
+    "desserts desserts desserts desserts cookies cookies cookies cookies cupcakes cupcakes cupcakes cupcakes"
+    ". . . . . . . . . . . . ";
+}
+.desserts {
+  grid-area: desserts;
+}
+.cookies {
+  grid-area: cookies;
+}
+.cakes {
+  grid-area: cakes;
+}
+.cupcakes {
+  grid-area: cupcakes;
+}
+.breakfast {
+  grid-area: breakfast;
 }
 .container {
   display: grid;
@@ -67,6 +95,16 @@ html {
   }
 }
 @media screen and (max-width: 800px) {
+  .container {
+    grid-template-rows: auto minmax(0, 450px) auto auto;
+    grid-template-areas:
+    /* "header header header header header header header header header header header header" */
+      "salty salty salty salty salty salty sweets sweets sweets sweets sweets sweets"
+      "drinks drinks drinks drinks drinks drinks empty empty empty empty empty empty"
+      "dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen"
+      "general general  general  general  general  general  buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee"
+      "general  general  general  general  general  general  contactMe contactMe contactMe contactMe contactMe contactMe";
+  }
   .header {
     grid-template-rows: auto auto;
     grid-template-areas: "headerTitle headerTitle headerTitle";
@@ -77,9 +115,21 @@ html {
   .linksContainer {
     display: none;
   }
+  .categoriesContainer {
+    grid-template-columns: 1fr;
+    grid-template-rows: unset;
+    grid-auto-rows: auto;
+    grid-template-areas:
+      "breakfast"
+      "cakes"
+      "cookies"
+      "cupcakes"
+      "desserts";
+  }
 }
 @media (max-width: 700px) {
   .container {
+    grid-template-rows: auto auto auto auto auto auto;
     grid-template-areas:
       /* "header header header header header header header header header header header header" */
       "salty salty salty salty salty salty salty salty salty salty salty salty"
@@ -88,6 +138,9 @@ html {
       "dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen"
       "buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee  contactMe contactMe contactMe contactMe contactMe contactMe"
       "general  general  general  general  general  general general  general  general  general  general  general";
+  }
+  .dozen {
+    display: block;
   }
   .milkshakeSvg {
     height: unset !important;
@@ -99,7 +152,7 @@ html {
 }
 @media (max-width: 600px) {
   .walnuts {
-    height: 90px;
+    height: 110px;
   }
 }
 .milkshakeSvg {
@@ -122,10 +175,7 @@ html {
   /* grid-column: 1 / 10;
   grid-row: 2 / 3; */
 }
-.walnuts {
-  float: left;
-  height: 150px;
-}
+
 .drinks {
   grid-area: drinks;
   /* grid-column: 10 / 13;
