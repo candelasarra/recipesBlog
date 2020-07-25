@@ -134,8 +134,6 @@ const Index = props => {
     `
   )
 
-  console.log(query.site.siteMetadata)
-
   //creating the array of objects with row one data to map over for UI
   const makeRowOneObjects = query.site.siteMetadata.menuLinks.map(item => {
     const { title, link, name } = item

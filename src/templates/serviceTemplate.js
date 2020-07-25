@@ -11,11 +11,15 @@ const ServiceTemplate = ({ data, path, pageContext, location }) => {
   const service = data.allContentfulBlogPost.edges[0].node.service[0].toLowerCase()
   const category = []
   data.allContentfulBlogPost.edges.map(edge => {
-    edge.node[service].map(element => {
-      if (!category.includes(element)) {
-        category.push(element)
-      }
-    })
+    //this if because only sweets have categories
+    if (edge && edge.node && edge.node[service]) {
+      edge.node[service].map(element => {
+        // this if because one recipe can fall into more than one category so filteing to not repeat
+        if (!category.includes(element)) {
+          category.push(element)
+        }
+      })
+    }
   })
   const breadcrumbArray = [
     { label: "Home", link: "/" },

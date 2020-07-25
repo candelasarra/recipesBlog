@@ -1,11 +1,18 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Typography, useTheme, makeStyles, TextField } from "@material-ui/core"
+import {
+  Typography,
+  useTheme,
+  makeStyles,
+  TextField,
+  FormGroup,
+} from "@material-ui/core"
 import LanguageContext from "../templates/LanguageContext"
 import { Link } from "gatsby"
 import strawBack from "../images/strawberryBackground.svg"
 import Dog from "../vectors/dog.svg"
 import Pagination from "../components/pagination"
 import paperImage from "../images/paperImage.jpg"
+import ServiceCheckbox from "../components/serviceCheckbox"
 
 const useStyles = makeStyles(theme => ({
   postDescriptionText: {
@@ -95,6 +102,7 @@ const ServicePostsContent = ({
   esPosts,
   serviceNow,
   category,
+  tags,
 }) => {
   const theme = useTheme()
   const classes = useStyles()
@@ -106,6 +114,7 @@ const ServicePostsContent = ({
   const [numberOfPages, setNumberOfPages] = useState(0)
   const itemsPerPage = 8
   const [page, setPage] = useState(1)
+  const [checked, setChecked] = useState(false)
   const searchResultString = data.results.edges.filter(
     edge =>
       edge.node.node_locale === language &&
@@ -114,23 +123,54 @@ const ServicePostsContent = ({
   const searchWord = data.results.edges.filter(
     edge => edge.node.node_locale === language && edge.node.slug === "search"
   )
+  const checkedValuesTrue = Object.values(checked).filter(
+    value => value === true
+  )
+  const handleCheckbox = e => {
+    setChecked({ ...checked, [e.target.name]: e.target.checked })
+  }
 
   useEffect(() => {
-    if (searched) {
+    if (searched || checkedValuesTrue.length !== 0) {
       const array = language === "en-US" ? usPosts : esPosts
       const filteredPosts = array.filter(post => {
         const lcTitle = post.node.blogTitle.toLowerCase()
         const lcDescription = post.node.descriptionOfPost.toLowerCase()
         const searchWord = searched.toLowerCase()
-        return (
-          lcTitle.includes(searchWord) || lcDescription.includes(searchWord)
-        )
+        const { tags, service } = post.node
+        if (checkedValuesTrue.length !== 0 && searched) {
+          return (
+            ((service && service.filter(ser => checked[ser]).length) ||
+              (tags && tags.filter(ser => checked[ser]).length)) &&
+            (lcTitle.includes(searchWord) || lcDescription.includes(searchWord))
+          )
+        } else if (checkedValuesTrue.length !== 0) {
+          return (
+            (service &&
+              service.filter(ser => checked[ser.toLowerCase()]).length) ||
+            (tags && tags.filter(ser => checked[ser]).length)
+          )
+        } else if (searched) {
+          return (
+            lcTitle.includes(searchWord) || lcDescription.includes(searchWord)
+          )
+        } else {
+          return false
+        }
       })
       setSearchedPosts(filteredPosts)
     } else {
       language === "en-US" ? setPosts(usPosts) : setPosts(esPosts)
     }
-  }, [language, usPosts, esPosts, searched])
+  }, [
+    language,
+    usPosts,
+    esPosts,
+    searched,
+    setChecked,
+    checked,
+    checkedValuesTrue.length,
+  ])
 
   useEffect(() => {
     if (searchedPosts) {
@@ -159,9 +199,13 @@ const ServicePostsContent = ({
             >
               <div>
                 <Link
-                  to={`/${serviceNow.toLowerCase()}/${category.toLowerCase()}/${
-                    post.node.slug
-                  }`}
+                  to={
+                    category
+                      ? `/${serviceNow.toLowerCase()}/${category.toLowerCase()}/${
+                          post.node.slug
+                        }`
+                      : `/${serviceNow.toLowerCase()}/${post.node.slug}`
+                  }
                   variant="h5"
                   style={{
                     textDecoration: "none",
@@ -223,6 +267,20 @@ const ServicePostsContent = ({
             style: { padding: "5px 10px 5px 10px " },
           }}
         />
+        <FormGroup row className={classes.formGroup}>
+          {!!tags.length &&
+            tags.map(value => {
+              return (
+                <ServiceCheckbox
+                  checked={checked[value]}
+                  handleCheckbox={handleCheckbox}
+                  name={value}
+                  label={value.toUpperCase()}
+                  key={value.toUpperCase()}
+                />
+              )
+            })}
+        </FormGroup>
       </div>
       <div style={{ width: "100%" }}>
         <div className={classes.postsContainer}>

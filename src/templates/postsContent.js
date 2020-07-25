@@ -108,7 +108,7 @@ const useStyles = makeStyles(theme => ({
   // },
 }))
 
-const PostsContent = ({ data }) => {
+const PostsContent = ({ data, tags }) => {
   const theme = useTheme()
   const classes = useStyles()
   const { language } = useContext(LanguageContext)
@@ -121,10 +121,8 @@ const PostsContent = ({ data }) => {
   const itemsPerPage = 8
   const [page, setPage] = useState(1)
 
-  const checkboxesData = [
-    ...data.site.siteMetadata.menuLinks,
-    ...data.site.siteMetadata.tags,
-  ]
+  const checkboxesData = [...data.site.siteMetadata.menuLinks, ...tags]
+
   const searchResultString = data.results.edges.filter(
     edge =>
       edge.node.node_locale === language &&
@@ -166,8 +164,9 @@ const PostsContent = ({ data }) => {
           return (
             lcTitle.includes(searchWord) || lcDescription.includes(searchWord)
           )
+        } else {
+          return false
         }
-        return false
       })
       setSearchedPosts(filteredPosts)
     } else {
@@ -184,7 +183,6 @@ const PostsContent = ({ data }) => {
     checked,
     checkedValuesTrue.length,
   ])
-
   useEffect(() => {
     if (searchedPosts) {
       setPosts(searchedPosts)
@@ -250,17 +248,6 @@ const PostsContent = ({ data }) => {
     classes.postTitle,
     theme,
   ])
-  // const checkboxes = checkboxesData.map((value) => {
-  //   const label = value.title?  value.title : value;
-  //   const name = value.name? value.name : value;
-  //  return (
-  //  <ServiceCheckbox
-  //   checked={checked[name]}
-  //   handleCheckbox={handleCheckbox}
-  //   name={name}
-  //   label={label}
-  //   />)
-  // })
   return (
     <div className={`${classes.mainContainer} shadow`}>
       <div
@@ -291,14 +278,16 @@ const PostsContent = ({ data }) => {
           {!!checkboxesData.length &&
             checkboxesData.map(value => {
               const label = value.title
-              const name = value.name
+                ? value.title.toUpperCase()
+                : value.toUpperCase()
+              const name = value.name ? value.name : value
               return (
                 <ServiceCheckbox
                   checked={checked[name]}
                   handleCheckbox={handleCheckbox}
                   name={name}
                   label={label}
-                  key={name}
+                  key={label}
                 />
               )
             })}

@@ -64,12 +64,25 @@ exports.createPages = async function({ actions, graphql, reporter }) {
     console.log(edge)
     const slug = edge.node.slug
     const service = edge.node.service[0]
-    const category = edge.node[service.toLowerCase()][0]
-    actions.createPage({
-      path: `/${service.toLowerCase()}/${category.toLowerCase()}/${slug}`,
-      component: require.resolve(`./src/templates/BlogPostLayout`),
-      context: { slug: slug, service: service, category: category },
-    })
+    const categories = []
+    if (service === "Sweets") {
+      edge.node[service.toLowerCase()].map(element => {
+        if (!categories.includes(element)) {
+          categories.push(element)
+          actions.createPage({
+            path: `/${service.toLowerCase()}/${element.toLowerCase()}/${slug}`,
+            component: require.resolve(`./src/templates/BlogPostLayout`),
+            context: { slug: slug, service: service, category: element },
+          })
+        }
+      })
+    } else {
+      actions.createPage({
+        path: `/${service.toLowerCase()}/${slug}`,
+        component: require.resolve(`./src/templates/BlogPostLayout`),
+        context: { slug: slug, service: service },
+      })
+    }
   })
   const resultServices = await graphql(`
     query {
@@ -91,11 +104,19 @@ exports.createPages = async function({ actions, graphql, reporter }) {
   resultServices.data.site.siteMetadata.menuLinks.forEach(edge => {
     const { name, link, title } = edge
     console.log(edge)
-    actions.createPage({
-      path: `${link.toLowerCase()}`,
-      component: require.resolve(`./src/templates/serviceTemplate`),
-      context: { title: title },
-    })
+    if (name === "sweets") {
+      actions.createPage({
+        path: `${link}`,
+        component: require.resolve(`./src/templates/serviceTemplate`),
+        context: { title: title },
+      })
+    } else {
+      actions.createPage({
+        path: `${link}`,
+        component: require.resolve(`./src/templates/servicePosts`),
+        context: { service: title },
+      })
+    }
   })
   const categoriesResult = await graphql(
     `
@@ -122,9 +143,8 @@ exports.createPages = async function({ actions, graphql, reporter }) {
     const categories = []
     const service = edge.node.service[0]
     console.log("HEREEE SERVICE", service)
-    const category = edge.node[service.toLowerCase()][0]
-    categoriesResult.data.allContentfulBlogPost.edges.map(inner => {
-      inner.node[service.toLowerCase()].map(element => {
+    if (service === "Sweets") {
+      edge.node[service.toLowerCase()].map(element => {
         if (!categories.includes(element)) {
           categories.push(element)
           actions.createPage({
@@ -134,6 +154,6 @@ exports.createPages = async function({ actions, graphql, reporter }) {
           })
         }
       })
-    })
+    }
   })
 }

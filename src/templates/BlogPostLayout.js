@@ -29,6 +29,16 @@ const BlogPostLayout = props => {
       },
       { label: `Post`, variant: "body2" },
     ]
+  } else if (service) {
+    breadcrumbArray = [
+      { label: "Home", link: "/", variant: "body2" },
+      {
+        label: `${service}`,
+        link: `/${service.toLowerCase}`,
+        variant: "body2",
+      },
+      { label: `Post`, variant: "body2" },
+    ]
   } else {
     breadcrumbArray = [
       { label: "Home", link: "/", variant: "body2" },

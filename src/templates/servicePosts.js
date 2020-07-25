@@ -8,25 +8,50 @@ import { NavigateNext, Home } from "@material-ui/icons"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 
 const ServicePosts = props => {
-  const theme = useTheme()
   const { data } = props
-  console.log(data)
   const { pageContext } = props
   const { service } = pageContext
   const { category } = pageContext
-  console.log(data.usPosts.edges)
+  const filteredTags = []
   const usPosts = data.usPosts.edges.filter(edge => {
-    return (
-      edge.node.service[0] === service &&
-      edge.node[service.toLowerCase()].includes(category)
-    )
+    const post = edge.node
+    if (post && post.tags) {
+      post.tags.forEach(tag => {
+        if (!filteredTags.includes(tag)) {
+          filteredTags.push(tag)
+        }
+      })
+    }
+    if (
+      service &&
+      edge &&
+      edge.node &&
+      edge.node[service.toLowerCase()] &&
+      category
+    ) {
+      return (
+        edge.node.service[0] === service &&
+        edge.node[service.toLowerCase()].includes(category)
+      )
+    } else {
+      return edge.node.service[0] === service
+    }
   })
-  console.log("USPOSTS", usPosts)
   const esPosts = data.esPosts.edges.filter(edge => {
-    return (
-      edge.node.service[0] === service &&
-      edge.node[service.toLowerCase()].includes(category)
-    )
+    if (
+      service &&
+      edge &&
+      edge.node &&
+      edge.node[service.toLowerCase()] &&
+      category
+    ) {
+      return (
+        edge.node.service[0] === service &&
+        edge.node[service.toLowerCase()].includes(category)
+      )
+    } else {
+      return edge.node.service[0] === service
+    }
   })
   const breadcrumbArray = [
     { label: "Home", link: "/" },
@@ -43,6 +68,7 @@ const ServicePosts = props => {
         data={data}
         serviceNow={service}
         category={category}
+        tags={filteredTags}
       />
     </MainWrapper>
   )
@@ -56,6 +82,7 @@ export const query = graphql`
     ) {
       edges {
         node {
+          tags
           sweets
           service
           blogTitle
@@ -73,6 +100,7 @@ export const query = graphql`
     ) {
       edges {
         node {
+          tags
           sweets
           service
           blogTitle
@@ -91,6 +119,7 @@ export const query = graphql`
     all: allContentfulBlogPost {
       edges {
         node {
+          tags
           sweets
           service
           slug
