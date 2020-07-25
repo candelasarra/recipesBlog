@@ -33,6 +33,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    maxWidth: "90%",
+    alignItems: "center",
   },
   aTags: {
     textDecoration: "underline",
