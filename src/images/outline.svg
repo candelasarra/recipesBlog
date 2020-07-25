@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+<defs>
+<style>.svg{fill:none;stroke:#e25a5f;stroke-miterlimit:10;stroke-width:2px;}</style>
+</defs>
+<title>outline</title>
+<polyline class="svg" points="31 23.42 31 31 23.42 31"/>
+<polyline class="svg" points="8.58 31 1 31 1 23.42"/>
+<polyline class="svg" points="1 8.58 1 1 8.58 1"/>
+<polyline class="svg" points="23.42 1 31 1 31 8.58"/>
+</svg>

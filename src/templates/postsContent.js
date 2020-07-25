@@ -4,17 +4,13 @@ import {
   useTheme,
   makeStyles,
   TextField,
-  InputAdornment,
   FormGroup,
 } from "@material-ui/core"
 import LanguageContext from "../templates/LanguageContext"
 import { Link } from "gatsby"
-import { Search, SentimentVeryDissatisfied } from "@material-ui/icons"
 import ServiceCheckbox from "../components/serviceCheckbox"
 import "../css/global.css"
-import Symbol from "../vectors/symbol.svg"
 import Pagination from "../components/pagination"
-import border from "../images/greystars.svg"
 import strawBack from "../images/strawberryBackground.svg"
 import paperImage from "../images/paperImage.jpg"
 import Dog from "../vectors/dog.svg"
@@ -290,13 +286,6 @@ const PostsContent = ({ data }) => {
           placeholder={searchWord[0].node.string}
           onChange={handleChange}
           InputProps={{ padding: "0px 0px 0px 10px" }}
-          // InputProps={{
-          //   endAdornment: (
-          //     <InputAdornment>
-          //       <Search disabled={!searched} style={{ color: "gray" }} />
-          //     </InputAdornment>
-          //   ),
-          // }}
         />
         <FormGroup row className={classes.formGroup}>
           {!!checkboxesData.length &&

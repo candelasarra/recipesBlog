@@ -1,46 +1,46 @@
 import React, { useContext, useEffect, useState } from "react"
-import {
-  Typography,
-  useTheme,
-  makeStyles,
-  TextField,
-  InputAdornment,
-  FormGroup,
-} from "@material-ui/core"
+import { Typography, useTheme, makeStyles, TextField } from "@material-ui/core"
 import LanguageContext from "../templates/LanguageContext"
 import { Link } from "gatsby"
-import { Search, SentimentVeryDissatisfied } from "@material-ui/icons"
-import ServiceCheckbox from "../components/serviceCheckbox"
-import Symbol from "../vectors/symbol.svg"
+import strawBack from "../images/strawberryBackground.svg"
+import Dog from "../vectors/dog.svg"
 import Pagination from "../components/pagination"
+import paperImage from "../images/paperImage.jpg"
+
 const useStyles = makeStyles(theme => ({
   postDescriptionText: {
-    color: theme.palette.primary.main,
+    color: theme.palette.primary.light,
+    fontStyle: "italic",
+    textAlign: "center",
+    overflow: "scroll",
   },
   postTitle: {
     color: theme.palette.primary.main,
-    fontWeight: "bold",
+    fontWeight: "500",
     marginBottom: theme.spacing(1),
     width: "fit-content",
+    textAlign: "center",
   },
   dateText: {
-    color: "lightgray",
+    color: theme.palette.primary.light,
   },
   sadFace: {
     alignSelf: "center",
     marginTop: "auto",
-    fontSize: 200,
-    color: "#80808054",
     position: "relative",
   },
   mainContainer: {
     display: "flex",
-    minHeight: "50vh",
+    minHeight: "90vh",
     flexDirection: "column",
+    alignItems: "center",
+    padding: 10,
+    backgroundImage: `url(${strawBack})`,
+    backgroundSize: 600,
   },
   searchBar: {
     marginBottom: theme.spacing(5),
-    width: "50%",
+    width: "80%",
     [theme.breakpoints.down("xs")]: {
       width: "80%",
     },
@@ -48,16 +48,43 @@ const useStyles = makeStyles(theme => ({
   searchResults: {
     width: "fit-content",
     alignSelf: "center",
-    color: "#80808054",
+    marginTop: theme.spacing(2),
+    textAlign: "center",
+    color: "#3a3a3a",
   },
   formGroup: {
     marginBottom: theme.spacing(5),
   },
   postsContainer: {
-    margin: "20px 10%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "20px 18%",
     flexWrap: "wrap",
-    [theme.breakpoints.down("xs")]: {
+    //backgroundImage: `url(${paperImage})`,
+    [theme.breakpoints.down("sm")]: {
       margin: "20px 5%",
+    },
+  },
+  postDiv: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    // borderBottom: "7px double",
+    padding: 20,
+    height: 200,
+    backgroundImage: `url(${paperImage})`,
+    marginBottom: theme.spacing(3),
+    // borderImageSource: `url(${border})`,
+    // borderImageRepeat: "round",
+    // borderImageWidth: "11px",
+    // borderImageSlice: "259 fill",
+    // borderStyle: "solid",
+    [theme.breakpoints.down("xs")]: {
+      width: "95%",
+      // border: "none",
     },
   },
 }))
@@ -126,17 +153,11 @@ const ServicePostsContent = ({
         .slice((page - 1) * itemsPerPage, page * itemsPerPage)
         .map(post => {
           return (
-            <div style={{ display: "flex", marginBottom: theme.spacing(6) }}>
-              <Symbol style={{ width: 30 }} />
-              <div
-                key={post.node.slug}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  maxWidth: "60%",
-                  marginLeft: 20,
-                }}
-              >
+            <div
+              key={post.node.slug}
+              className={`${classes.postDiv} ${classes.color} shadow`}
+            >
+              <div>
                 <Link
                   to={`/${serviceNow.toLowerCase()}/${category.toLowerCase()}/${
                     post.node.slug
@@ -148,22 +169,21 @@ const ServicePostsContent = ({
                     width: "fit-content",
                   }}
                 >
-                  <Typography variant="h5" className={classes.postTitle}>
+                  <Typography variant="h4" className={classes.postTitle}>
                     {post.node.blogTitle}
                   </Typography>
                 </Link>
-
-                <Typography variant="caption" className={classes.dateText}>
-                  {" "}
-                  {post.node.createdAt}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  className={classes.postDescriptionText}
-                >
-                  {post.node.descriptionOfPost}
-                </Typography>
               </div>
+              <Typography variant="caption" className={classes.dateText}>
+                {" "}
+                {post.node.createdAt}
+              </Typography>
+              <Typography
+                variant="body1"
+                className={classes.postDescriptionText}
+              >
+                {post.node.descriptionOfPost}
+              </Typography>
             </div>
           )
         })
@@ -193,30 +213,30 @@ const ServicePostsContent = ({
         }}
       >
         <TextField
+          variant="filled"
           value={searched}
           className={classes.searchBar}
           placeholder={searchWord[0].node.string}
           onChange={handleChange}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment>
-                <Search disabled={!searched} style={{ color: "gray" }} />
-              </InputAdornment>
-            ),
+          InputProps={{ padding: "0px 0px 0px 10px" }}
+          inputProps={{
+            style: { padding: "5px 10px 5px 10px " },
           }}
         />
       </div>
-      <div className={classes.postsContainer}>
-        {searched && searchedPosts && searchedPosts.length === 0 ? (
-          <>
-            <SentimentVeryDissatisfied className={classes.sadFace} />
-            <Typography variant="h4" className={classes.searchResults}>
-              {searchResultString[0].node.string}
-            </Typography>
-          </>
-        ) : (
-          arrayOfPosts
-        )}
+      <div style={{ width: "100%" }}>
+        <div className={classes.postsContainer}>
+          {searched && searchedPosts && searchedPosts.length === 0 ? (
+            <div className="opacityAn">
+              <Dog className={`${classes.sadFace}`} />
+              <Typography variant="h4" className={classes.searchResults}>
+                {searchResultString[0].node.string}
+              </Typography>
+            </div>
+          ) : (
+            arrayOfPosts
+          )}
+        </div>
       </div>
       {posts && posts.length > itemsPerPage && (
         <Pagination

@@ -18,6 +18,8 @@ import TrendyMilkshake from "../vectors/milkshake.svg"
 import Drink from "../vectors/drinks.svg"
 import border from "../images/star.svg"
 import Walnuts from "../vectors/walnuts.svg"
+import Spices from "../vectors/spices.svg"
+import outline from "../images/outline.svg"
 const useStyles = makeStyles(() => ({
   font: {
     // fontFamily: " 'Barrio', cursive",
@@ -66,6 +68,7 @@ const useStyles = makeStyles(() => ({
     height: "100%",
     padding: 30,
     maxHeight: 950,
+    justifyContent: "space-between",
   },
   gridRoot: {
     maxHeight: 2450,
@@ -75,6 +78,15 @@ const useStyles = makeStyles(() => ({
   },
   dozen: {
     padding: 20,
+  },
+  borderDrinks: {
+    padding: 20,
+    border: "3px solid",
+    borderImage: `url(${outline}) 56 round`,
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
   },
 }))
 
@@ -210,17 +222,27 @@ const Index = props => {
               <Typography>Salty</Typography>
             </div>
             <div className={`drinks shadow ${classes.color}`}>
-              <Typography
-                variant="h4"
-                style={{ fontFamily: "'Shrikhand', cursive" }}
-              >
-                Drinks
-              </Typography>
-              <Drink />
+              <div className={classes.borderDrinks}>
+                <Typography
+                  variant="h3"
+                  style={{
+                    fontFamily: "'Shrikhand', cursive",
+                    textAlign: "center",
+                    color: "#e25a5f",
+                  }}
+                >
+                  Drinks
+                </Typography>
+
+                <Typography style={{ textAlign: "center" }}>
+                  Recipes for drinks, from milkshakes to alcoholic drinks and
+                  juices. Theres also some nut milk recipes and etc.
+                </Typography>
+                <Drink style={{ maxHeight: 409 }} />
+              </div>
             </div>
             <div className={`${classes.dozen} dozen shadow`}>
-              <Walnuts className={`walnuts ${classes.color}`} />
-              <Typography variant="body1" className="homeTextNuts">
+              <Typography variant="body2" className="homeTextNuts">
                 djslfkj sdlfdjslfkj sdlfdjslfkjsdl fdjslfkjsdlf
                 djslfkjsdlfdjslfkjsdlf djslfkjsdlf djslfkjsdlf djslfkjsdlf
                 djslfkjsdlfdjsl fkjsdlfdjslfkj sdlfdjslfkjsdlf djslfkjsdlf
@@ -234,6 +256,7 @@ const Index = props => {
                 djslfkjsdlf djslfkjsdlf djslfkjsdlf djslfkjsdlfdjsl
                 fkjsdlfdjslfkj sdlfdjslfkjsdlf djslfkjsdlf
               </Typography>
+              <Spices className={` ${classes.color}`} />
             </div>
             <div className="contactMe shadow">
               <Typography>Bread</Typography>

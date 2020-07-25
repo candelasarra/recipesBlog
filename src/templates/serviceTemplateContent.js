@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { makeStyles } from "@material-ui/styles"
-import { Slide, Card, Typography } from "@material-ui/core"
+import { Typography } from "@material-ui/core"
 import { navigate } from "gatsby"
 import Cookies from "../vectors/cookies.svg"
 import Cakes from "../vectors/twoCakes.svg"
 import Cupcakes from "../vectors/cupcakes.svg"
 import Dessert from "../vectors/desserts.svg"
 import Breakfast from "../vectors/breakfast.svg"
-import Rice from "../vectors/rice.svg"
 const useStyles = makeStyles(theme => ({
   serviceContainer: {
     textAlign: "center",

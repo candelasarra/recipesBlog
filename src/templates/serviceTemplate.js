@@ -2,9 +2,7 @@ import React from "react"
 import MainWrapper from "./MainWrapper"
 import Header from "../components/header"
 import ServiceTemplateContent from "./serviceTemplateContent"
-import { Breadcrumbs, Typography, useTheme } from "@material-ui/core"
-import { Link } from "gatsby"
-import { NavigateNext } from "@material-ui/icons"
+import { useTheme } from "@material-ui/core"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 
 const ServiceTemplate = ({ data, path, pageContext, location }) => {
