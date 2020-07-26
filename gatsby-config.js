@@ -48,7 +48,13 @@ module.exports = {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ["Shrikhand", "Limelight", "Poiret One", "Inconsolata"],
+          families: [
+            "Shrikhand",
+            "Limelight",
+            "Poiret One",
+            "Inconsolata",
+            "Barrio",
+          ],
         },
       },
     },

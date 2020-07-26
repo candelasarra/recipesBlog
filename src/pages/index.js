@@ -17,8 +17,8 @@ import BurgerHome from "../vectors/burgerHome.svg"
 import TrendyMilkshake from "../vectors/milkshake.svg"
 import Drink from "../vectors/drinks.svg"
 import border from "../images/star.svg"
-import Walnuts from "../vectors/walnuts.svg"
 import Spices from "../vectors/spices.svg"
+import Typewriter from "../vectors/typewriter.svg"
 import outline from "../images/outline.svg"
 const useStyles = makeStyles(() => ({
   font: {
@@ -78,6 +78,14 @@ const useStyles = makeStyles(() => ({
   },
   dozen: {
     padding: 20,
+  },
+  typewriter: {
+    padding: 20,
+    display: "flex",
+    alignItems: "center",
+  },
+  typewriterSvg: {
+    width: "50%",
   },
   borderDrinks: {
     padding: 20,
@@ -216,10 +224,24 @@ const Index = props => {
                 )
               })}
             </>
-            <div className="general shadow">
-              <Typography>Salty</Typography>
+            <div
+              className={`${classes.typewriter} ${classes.color} general shadow`}
+            >
+              <Typewriter className={classes.typewriterSvg} />
+              <div>
+                <Typography variant="h6">Let's stay in touch!</Typography>
+                <Typography variant="h6">Email me at:</Typography>
+                <Typography style={{ fontFamily: "'Barrio', cursive" }}>
+                  <a
+                    href="mailto:candela@cherrychronicles.com"
+                    style={{ color: "#e25a5f" }}
+                  >
+                    candela@cherrychronicles.com
+                  </a>{" "}
+                </Typography>
+              </div>
             </div>
-            <div className={`drinks shadow ${classes.color}`}>
+            <div className={`drinks shadow  ${classes.color}`}>
               <div className={classes.borderDrinks}>
                 <Typography
                   variant="h3"
