@@ -131,8 +131,6 @@ const Subscribe = () => {
     }
   }
 
-  const API =
-    "https://hocx8gfype.execute-api.us-east-1.amazonaws.com/prd/blog-emails"
   const handlePostEmail = async data => {
     try {
       const res = await axios.post(API, data)

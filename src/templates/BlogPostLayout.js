@@ -53,7 +53,7 @@ const BlogPostLayout = props => {
       <Header titleStyle="h4" />
       <CustomBreadcrumbs array={breadcrumbArray} location={props.location} />
       <BlogPostLayoutContent edges={edges} />
-      <Subscribe />
+      {/* <Subscribe /> */}
     </MainWrapper>
   )
 }
