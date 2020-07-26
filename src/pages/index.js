@@ -156,31 +156,6 @@ const Index = props => {
     }
   })
 
-  const gridItems = [
-    {
-      title: "Banana Text",
-      cols: 4,
-    },
-    {
-      title: "Sweets",
-      cols: 6,
-    },
-    {
-      title: "Salty",
-      cols: 5,
-    },
-    {
-      title: "Long",
-      cols: 5,
-      rows: 2,
-    },
-    {
-      title: "Bread",
-      cols: 10,
-    },
-  ]
-  console.log(props)
-
   return (
     <div
       style={{
@@ -296,7 +271,7 @@ const Index = props => {
             <div className="buyMeCoffee shadow">
               <Typography>Bread</Typography>
             </div>
-            <div className="empty shadow" />
+            <div className="empty shadow" style={{ display: "flex" }}></div>
           </div>
         </div>
       </MainWrapper>

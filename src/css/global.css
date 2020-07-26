@@ -13,6 +13,12 @@ hr {
 }
 body {
   margin: 0;
+  transform: translateZ(0);
+  -moz-transform: translatez(0);
+  -ms-transform: translatez(0);
+  -o-transform: translatez(0);
+  -webkit-transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
 }
 html {
   background-color: #1f1f1f;
