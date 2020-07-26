@@ -207,7 +207,7 @@ const Index = props => {
                     className={`${classes.rowOneItem} ${name} shadow ${classes.color}`}
                   >
                     <div
-                      className={`${classes.border} ${classes.rowOneItemInside}`}
+                      className={`${classes.border} stars ${classes.rowOneItemInside}`}
                     >
                       <Typography
                         style={{
@@ -228,10 +228,19 @@ const Index = props => {
               className={`${classes.typewriter} ${classes.color} general shadow`}
             >
               <Typewriter className={classes.typewriterSvg} />
-              <div>
-                <Typography variant="h6">Let's stay in touch!</Typography>
-                <Typography variant="h6">Email me at:</Typography>
-                <Typography style={{ fontFamily: "'Barrio', cursive" }}>
+              <div style={{ marginLeft: 20 }}>
+                <Typography variant="h5" style={{ textAlign: "center" }}>
+                  Let's stay in touch!
+                </Typography>
+                <Typography variant="h5" style={{ textAlign: "center" }}>
+                  Email me at:
+                </Typography>
+                <Typography
+                  style={{
+                    fontFamily: "'Barrio', cursive",
+                    textAlign: "center",
+                  }}
+                >
                   <a
                     href="mailto:candela@cherrychronicles.com"
                     style={{ color: "#e25a5f" }}
@@ -242,7 +251,7 @@ const Index = props => {
               </div>
             </div>
             <div className={`drinks shadow  ${classes.color}`}>
-              <div className={classes.borderDrinks}>
+              <div className={` stars ${classes.borderDrinks}`}>
                 <Typography
                   variant="h3"
                   style={{

@@ -74,16 +74,39 @@ html {
   grid-template-columns: 1fr 7fr auto;
   grid-template-areas: "headerCherryLogo headerTitle linksContainer";
 }
+_::-webkit-full-page-media,
+_:future,
+:root .stars {
+  border-image-repeat: repeat;
+}
+@media screen and (min-color-index: 0) and(-webkit-min-device-pixel-ratio:0) {
+  @media {
+    .stars {
+      border-image-repeat: repeat;
+    }
+    /*
+      Define here the CSS styles applied only to Safari browsers
+      (any version and any device)
+     */
+  }
+}
 .headerCherryLogo {
+  cursor: pointer;
   grid-area: headerCherryLogo;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 20px 0px 10px 0px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+}
+.svgNoSelect {
+  user-select: none;
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
 }
 .linksContainer {
   grid-area: linksContainer;

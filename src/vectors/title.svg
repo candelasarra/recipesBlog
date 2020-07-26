@@ -3,8 +3,8 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 190.8 17.2" style="enable-background:new 0 0 190.8 17.2;" xml:space="preserve">
 <style type="text/css">
-	.st0{font-family:'Barrio-Regular';}
+	.title{font-family:"Barrio", cursive;}
 	.st1{font-size:21px;}
 </style>
-<text transform="matrix(1 0 0 1 0.6038 16.0416)" class="st0 st1">cherry chronicles</text>
+<text transform="matrix(1 0 0 1 0.6038 16.0416)" class="title st1">cherry chronicles</text>
 </svg>
