@@ -202,32 +202,6 @@ const Index = props => {
                 )
               })}
             </>
-            <div
-              className={`${classes.typewriter} ${classes.color} general shadow`}
-            >
-              <Typewriter className={classes.typewriterSvg} />
-              <div style={{ marginLeft: 20 }}>
-                <Typography variant="h5" style={{ textAlign: "center" }}>
-                  Let's stay in touch!
-                </Typography>
-                <Typography variant="h5" style={{ textAlign: "center" }}>
-                  Email me at:
-                </Typography>
-                <Typography
-                  style={{
-                    fontFamily: "'Barrio', cursive",
-                    textAlign: "center",
-                  }}
-                >
-                  <a
-                    href="mailto:candela@cherrychronicles.com"
-                    style={{ color: "#e25a5f" }}
-                  >
-                    candela@cherrychronicles.com
-                  </a>{" "}
-                </Typography>
-              </div>
-            </div>
             <div className={`drinks shadow  ${classes.color}`}>
               <div className={` stars ${classes.borderDrinks}`}>
                 <Typography
@@ -264,6 +238,32 @@ const Index = props => {
                 fkjsdlfdjslfkj sdlfdjslfkjsdlf djslfkjsdlf
               </Typography>
               <Spices className={` ${classes.color}`} />
+            </div>
+            <div
+              className={`${classes.typewriter} ${classes.color} general shadow`}
+            >
+              <Typewriter className={classes.typewriterSvg} />
+              <div style={{ marginLeft: 20 }}>
+                <Typography variant="h5" style={{ textAlign: "center" }}>
+                  Let's stay in touch!
+                </Typography>
+                <Typography variant="h5" style={{ textAlign: "center" }}>
+                  Email me at:
+                </Typography>
+                <Typography
+                  style={{
+                    fontFamily: "'Barrio', cursive",
+                    textAlign: "center",
+                  }}
+                >
+                  <a
+                    href="mailto:candela@cherrychronicles.com"
+                    style={{ color: "#e25a5f" }}
+                  >
+                    candela@cherrychronicles.com
+                  </a>{" "}
+                </Typography>
+              </div>
             </div>
             <div className="contactMe shadow">
               <Typography>Bread</Typography>

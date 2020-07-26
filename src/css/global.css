@@ -19,6 +19,8 @@ body {
   -o-transform: translatez(0);
   -webkit-transform: translateZ(0);
   -webkit-font-smoothing: antialiased;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 html {
   background-color: #1f1f1f;
