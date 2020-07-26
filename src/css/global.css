@@ -38,11 +38,10 @@ html {
 .categoriesContainer {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: minmax(0, 500px) minmax(0, 400px) minmax(0, 100px);
+  grid-template-rows: minmax(0, 500px) minmax(0, 400px);
   grid-template-areas:
     "cakes cakes cakes cakes cakes cakes breakfast breakfast breakfast breakfast breakfast breakfast"
-    "desserts desserts desserts desserts cookies cookies cookies cookies cupcakes cupcakes cupcakes cupcakes"
-    ". . . . . . . . . . . . ";
+    "desserts desserts desserts desserts cookies cookies cookies cookies cupcakes cupcakes cupcakes cupcakes";
 }
 .desserts {
   grid-area: desserts;
@@ -164,8 +163,7 @@ _:future,
   }
   .categoriesContainer {
     grid-template-columns: 1fr;
-    grid-template-rows: unset;
-    grid-auto-rows: auto;
+    grid-template-rows: auto auto auto auto auto;
     grid-template-areas:
       "breakfast"
       "cakes"

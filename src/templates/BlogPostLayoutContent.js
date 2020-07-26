@@ -270,6 +270,7 @@ const BlogPostLayoutContent = ({ edges }) => {
               minHeight: "100vh",
               display: "flex",
               flexDirection: "column",
+              alignItems: "center",
             }}
           >
             <Typography className={classes.createdAtText}>
