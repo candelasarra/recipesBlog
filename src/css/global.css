@@ -147,6 +147,12 @@ _:future,
   }
 }
 @media screen and (max-width: 800px) {
+  .headerCherryLogo {
+    display: none;
+  }
+  .linksContainer {
+    display: none;
+  }
   .container {
     grid-template-areas:
     /* "header header header header header header header header header header header header" */
@@ -163,12 +169,7 @@ _:future,
     grid-template-rows: auto auto;
     grid-template-areas: "headerTitle headerTitle headerTitle";
   }
-  .headerCherryLogo {
-    display: none;
-  }
-  .linksContainer {
-    display: none;
-  }
+
   .categoriesContainer {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto auto;
@@ -185,15 +186,17 @@ _:future,
 }
 @media (max-width: 700px) {
   .container {
-    grid-template-rows: auto auto auto auto auto auto;
+    display: flex;
+    flex-direction: column;
+    /* grid-template-rows: auto auto auto auto auto auto;
     grid-template-areas:
-      /* "header header header header header header header header header header header header" */
-      "salty salty salty salty salty salty salty salty salty salty salty salty"
+       "header header header header header header header header header header header header" */
+    /* "salty salty salty salty salty salty salty salty salty salty salty salty"
       "sweets sweets sweets sweets sweets sweets sweets sweets sweets sweets sweets sweets"
       "drinks drinks drinks drinks drinks drinks drinks drinks drinks drinks drinks drinks"
       "dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen"
       "buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee  contactMe contactMe contactMe contactMe contactMe contactMe"
-      "general  general  general  general  general  general general  general  general  general  general  general";
+      "general  general  general  general  general  general general  general  general  general  general  general"; */
   }
   .dozen {
     display: block;

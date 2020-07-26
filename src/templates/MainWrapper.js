@@ -121,9 +121,7 @@ const MainWrapper = ({ children }) => {
       <LanguageContext.Provider value={value}>
         <ThemeProvider theme={theme}>
           <SEO />
-          <div className={classes.deepDiv} style={{}}>
-            {children}
-          </div>
+          <div className={classes.deepDiv}>{children}</div>
         </ThemeProvider>
       </LanguageContext.Provider>
     </div>
