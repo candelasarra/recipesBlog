@@ -72,6 +72,7 @@ const useStyles = makeStyles(() => ({
     padding: 30,
     maxHeight: 950,
     justifyContent: "space-between",
+    transform: "translate3d(0,0,0)",
   },
   gridRoot: {
     maxHeight: 2450,
@@ -91,6 +92,7 @@ const useStyles = makeStyles(() => ({
     width: "50%",
   },
   borderDrinks: {
+    transform: "translate3d(0,0,0)",
     padding: 20,
     border: "3px solid",
     borderImage: `url(${outline}) 56 round`,

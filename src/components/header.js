@@ -58,6 +58,9 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "space-around",
     textAlign: "center",
     margin: theme.spacing(3),
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
   },
   activeLink: {
     color: theme.palette.secondary.main,

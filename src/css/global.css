@@ -13,14 +13,7 @@ hr {
 }
 body {
   margin: 0;
-  transform: translateZ(0);
-  -moz-transform: translatez(0);
-  -ms-transform: translatez(0);
-  -o-transform: translatez(0);
-  -webkit-transform: translateZ(0);
-  -webkit-font-smoothing: antialiased;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+  transform: translate3d(0, 0, 0);
 }
 html {
   background-color: #1f1f1f;
@@ -186,17 +179,15 @@ _:future,
 }
 @media (max-width: 700px) {
   .container {
-    display: flex;
-    flex-direction: column;
-    /* grid-template-rows: auto auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto;
     grid-template-areas:
-       "header header header header header header header header header header header header" */
-    /* "salty salty salty salty salty salty salty salty salty salty salty salty"
+      /* "header header header header header header header header header header header header" */
+      "salty salty salty salty salty salty salty salty salty salty salty salty"
       "sweets sweets sweets sweets sweets sweets sweets sweets sweets sweets sweets sweets"
       "drinks drinks drinks drinks drinks drinks drinks drinks drinks drinks drinks drinks"
       "dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen"
       "buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee  contactMe contactMe contactMe contactMe contactMe contactMe"
-      "general  general  general  general  general  general general  general  general  general  general  general"; */
+      "general  general  general  general  general  general general  general  general  general  general  general";
   }
   .dozen {
     display: block;
