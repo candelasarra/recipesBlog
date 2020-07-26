@@ -56,10 +56,12 @@ const useStyles = makeStyles(() => ({
     padding: 20,
   },
   color: {
-    transition: "filter .9s",
+    transitionProperty: "filter",
+    transitionDuration: "0.9s",
+    transitionTimingFunction: "ease-in",
     filter: "brightness(0%) grayscale(0) contrast(100%)",
     "&:hover": {
-      filter: "brightness(100%) grayscale(0) contrast(100%);",
+      filter: "brightness(100%) grayscale(0) contrast(100%) blur(0px) ;",
     },
   },
   rowOneItemInside: {

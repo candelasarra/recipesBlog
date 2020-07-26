@@ -34,10 +34,10 @@ const useStyles = makeStyles(theme => ({
     cursor: "pointer",
   },
   color: {
-    transition: "filter .9s",
+    transition: "filter 0.9s",
     filter: "brightness(0%) grayscale(0) contrast(100%)",
     "&:hover": {
-      filter: "brightness(100%) grayscale(0) contrast(100%);",
+      filter: "brightness(100%) grayscale(0) contrast(100%) blur(0px);",
     },
   },
 }))
