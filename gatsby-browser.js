@@ -5,3 +5,6 @@
  */
 
 // You can delete this file if you're not using it
+require("typeface-barrio")
+require("typeface-shrikhand")
+require("typeface-inconsolata")
