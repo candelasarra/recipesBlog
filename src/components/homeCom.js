@@ -55,9 +55,9 @@ const useStyles = makeStyles(theme => ({
   rowOneItem: {
     display: "flex",
     flexDirection: "column",
-    padding: 20,
+    padding: 0,
     [theme.breakpoints.up("md")]: {
-      padding: 0,
+      padding: 20,
     },
   },
   color: {
