@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     padding: 20,
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.up("md")]: {
       padding: 0,
     },
   },
