@@ -148,10 +148,6 @@ _:future,
     display: none;
   }
   .container {
-    grid-template-rows: minmax(0px, 530px) minmax(0px, 530px) minmax(0px, 530px) minmax(
-        0px,
-        530px
-      ) minmax(0px, 530px);
     grid-template-areas:
     /* "header header header header header header header header header header header header" */
       "salty salty salty salty salty salty sweets sweets sweets sweets sweets sweets"
