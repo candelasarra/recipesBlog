@@ -72,6 +72,17 @@ const useStyles = makeStyles(theme => ({
   sweetContainer: {
     height: "100%",
   },
+  cookieGrid: {
+    height: "100%",
+    width: "100%",
+    [theme.breakpoints.only("sm")]: {
+      maxHeight: 500,
+    },
+    [theme.breakpoints.only("xs")]: {
+      height: "unset",
+      maxHeight: 450,
+    },
+  },
 }))
 const imageStyle = {
   maxHeight: "500px",
@@ -123,7 +134,7 @@ const ServiceTemplateContent = ({ data, path }) => {
             </Grid>
           </Grid>
           <Grid container item xs={12}>
-            <Grid item sm={12} md={4} style={{ width: "100%", maxHeight: 500 }}>
+            <Grid item sm={12} md={4} className={classes.cookieGrid}>
               <div
                 className={`${classes.category}  ${classes.color} shadow `}
                 onClick={() => navigate(`${path}/cookies`)}

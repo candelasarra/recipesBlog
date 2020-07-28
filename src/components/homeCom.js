@@ -95,10 +95,12 @@ const useStyles = makeStyles(theme => ({
   typewriter: {
     padding: 20,
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
   },
   typewriterSvg: {
     width: "50%",
+    flex: 1,
   },
   borderDrinks: {
     padding: 20,
@@ -256,14 +258,29 @@ const HomeComp = ({ props }) => {
             </div>
           </Grid>
           <Grid item container xs={12}>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={12} md={6}>
               <div className={`${classes.typewriter} ${classes.color}  shadow`}>
-                <Typewriter className={classes.typewriterSvg} />
-                <div style={{ marginLeft: 20 }}>
-                  <Typography variant="h5" style={{ textAlign: "center" }}>
-                    Let's stay in touch!
-                  </Typography>
-                  <Typography variant="h5" style={{ textAlign: "center" }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <Typewriter className={classes.typewriterSvg} />
+                  <div style={{ marginLeft: 20, flex: 2 }}>
+                    <Typography variant="h4" style={{ textAlign: "center" }}>
+                      Let's stay in touch!
+                    </Typography>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    marginTop: 20,
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    style={{ textAlign: "center", marginRight: 15 }}
+                  >
                     Email me at:
                   </Typography>
                   <Typography
@@ -276,13 +293,14 @@ const HomeComp = ({ props }) => {
                       href="mailto:candela@cherrychronicles.com"
                       style={{ color: "#e25a5f" }}
                     >
+                      {" "}
                       candela@cherrychronicles.com
-                    </a>{" "}
+                    </a>
                   </Typography>
                 </div>
               </div>
             </Grid>
-            <Grid item container xs={6}>
+            <Grid item container xs={12} sm={12} md={6}>
               <Grid item xs={12}>
                 <div className=" shadow">
                   <Typography>Bread</Typography>
