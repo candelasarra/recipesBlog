@@ -45,17 +45,21 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-web-font-loader",
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
-        google: {
-          families: [
-            "Shrikhand",
-            "Limelight",
-            "Poiret One",
-            "Inconsolata",
-            "Barrio",
-          ],
-        },
+        fonts: [
+          {
+            family: `Barrio`,
+          },
+          {
+            family: `Shrikhand`,
+            variants: [`400`],
+          },
+          {
+            family: `Inconsolata`,
+            variants: [`400`, `700`],
+          },
+        ],
       },
     },
     {

@@ -1,6 +1,5 @@
 /* notable */
 * {
-  /* font-family: "Barrio", cursive !important; */
   box-sizing: border-box;
 }
 p {
@@ -36,6 +35,7 @@ html {
 /* border-image-repeat: space; */
 .svg {
   fill: #e25a5f !important;
+  text-rendering: optimizeSpeed;
 }
 .categoriesContainer {
   display: grid;

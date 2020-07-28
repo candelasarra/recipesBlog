@@ -5,19 +5,11 @@ import IconButton from "@material-ui/core/IconButton"
 import NavigateNextIcon from "@material-ui/icons/NavigateNext"
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore"
 import { graphql } from "gatsby"
-import Symbol from "../vectors/symbol.svg"
 import Title from "../vectors/title.svg"
-import Eight from "../vectors/eight.svg"
-import Hash from "../vectors/hash.svg"
-import At from "../vectors/at.svg"
+
 import LangSwitch from "./LangSwitch"
+import HeaderSymbol from "./headerSymbol"
 //import Ce from "../vectors/cece.svg"
-const symbols = [
-  <Symbol style={{ margin: 10 }} />,
-  <Eight style={{ margin: 10 }} />,
-  <Hash style={{ margin: 10 }} />,
-  <At style={{ margin: 10 }} />,
-]
 
 const useStyles = makeStyles(theme => ({
   mainDiv: {
@@ -97,7 +89,6 @@ const Header = ({ titleStyle }) => {
   const classes = useStyles()
   // false means US, true means ES
   const [open, setOpen] = useState(false)
-  const [selectedSymbol, setSelectedSymbol] = useState(0)
   const date = new Date()
   const day = date.toDateString().split(" ")[2]
   const month = MONTHS[date.getMonth()]
@@ -134,15 +125,8 @@ const Header = ({ titleStyle }) => {
   return (
     <div className={`${classes.mainDiv} header shadow`}>
       {/* <div style={{ display: "flex", justifyContent: "space-between" }}> */}
-      <div
-        className="headerCherryLogo"
-        onClick={() =>
-          selectedSymbol < symbols.length - 1
-            ? setSelectedSymbol(state => state + 1)
-            : setSelectedSymbol(0)
-        }
-      >
-        {symbols[selectedSymbol]}
+      <div className="headerCherryLogo">
+        <HeaderSymbol />
       </div>
       <div className={`${classes.headerTitle} headerTitle shadow`}>
         <Typography
