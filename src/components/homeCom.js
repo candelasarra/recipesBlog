@@ -9,6 +9,8 @@ import {
   createMuiTheme,
   divList,
   divListTile,
+  Grid,
+  Hidden,
 } from "@material-ui/core"
 import { navigate, useStaticQuery, Link } from "gatsby"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
@@ -56,6 +58,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     padding: 0,
+    height: "100%",
     [theme.breakpoints.up("md")]: {
       padding: 20,
     },
@@ -64,7 +67,7 @@ const useStyles = makeStyles(theme => ({
     transitionProperty: "filter",
     contain: "paint",
     transitionDuration: "0.9s",
-    transitionTimingFunction: "ease-in",
+    transitionTimingFunction: "linear",
     transform: "translateZ(0)",
     filter: "brightness(0%) grayscale(0) contrast(100%) ",
     "&:hover": {
@@ -87,6 +90,7 @@ const useStyles = makeStyles(theme => ({
   },
   dozen: {
     padding: 20,
+    height: "100%",
   },
   typewriter: {
     padding: 20,
@@ -104,6 +108,10 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
+  },
+  drinks: {
+    height: "100%",
+    padding: 20,
   },
 }))
 
@@ -170,104 +178,124 @@ const HomeComp = ({ props }) => {
       {/* <div className="breadcrumbs"> */}
       <CustomBreadcrumbs array={breadcrumbArray} location={props.location} />
       {/* </div> */}
-      <div className="container">
-        <>
-          {makeRowOneObjects.map(row => {
-            const { title, link, name, image } = row
-            return (
-              <div
-                onClick={() => navigate(`${link}/`)}
-                key={name}
-                className={`${classes.rowOneItem} ${name} shadow ${classes.color}`}
-              >
-                <div
-                  className={`${classes.border} stars ${classes.rowOneItemInside}`}
+      <div>
+        <Grid container spacing={0}>
+          <>
+            {makeRowOneObjects.map(row => {
+              const { title, link, name, image } = row
+              return (
+                <Grid item xs={12} sm={6}>
+                  <div
+                    onClick={() => navigate(`${link}/`)}
+                    key={name}
+                    className={`${classes.rowOneItem}  shadow ${classes.color}`}
+                  >
+                    <div
+                      className={`${classes.border} stars ${classes.rowOneItemInside}`}
+                    >
+                      <Typography
+                        style={{
+                          color: "#e25a5f",
+                          fontFamily: "'Shrikhand', cursive",
+                        }}
+                        variant="h2"
+                      >
+                        {title}
+                      </Typography>
+                      {image}
+                    </div>
+                  </div>
+                </Grid>
+              )
+            })}
+          </>
+          <Grid item xs={12} sm={7} md={7} lg={7} xl={7}>
+            <div className={` ${classes.drinks} shadow  ${classes.color}`}>
+              <div className={` stars ${classes.borderDrinks}`}>
+                <Typography
+                  variant="h3"
+                  style={{
+                    fontFamily: "'Shrikhand', cursive",
+                    textAlign: "center",
+                    color: "#e25a5f",
+                  }}
                 >
+                  Drinks
+                </Typography>
+
+                <Typography style={{ textAlign: "center" }}>
+                  Recipes for drinks, from milkshakes to alcoholic drinks and
+                  juices. Theres also some nut milk recipes and etc.
+                </Typography>
+                <Drink style={{ maxHeight: 409 }} />
+              </div>
+            </div>
+          </Grid>
+          <Hidden only={["xs", "md", "lg", "xl"]}>
+            <Grid item xs={5}>
+              <div style={{ display: "flex" }}></div>
+            </Grid>
+          </Hidden>
+          <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
+            <div className={`${classes.dozen}  shadow`}>
+              <Typography variant="body2" className="homeTextNuts">
+                djslfkj sdlfdjslfkj sdlfdjslfkjsdl fdjslfkjsdlf
+                djslfkjsdlfdjslfkjsdlf djslfkjsdlf djslfkjsdlf djslfkjsdlf
+                djslfkjsdlfdjsl fkjsdlfdjslfkj sdlfdjslfkjsdlf djslfkjsdlf
+                djslfkjsdlfddjslfkjsdlf djslfkjsdlf djslfkjsdlfjslfkjsd
+                lfdjslfkjsdlf djslfkjsdlfdjslfkjsdlf djslfkj sdlfdjslfkj
+                sdlfdjslfkjsdl fdjslfkjsdlf djslfkjsdlfdjslfkjsdlf djslfkjsdlf
+                djslfkjsdlf djslfkjsdlf djslfkjsdlfdjsl fkjsdlfdjslfkj
+                sdlfdjslfkjsdlf djslfkjsdlf djslfkjsdlfddjslfkjsdlf djslfkjsdlf
+                djslfkjsdlfjslfkjsd lfdjslfkjsdlf djslfkjsdlfdjslfkjsdlf djslfkj
+                sdlfdjslfkj sdlfdjslfkjsdl fdjslfkjsdlf djslfkjsdlfdjslfkjsdlf
+                djslfkjsdlf djslfkjsdlf djslfkjsdlf djslfkjsdlfdjsl
+                fkjsdlfdjslfkj sdlfdjslfkjsdlf djslfkjsdlf
+              </Typography>
+              <Spices className={` ${classes.color}`} />
+            </div>
+          </Grid>
+          <Grid item container xs={12}>
+            <Grid item xs={6}>
+              <div className={`${classes.typewriter} ${classes.color}  shadow`}>
+                <Typewriter className={classes.typewriterSvg} />
+                <div style={{ marginLeft: 20 }}>
+                  <Typography variant="h5" style={{ textAlign: "center" }}>
+                    Let's stay in touch!
+                  </Typography>
+                  <Typography variant="h5" style={{ textAlign: "center" }}>
+                    Email me at:
+                  </Typography>
                   <Typography
                     style={{
-                      color: "#e25a5f",
-                      fontFamily: "'Shrikhand', cursive",
+                      fontFamily: "'Barrio', cursive",
+                      textAlign: "center",
                     }}
-                    variant="h2"
                   >
-                    {title}
+                    <a
+                      href="mailto:candela@cherrychronicles.com"
+                      style={{ color: "#e25a5f" }}
+                    >
+                      candela@cherrychronicles.com
+                    </a>{" "}
                   </Typography>
-                  {image}
                 </div>
               </div>
-            )
-          })}
-        </>
-        <div className={`drinks shadow  ${classes.color}`}>
-          <div className={` stars ${classes.borderDrinks}`}>
-            <Typography
-              variant="h3"
-              style={{
-                fontFamily: "'Shrikhand', cursive",
-                textAlign: "center",
-                color: "#e25a5f",
-              }}
-            >
-              Drinks
-            </Typography>
-
-            <Typography style={{ textAlign: "center" }}>
-              Recipes for drinks, from milkshakes to alcoholic drinks and
-              juices. Theres also some nut milk recipes and etc.
-            </Typography>
-            <Drink style={{ maxHeight: 409 }} />
-          </div>
-        </div>
-        <div className={`${classes.dozen} dozen shadow`}>
-          <Typography variant="body2" className="homeTextNuts">
-            djslfkj sdlfdjslfkj sdlfdjslfkjsdl fdjslfkjsdlf
-            djslfkjsdlfdjslfkjsdlf djslfkjsdlf djslfkjsdlf djslfkjsdlf
-            djslfkjsdlfdjsl fkjsdlfdjslfkj sdlfdjslfkjsdlf djslfkjsdlf
-            djslfkjsdlfddjslfkjsdlf djslfkjsdlf djslfkjsdlfjslfkjsd
-            lfdjslfkjsdlf djslfkjsdlfdjslfkjsdlf djslfkj sdlfdjslfkj
-            sdlfdjslfkjsdl fdjslfkjsdlf djslfkjsdlfdjslfkjsdlf djslfkjsdlf
-            djslfkjsdlf djslfkjsdlf djslfkjsdlfdjsl fkjsdlfdjslfkj
-            sdlfdjslfkjsdlf djslfkjsdlf djslfkjsdlfddjslfkjsdlf djslfkjsdlf
-            djslfkjsdlfjslfkjsd lfdjslfkjsdlf djslfkjsdlfdjslfkjsdlf djslfkj
-            sdlfdjslfkj sdlfdjslfkjsdl fdjslfkjsdlf djslfkjsdlfdjslfkjsdlf
-            djslfkjsdlf djslfkjsdlf djslfkjsdlf djslfkjsdlfdjsl fkjsdlfdjslfkj
-            sdlfdjslfkjsdlf djslfkjsdlf
-          </Typography>
-          <Spices className={` ${classes.color}`} />
-        </div>
-        <div
-          className={`${classes.typewriter} ${classes.color} general shadow`}
-        >
-          <Typewriter className={classes.typewriterSvg} />
-          <div style={{ marginLeft: 20 }}>
-            <Typography variant="h5" style={{ textAlign: "center" }}>
-              Let's stay in touch!
-            </Typography>
-            <Typography variant="h5" style={{ textAlign: "center" }}>
-              Email me at:
-            </Typography>
-            <Typography
-              style={{
-                fontFamily: "'Barrio', cursive",
-                textAlign: "center",
-              }}
-            >
-              <a
-                href="mailto:candela@cherrychronicles.com"
-                style={{ color: "#e25a5f" }}
-              >
-                candela@cherrychronicles.com
-              </a>{" "}
-            </Typography>
-          </div>
-        </div>
-        <div className="contactMe shadow">
-          <Typography>Bread</Typography>
-        </div>
-        <div className="buyMeCoffee shadow">
-          <Typography>Bread</Typography>
-        </div>
-        <div className="empty shadow" style={{ display: "flex" }}></div>
+            </Grid>
+            <Grid item container xs={6}>
+              <Grid item xs={12}>
+                <div className=" shadow">
+                  <Typography>Bread</Typography>
+                </div>
+              </Grid>
+              <Grid item xs={12}>
+                <div className=" shadow">
+                  <Typography>Bread</Typography>
+                </div>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
       </div>
     </div>
   )
