@@ -45,21 +45,12 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: "gatsby-plugin-web-font-loader",
       options: {
-        fonts: [
-          {
-            family: `Barrio`,
-          },
-          {
-            family: `Shrikhand`,
-            variants: [`400`],
-          },
-          {
-            family: `Inconsolata`,
-            variants: [`400`, `700`],
-          },
-        ],
+        custom: {
+          families: ["Barrio", "Shrikhand"],
+          urls: ["/fonts/fonts.css"],
+        },
       },
     },
     {
