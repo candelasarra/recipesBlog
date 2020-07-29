@@ -6,7 +6,6 @@ p {
   font-family: "Inconsolata", monospace;
 }
 hr {
-  background: #d3d3d34a !important ;
   border: none !important;
   height: 2px !important ;
 }
@@ -16,7 +15,7 @@ body {
   overflow-y: auto;
 }
 html {
-  background-color: #1f1f1f;
+  background-image: url("https://cdn.inspirationhut.net/wp-content/uploads/2014/09/light-paper-fibers.jpg");
 }
 .walnuts {
   float: left;
