@@ -56,13 +56,13 @@ function MenuMobile({ url, urlText }) {
 
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
-    }
-
-    prevOpen.current = open;
-  }, [open]);
+  // React.useEffect(() => {
+  //   if (prevOpen.current === true && open === false) {
+  //     anchorRef.current.focus();
+  //   }
+  //   console.log("in use effect")
+  //   prevOpen.current = open;
+  // }, [open]);
 
   return (
     <div className={classes.root}>
@@ -76,15 +76,15 @@ function MenuMobile({ url, urlText }) {
         >
           <MenuBookIcon />
         </IconButton>
-        <Popper open={open} anchorEl={anchorRef.current} transition disablePortal placement="bottom-end" style={{ zIndex: 1000 }}>
+        <Popper open={open} anchorEl={anchorRef.current} transition disablePortal placement="bottom-end" style={{ zIndex: 1000, boxShadow: open ? '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)' : "none" }}>
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
             >
-              <Paper elevation={4}>
+              <Paper >
                 <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList variant="menu" id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown} style={{ outline: 'none' }}>
                     <MenuItem style={{ padding: 'unset', display: 'flex', justifyContent: 'center' }} ><LangSwitch checked={checked} setLanguage={setLanguage} setChecked={setChecked} /> </MenuItem>
                     <MenuItem style={{ display: 'flex', justifyContent: 'center' }}>
                       <Link
@@ -102,7 +102,7 @@ function MenuMobile({ url, urlText }) {
           )}
         </Popper>
       </div>
-    </div>
+    </div >
   );
 }
 
