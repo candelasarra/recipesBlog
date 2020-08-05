@@ -65,33 +65,7 @@ const LanguageSwitch = withStyles(theme => ({
   )
 })
 
-const LangSwitch = () => {
-  // const [checked, setChecked] = useState(false)
-  // const { setLanguage, language } = useContext(LanguageContext)
-  const { checked, language, setLanguage, setChecked } = useLanguage()
-  // useEffect(() => {
-  //   const cookie = getCookie("masLang")
-  //   if (cookie) {
-  //     if (cookie === "es-ES") {
-  //       setChecked(true)
-  //       setLanguage("es-ES")
-  //     } else if (cookie === "en-US") {
-  //       setChecked(false)
-  //       setLanguage("en-US")
-  //     }
-  //   }
-  // }, [])
-  // useEffect(() => {
-  //   if (checked) {
-
-  //   } else if (!checked) {
-
-  //   }
-  // }, [checked, setLanguage])
-
-  // useEffect(() => {
-
-  // }, [checked])
+const LangSwitch = ({ checked, setLanguage, setChecked }) => {
 
   function setCookie(name, value, days) {
     var expires = ""
@@ -102,16 +76,7 @@ const LangSwitch = () => {
     }
     document.cookie = name + "=" + (value || "") + expires + "; path=/"
   }
-  // function getCookie(name) {
-  //   var nameEQ = name + "="
-  //   var ca = document.cookie.split(";")
-  //   for (var i = 0; i < ca.length; i++) {
-  //     var c = ca[i]
-  //     while (c.charAt(0) == " ") c = c.substring(1, c.length)
-  //     if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length)
-  //   }
-  //   return null
-  // }
+
   const handleSwitch = e => {
     setChecked(e.target.checked)
 

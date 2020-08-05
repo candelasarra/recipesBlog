@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import LangSwitch from './LangSwitch';
 import { IconButton, Typography } from '@material-ui/core';
 import { Link } from 'gatsby';
+import { useLanguage } from '../commons/functions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +34,7 @@ function MenuMobile({ url, urlText }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-
+  const { checked, language, setLanguage, setChecked } = useLanguage()
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -84,7 +85,7 @@ function MenuMobile({ url, urlText }) {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem style={{ padding: 'unset', display: 'flex', justifyContent: 'center' }} ><LangSwitch /> </MenuItem>
+                    <MenuItem style={{ padding: 'unset', display: 'flex', justifyContent: 'center' }} ><LangSwitch checked={checked} setLanguage={setLanguage} setChecked={setChecked} /> </MenuItem>
                     <MenuItem style={{ display: 'flex', justifyContent: 'center' }}>
                       <Link
                         to={url}
