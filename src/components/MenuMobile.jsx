@@ -76,15 +76,15 @@ function MenuMobile({ url, urlText }) {
         >
           <MenuBookIcon />
         </IconButton>
-        <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal placement="bottom-end" style={{ zIndex: 1000 }}>
+        <Popper open={open} anchorEl={anchorRef.current} transition disablePortal placement="bottom-end" style={{ zIndex: 1000 }}>
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
             >
-              <Paper>
+              <Paper elevation={4}>
                 <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                  <MenuList variant="menu" autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     <MenuItem style={{ padding: 'unset', display: 'flex', justifyContent: 'center' }} ><LangSwitch checked={checked} setLanguage={setLanguage} setChecked={setChecked} /> </MenuItem>
                     <MenuItem style={{ display: 'flex', justifyContent: 'center' }}>
                       <Link
