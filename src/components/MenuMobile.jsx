@@ -84,7 +84,7 @@ function MenuMobile({ url, urlText }) {
             >
               <Paper elevation={4}>
                 <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList variant="menu" autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                  <MenuList variant="menu" id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     <MenuItem style={{ padding: 'unset', display: 'flex', justifyContent: 'center' }} ><LangSwitch checked={checked} setLanguage={setLanguage} setChecked={setChecked} /> </MenuItem>
                     <MenuItem style={{ display: 'flex', justifyContent: 'center' }}>
                       <Link
