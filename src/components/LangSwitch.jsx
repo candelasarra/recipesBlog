@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/styles";
 import LanguageContext from "../templates/LanguageContext";
 import { Switch } from "@material-ui/core";
 import usFlag from "../images/usflag.jpg"
-import esFlag from "../images/esFlag1.png"
+import esFlag from "../images/esFlag1.jpg"
 import { useLanguage } from "../commons/functions";
 const LanguageSwitch = withStyles(theme => ({
   root: {
