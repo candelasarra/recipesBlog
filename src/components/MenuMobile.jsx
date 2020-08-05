@@ -10,7 +10,7 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import LanguageSwitch from "./header"
 import { makeStyles } from '@material-ui/core/styles';
 import LangSwitch from './LangSwitch';
-import { IconButton, Typography } from '@material-ui/core';
+import { IconButton, Typography, Card } from '@material-ui/core';
 import { Link } from 'gatsby';
 import { useLanguage } from '../commons/functions';
 
@@ -57,11 +57,11 @@ function MenuMobile({ url, urlText }) {
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
   // React.useEffect(() => {
-  //   if (prevOpen.current === true && open === false) {
+  //   // if (prevOpen.current === true && open === false) {
   //     anchorRef.current.focus();
-  //   }
-  //   console.log("in use effect")
-  //   prevOpen.current = open;
+  //   // }
+  //   // console.log("in use effect")
+  //   // prevOpen.current = open;
   // }, [open]);
 
   return (
@@ -76,13 +76,13 @@ function MenuMobile({ url, urlText }) {
         >
           <MenuBookIcon />
         </IconButton>
-        <Popper open={open} anchorEl={anchorRef.current} transition disablePortal placement="bottom-end" style={{ zIndex: 1000, boxShadow: open ? '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)' : "none" }}>
+        <Popper open={open} anchorEl={anchorRef.current} transition disablePortal placement="bottom-end" style={{zIndex: 999  }}>
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
             >
-              <Paper >
+              <Card raised>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown} style={{ outline: 'none' }}>
                     <MenuItem style={{ padding: 'unset', display: 'flex', justifyContent: 'center' }} ><LangSwitch checked={checked} setLanguage={setLanguage} setChecked={setChecked} /> </MenuItem>
@@ -97,7 +97,7 @@ function MenuMobile({ url, urlText }) {
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
-              </Paper>
+              </Card>
             </Grow>
           )}
         </Popper>
