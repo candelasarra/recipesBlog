@@ -71,19 +71,29 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `Cherry Chronicles`,
-        short_name: `Cherry Chronicles`,
-        start_url: `/`,
-        background_color: `#a58da4`,
-        theme_color: `#a58da4`,
-        display: `standalone`,
-        icon: `src/images/masacre-icon.png`,
-        include_favicon: true,
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-manifest`,
+    //   options: {
+    //     name: `Cherry Chronicles`,
+    //     short_name: `Cherry Chronicles`,
+    //     start_url: `/`,
+    //     background_color: `#a58da4`,
+    //     theme_color: `#a58da4`,
+    //     display: `standalone`,
+    //     // icons: [
+    //     //   {
+    //     //     src: `/favicons/android-chrome-192x192.png`,
+    //     //     sizes: `192x192`,
+    //     //     type: `image/png`,
+    //     //   },
+    //     //   {
+    //     //     src: `/favicons/android-chrome-512x512.png`,
+    //     //     sizes: `512x512`,
+    //     //     type: `image/png`,
+    //     //   },
+    //     // ]
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {
