@@ -13,7 +13,8 @@ import LangSwitch from './LangSwitch';
 import { IconButton, Typography, Card } from '@material-ui/core';
 import { Link } from 'gatsby';
 import { useLanguage } from '../commons/functions';
-
+import usFlag from "../images/usflag.jpg"
+import esFlag from "../images/esFlag1.jpg"
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -85,7 +86,7 @@ function MenuMobile({ url, urlText }) {
               <Card raised>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown} style={{ outline: 'none' }}>
-                    <MenuItem style={{ padding: 'unset', display: 'flex', justifyContent: 'center' }} ><LangSwitch checked={checked} setLanguage={setLanguage} setChecked={setChecked} /> </MenuItem>
+                    <MenuItem style={{ padding: 'unset', display: 'flex', justifyContent: 'center' }} ><LangSwitch checked={checked} setLanguage={setLanguage} setChecked={setChecked}  esFlag={esFlag} usFlag={usFlag}  /> </MenuItem>
                     <MenuItem style={{ display: 'flex', justifyContent: 'center' }}>
                       <Link
                         to={url}

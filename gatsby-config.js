@@ -107,6 +107,14 @@ module.exports = {
       options: {
         rule: {
           include: /vectors\/.*\.svg/,
+          omitKeys: [
+            "xmlnsDc",
+            "xmlnsCc",
+            "xmlnsRdf",
+            "xmlnsSvg",
+            "xmlnsSodipodi",
+            "xmlnsInkscape",
+          ],
         },
       },
     },
