@@ -164,11 +164,15 @@ const HomeComp = ({ props }) => {
   //creating the array of objects with row one data to map over for UI
   const makeRowOneObjects = query.site.siteMetadata.menuLinks.map(item => {
     const { title, link, name } = item
-    return {
-      title,
-      link,
-      name,
-      image: returnRightSvg(name),
+    if (name === "salty" || name === "sweets") {
+      return {
+        title,
+        link,
+        name,
+        image: returnRightSvg(name),
+      }
+    } else {
+      return {}
     }
   })
 
@@ -185,53 +189,63 @@ const HomeComp = ({ props }) => {
           <>
             {makeRowOneObjects.map(row => {
               const { title, link, name, image } = row
-              return (
-                <Grid item xs={12} sm={6}>
-                  <div
-                    onClick={() => navigate(`${link}/`)}
-                    key={name}
-                    className={`${classes.rowOneItem}  shadow ${classes.color}`}
-                  >
-                    <div
-                      className={`${classes.border} stars ${classes.rowOneItemInside}`}
-                    >
-                      <Typography
-                        style={{
-                          color: "#e25a5f",
-                          fontFamily: "'Shrikhand', cursive",
-                        }}
-                        variant="h2"
+              if (title) {
+                return (
+                  <Grid item xs={12} sm={6}>
+                    <Link to={`${link}/`} style={{ textDecoration: "none" }}>
+                      <div
+                        key={name}
+                        className={`${classes.rowOneItem}  shadow ${classes.color}`}
                       >
-                        {title}
-                      </Typography>
-                      {image}
-                    </div>
-                  </div>
-                </Grid>
-              )
+                        <div
+                          className={`${classes.border} stars ${classes.rowOneItemInside}`}
+                        >
+                          <Typography
+                            style={{
+                              color: "#e25a5f",
+                              fontFamily: "'Shrikhand', cursive",
+                            }}
+                            variant="h2"
+                          >
+                            {title}
+                          </Typography>
+                          {image}
+                        </div>
+                      </div>
+                    </Link>
+                  </Grid>
+                )
+              } else {
+                return null
+              }
             })}
           </>
           <Grid item xs={12} sm={7} md={7} lg={7} xl={7}>
-            <div className={` ${classes.drinks} shadow  ${classes.color}`}>
-              <div className={` stars ${classes.borderDrinks}`}>
-                <Typography
-                  variant="h3"
-                  style={{
-                    fontFamily: "'Shrikhand', cursive",
-                    textAlign: "center",
-                    color: "#e25a5f",
-                  }}
-                >
-                  Drinks
-                </Typography>
+            <Link
+              to="/drinks"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <div className={` ${classes.drinks} shadow  ${classes.color}`}>
+                <div className={` stars ${classes.borderDrinks}`}>
+                  <Typography
+                    variant="h3"
+                    style={{
+                      fontFamily: "'Shrikhand', cursive",
+                      textAlign: "center",
+                      color: "#e25a5f",
+                    }}
+                  >
+                    Drinks
+                  </Typography>
 
-                <Typography style={{ textAlign: "center" }}>
-                  Recipes for drinks, from milkshakes to alcoholic drinks and
-                  juices. Theres also some nut milk recipes and etc.
-                </Typography>
-                <Drink style={{ maxHeight: 409 }} />
+                  <Typography style={{ textAlign: "center" }}>
+                    Recipes for drinks, from milkshakes to alcoholic drinks and
+                    juices. Theres also some nut milk recipes and etc.
+                  </Typography>
+                  <Drink style={{ maxHeight: 409 }} />
+                </div>
               </div>
-            </div>
+            </Link>
           </Grid>
           <Hidden only={["xs", "md", "lg", "xl"]}>
             <Grid item xs={5}>

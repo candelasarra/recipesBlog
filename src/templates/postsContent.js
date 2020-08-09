@@ -11,9 +11,43 @@ import { Link } from "gatsby"
 import ServiceCheckbox from "../components/serviceCheckbox"
 import "../css/global.css"
 import Pagination from "../components/pagination"
-import strawBack from "../images/strawberryBackground.svg"
+import strawBack from "../images/strawberryBackground.png"
 import paperImage from "../images/paperImage.jpg"
 import Dog from "../vectors/dog.svg"
+import Trace from "../vectors/trace3.svg"
+import Trace1 from "../vectors/trace1.svg"
+import Trace2 from "../vectors/trace2.svg"
+
+const traces = [
+  <Trace
+    style={{
+      position: "absolute",
+      zIndex: 1,
+      transform: "translate(-8%, -27%)",
+    }}
+  />,
+  <Trace1
+    style={{
+      position: "absolute",
+      zIndex: 1,
+      transform: "translate(-14%, -16%)",
+    }}
+  />,
+  <Trace
+    style={{
+      position: "absolute",
+      zIndex: 1,
+      transform: "translate(-8%, -27%)",
+    }}
+  />,
+  <Trace2
+    style={{
+      position: "absolute",
+      zIndex: 1,
+      transform: "translate(-7%, -33%)",
+    }}
+  />,
+]
 const useStyles = makeStyles(theme => ({
   postDescriptionText: {
     color: theme.palette.primary.light,
@@ -30,6 +64,7 @@ const useStyles = makeStyles(theme => ({
   },
   dateText: {
     color: theme.palette.primary.light,
+    marginBottom: 5,
   },
   sadFace: {
     alignSelf: "center",
@@ -106,6 +141,27 @@ const useStyles = makeStyles(theme => ({
   //     filter: "brightness(100%) grayscale(0) contrast(100%);",
   //   },
   // },
+  noNothing: {
+    strokeDashoffset: 900,
+    willChange: "stroke-dashoffset",
+    transition: "stroke-dashoffset 1s",
+    transitionDelay: "0s",
+    "&:hover": {
+      strokeDashoffset: 0,
+    },
+  },
+  checked: {
+    strokeDashoffset: 0,
+  },
+  unchecked: {
+    strokeDashoffset: 900,
+    "&:hover": {
+      strokeDashoffset: 0,
+      transition: "stroke-dashoffset 1s",
+      transitionDelay: "0s",
+      willChange: "stroke-dashoffset",
+    },
+  },
 }))
 
 const PostsContent = ({ data, tags }) => {
@@ -119,10 +175,34 @@ const PostsContent = ({ data, tags }) => {
   const [checked, setChecked] = useState(false)
   const [numberOfPages, setNumberOfPages] = useState(0)
   const itemsPerPage = 8
+  const [clicked, setClicked] = useState([])
   const [page, setPage] = useState(1)
 
   const checkboxesData = [...data.site.siteMetadata.menuLinks, ...tags]
-
+  const returnRigthClassName = name => {
+    if (!Object.keys(checked).includes(name)) {
+      return classes.noNothing
+    } else if (checked[name]) {
+      return classes.checked
+    } else {
+      return classes.unchecked
+    }
+  }
+  const tagLabels = {
+    "gluten-free": data.results.edges.filter(
+      edge =>
+        edge.node.node_locale === language && edge.node.slug === "gluten-free"
+    ),
+    salty: data.results.edges.filter(
+      edge => edge.node.node_locale === language && edge.node.slug === "salty"
+    ),
+    sweets: data.results.edges.filter(
+      edge => edge.node.node_locale === language && edge.node.slug === "sweets"
+    ),
+    drinks: data.results.edges.filter(
+      edge => edge.node.node_locale === language && edge.node.slug === "drinks"
+    ),
+  }
   const searchResultString = data.results.edges.filter(
     edge =>
       edge.node.node_locale === language &&
@@ -209,31 +289,37 @@ const PostsContent = ({ data, tags }) => {
               className={`${classes.postDiv} ${classes.color} shadow`}
               // style={{ borderTop: idx === 0 ? "7px double" : "unset" }}
             >
-              <div>
-                <Link
-                  to={`/posts/${post.node.slug}`}
-                  variant="h5"
-                  style={{
-                    textDecoration: "none",
-                    color: "black",
-                    width: "fit-content",
-                  }}
-                >
+              <Link
+                to={`/posts/${post.node.slug}`}
+                variant="h5"
+                style={{
+                  textDecoration: "none",
+                  color: "black",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <div>
                   <Typography variant="h4" className={classes.postTitle}>
                     {post.node.blogTitle}
                   </Typography>
-                </Link>
-              </div>
-              <Typography variant="caption" className={classes.dateText}>
-                {" "}
-                {post.node.createdAt}
-              </Typography>
-              <Typography
-                variant="body1"
-                className={classes.postDescriptionText}
-              >
-                {post.node.descriptionOfPost}
-              </Typography>
+                </div>
+                <Typography variant="caption" className={classes.dateText}>
+                  {" "}
+                  {post.node.createdAt}
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  className={classes.postDescriptionText}
+                >
+                  {post.node.descriptionOfPost}
+                </Typography>
+              </Link>
             </div>
           )
         })
@@ -276,19 +362,31 @@ const PostsContent = ({ data, tags }) => {
         />
         <FormGroup row className={classes.formGroup}>
           {!!checkboxesData.length &&
-            checkboxesData.map(value => {
+            checkboxesData.map((value, idx) => {
               const label = value.title
                 ? value.title.toUpperCase()
                 : value.toUpperCase()
               const name = value.name ? value.name : value
               return (
-                <ServiceCheckbox
-                  checked={checked[name]}
-                  handleCheckbox={handleCheckbox}
-                  name={name}
-                  label={label}
-                  key={label}
-                />
+                <div
+                  style={{ position: "relative", margin: 10 }}
+                  key={name + idx}
+                >
+                  <span className={returnRigthClassName(name)}>
+                    {traces[idx]}
+                    <ServiceCheckbox
+                      checked={checked[name]}
+                      handleCheckbox={handleCheckbox}
+                      name={name}
+                      label={
+                        tagLabels[label.toLowerCase()]
+                          ? tagLabels[label.toLowerCase()][0].node.string
+                          : label
+                      }
+                      key={label}
+                    />
+                  </span>
+                </div>
               )
             })}
         </FormGroup>

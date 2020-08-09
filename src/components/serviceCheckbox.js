@@ -19,6 +19,8 @@ const ServiceCheckbox = ({ checked, handleCheckbox, name, label }) => {
         color: theme.palette.primary.main,
         marginLeft: 0,
         marginRight: 16,
+        zIndex: 99999,
+        position: "relative",
       }}
       control={
         <Checkbox

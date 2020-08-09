@@ -7,6 +7,7 @@ import {
 } from "@material-ui/core/styles"
 import LanguageContext from "./LanguageContext"
 import "../css/global.css"
+import paperImage from "../images/paperImage.jpg"
 import SEO from "../components/seo"
 //greish purple : #644d5b, redhish #c96567, bluish: #324455
 // terracota sheme: blue #4186f6, dark red #5c2118, bright red #bc463a, light red #d4a59b, "white" #f3e0dc
@@ -28,8 +29,7 @@ let theme = createMuiTheme({
     MuiPaper: {
       root: {
         //  backgroundColor: "rgb(24,25,26)",
-        backgroundImage:
-          'url("https://cdn.inspirationhut.net/wp-content/uploads/2014/09/light-paper-fibers.jpg")',
+        backgroundImage: `url(${paperImage})`,
       },
     },
     MuiTypography: {
@@ -113,8 +113,7 @@ const MainWrapper = ({ children }) => {
   return (
     <div
       style={{
-        backgroundImage:
-          'url("https://cdn.inspirationhut.net/wp-content/uploads/2014/09/light-paper-fibers.jpg")',
+        backgroundImage: `url(${paperImage})`,
         minHeight: "100vh",
       }}
     >

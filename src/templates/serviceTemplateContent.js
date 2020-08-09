@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { makeStyles } from "@material-ui/styles"
 import { Typography, Grid } from "@material-ui/core"
-import { navigate } from "gatsby"
+import { navigate, Link } from "gatsby"
 import Cookies from "../vectors/cookies.svg"
 import Cakes from "../vectors/twoCakes.svg"
 import Cupcakes from "../vectors/cupcakes.svg"
@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   font: {
+    color: "black",
     [theme.breakpoints.only("md")]: {
       fontSize: "3.1rem",
     },
@@ -102,85 +103,83 @@ const ServiceTemplateContent = ({ data, path }) => {
         <Grid container spacing={0}>
           <Grid container item xs={12}>
             <Grid item xs={12} sm={6} md={6} style={{ width: "100%" }}>
-              <div
-                className={` ${classes.category} ${classes.color} shadow`}
-                onClick={() => navigate(`${path}/cakes`)}
-              >
-                {/* <div style={{ width: "fit-content", margin: "0px auto" }}> */}
-                <Typography
-                  variant="h2"
-                  className={classes.font}
-                  style={{ width: "fit-content", margin: 20 }}
-                >
-                  Cakes
-                </Typography>
-                <Cakes style={imageStyle} />
-              </div>
+              <Link to={`${path}/cakes`} style={{ textDecoration: "none" }}>
+                <div className={` ${classes.category} ${classes.color} shadow`}>
+                  <Typography
+                    variant="h2"
+                    className={classes.font}
+                    style={{ width: "fit-content", margin: 20 }}
+                  >
+                    Cakes
+                  </Typography>
+                  <Cakes style={imageStyle} />
+                </div>
+              </Link>
             </Grid>
             <Grid item xs={12} sm={6} md={6} style={{ width: "100%" }}>
-              <div
-                className={` ${classes.category} ${classes.color} shadow`}
-                onClick={() => navigate(`${path}/breakfast`)}
-              >
-                <Typography
-                  variant="h2"
-                  className={classes.font}
-                  style={{ width: "fit-content", margin: 20 }}
-                >
-                  Breakfast
-                </Typography>
-                <Breakfast style={imageStyle} />
-              </div>
+              <Link to={`${path}/breakfast`} style={{ textDecoration: "none" }}>
+                <div className={` ${classes.category} ${classes.color} shadow`}>
+                  <Typography
+                    variant="h2"
+                    className={classes.font}
+                    style={{ width: "fit-content", margin: 20 }}
+                  >
+                    Breakfast
+                  </Typography>
+                  <Breakfast style={imageStyle} />
+                </div>
+              </Link>
             </Grid>
           </Grid>
           <Grid container item xs={12}>
             <Grid item sm={12} md={4} className={classes.cookieGrid}>
-              <div
-                className={`${classes.category}  ${classes.color} shadow `}
-                onClick={() => navigate(`${path}/cookies`)}
-              >
-                <Typography
-                  variant="h2"
-                  className={classes.font}
-                  style={{ width: "fit-content", margin: 20 }}
+              <Link to={`${path}/cookies`} style={{ textDecoration: "none" }}>
+                <div
+                  className={`${classes.category}  ${classes.color} shadow `}
                 >
-                  Cookies
-                </Typography>
-                <Cookies style={imageStyle} />
-                {/* </div> */}
-              </div>
+                  <Typography
+                    variant="h2"
+                    className={classes.font}
+                    style={{ width: "fit-content", margin: 20 }}
+                  >
+                    Cookies
+                  </Typography>
+                  <Cookies style={imageStyle} />
+                  {/* </div> */}
+                </div>
+              </Link>
             </Grid>
             <Grid item xs={12} sm={6} md={4} style={{ width: "100%" }}>
-              <div
-                className={`${classes.category}  ${classes.color} shadow `}
-                onClick={() => navigate(`${path}/cupcakes`)}
-              >
-                <Typography
-                  variant="h2"
-                  className={classes.font}
-                  style={{ width: "fit-content", margin: 20 }}
+              <Link to={`${path}/cupcakes`} style={{ textDecoration: "none" }}>
+                <div
+                  className={`${classes.category}  ${classes.color} shadow `}
                 >
-                  Cupcakes
-                </Typography>
-                <Cupcakes style={imageStyle} />
-              </div>
+                  <Typography
+                    variant="h2"
+                    className={classes.font}
+                    style={{ width: "fit-content", margin: 20 }}
+                  >
+                    Cupcakes
+                  </Typography>
+                  <Cupcakes style={imageStyle} />
+                </div>
+              </Link>
             </Grid>
             <Grid item xs={12} sm={6} md={4} style={{ width: "100%" }}>
-              <div
-                className={`${classes.category}  ${classes.color} shadow `}
-                onClick={() => navigate(`${path}/desserts`)}
-              >
-                {/* <div style={{ width: "fit-content", margin: "0px auto" }}> */}
-                <Typography
-                  variant="h2"
-                  className={classes.font}
-                  style={{ width: "fit-content", margin: 20 }}
+              <Link to={`${path}/desserts`} style={{ textDecoration: "none" }}>
+                <div
+                  className={`${classes.category}  ${classes.color} shadow `}
                 >
-                  Desserts
-                </Typography>
-                <Dessert style={imageStyle} />
-                {/* </div> */}
-              </div>
+                  <Typography
+                    variant="h2"
+                    className={classes.font}
+                    style={{ width: "fit-content", margin: 20 }}
+                  >
+                    Desserts
+                  </Typography>
+                  <Dessert style={imageStyle} />
+                </div>
+              </Link>
             </Grid>
           </Grid>
         </Grid>

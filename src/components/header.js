@@ -5,7 +5,8 @@ import IconButton from "@material-ui/core/IconButton"
 import NavigateNextIcon from "@material-ui/icons/NavigateNext"
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore"
 import { graphql } from "gatsby"
-import Title from "../vectors/title.svg"
+import paperImage from "../images/paperImage.jpg"
+import Title from "../vectors/title2.svg"
 
 import LangSwitch from "./LangSwitch"
 import HeaderSymbol from "./headerSymbol"
@@ -18,8 +19,7 @@ const useStyles = makeStyles(theme => ({
     // flexDirection: "column",
     //  marginBottom: theme.spacing(5),
 
-    backgroundImage:
-      'url("https://cdn.inspirationhut.net/wp-content/uploads/2014/09/light-paper-fibers.jpg")',
+    backgroundImage: `url(${paperImage})`,
   },
   headerTitle: {
     //   marginBottom: theme.spacing(5)

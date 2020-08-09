@@ -115,10 +115,11 @@ const Pagination = ({ page, numberOfPages, setPage }) => {
         display: "flex",
         justifyContent: "center",
         width: "fit-content",
-        borderTop: "3px dotted",
-        borderBottom: "3px dotted",
-        backgroundColor: "#fcfbf9ba",
+        backgroundColor: "#dad9d68a",
         marginTop: "auto",
+        marginBottom: 30,
+        border: "1px solid",
+        borderRadius: 50,
       }}
     >
       {numberOfPages > 3 && (
