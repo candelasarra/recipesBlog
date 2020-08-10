@@ -8,7 +8,7 @@
 // require("typeface-barrio")
 // require("typeface-shrikhand")
 // require("typeface-inconsolata")
-const transitionDelay = 200
+const transitionDelay = 500
 exports.shouldUpdateScroll = ({
   routerProps: { location },
   getSavedScrollPosition,

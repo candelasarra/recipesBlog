@@ -97,7 +97,7 @@ const useStyles = makeStyles(() => ({
 const MainWrapper = ({ children, location }) => {
   const classes = useStyles()
   const [loaded, setLoaded] = useState(false)
-  const timeout = 200
+  const timeout = 500
   function getCookie(name) {
     var nameEQ = name + "="
     var ca = document.cookie.split(";")
