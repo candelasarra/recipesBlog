@@ -86,22 +86,20 @@ const useStyles = makeStyles(() => ({
     marginLeft: `auto`,
     marginRight: `auto`,
     maxWidth: 1247,
-  },
-  notLoaded: {
-    transform: "translateX(-1000px)",
-    opacity: 0,
-  },
-  loaded: {
     animation: `$slide 1000ms ${theme.transitions.easing.easeInOut}`,
     transform: "translateX(0)",
   },
+  notLoaded: {
+    transform: "translateX(-1000px)",
+  },
+  loaded: {},
   "@keyframes slide": {
     "0%": {
-      opacity: 0,
+      // opacity: 0,
       transform: "translateX(-1000px)",
     },
     "100%": {
-      opacity: 1,
+      // opacity: 1,
       transform: "translateX(0)",
     },
   },
