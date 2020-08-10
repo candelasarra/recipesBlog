@@ -195,7 +195,6 @@ const HomeComp = ({ props }) => {
                           <Typography
                             style={{
                               color: "#e25a5f",
-                              fontFamily: "'Shrikhand', cursive",
                             }}
                             variant="h2"
                           >
