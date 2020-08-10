@@ -127,7 +127,11 @@ const MainWrapper = ({ children, animation }) => {
   }, [])
   const value = { language, setLanguage }
   const returnRightClassName = () => {
-    if (window && window.navigator.userAgent.toLowerCase().includes("safari")) {
+    if (
+      typeof window !== `undefined` &&
+      window.navigator &&
+      window.navigator.userAgent.toLowerCase().includes("safari")
+    ) {
       return classes.nothing
     } else if (loaded && animation) {
       return classes.loaded
