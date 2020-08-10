@@ -1,0 +1,14 @@
+@font-face {
+  font-family: Barrio;
+  font-weight: 400;
+  font-style: normal;
+  src: url("Barrio-Regular.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: Shrikhand;
+  font-weight: 400;
+  font-style: italic;
+  src: url("Shrikhand-Regular.woff") format("woff2");
+  font-display: swap;
+}

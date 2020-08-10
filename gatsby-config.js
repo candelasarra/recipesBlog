@@ -17,6 +17,11 @@ module.exports = {
         title: "Salty",
         link: "/salty",
       },
+      {
+        name: "drinks",
+        title: "Drinks",
+        link: "/drinks",
+      },
     ],
     tags: [
       {
@@ -32,6 +37,8 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+        name: "fonts",
+        path: `${__dirname}/static/fonts/`,
       },
     },
     `gatsby-transformer-sharp`,

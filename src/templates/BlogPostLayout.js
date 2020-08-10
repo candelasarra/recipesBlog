@@ -10,7 +10,6 @@ import { Link } from "gatsby"
 import LanguageContext from "./LanguageContext"
 
 const BlogPostLayout = props => {
-  console.log(props)
   const theme = useTheme()
   const { data } = props
   const { edges } = data.allContentfulBlogPost
@@ -46,10 +45,9 @@ const BlogPostLayout = props => {
       { label: `Post`, variant: "body2" },
     ]
   }
-  console.log(props)
 
   return (
-    <MainWrapper>
+    <MainWrapper animation={false}>
       <Header titleStyle="h4" />
       <CustomBreadcrumbs array={breadcrumbArray} location={props.location} />
       <BlogPostLayoutContent edges={edges} />

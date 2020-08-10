@@ -24,12 +24,11 @@ const CustomBreadcrumbs = ({ array, location }) => {
   const urlText = location.pathname === "/posts" ? "CATEGORIES" : "ALL"
   const url = location.pathname === "/posts" ? "/" : "/posts"
   const [breadcrumbs, setBreadcrumbs] = useState([])
-  console.log(location)
 
   useEffect(() => {
     if (array.length) {
       const items = array.map((item, index) => {
-        if (index !== array.length - 1) {
+        if (index !== array.length - 1 && item.label) {
           return (
             <Link
               key={item.link}
@@ -47,7 +46,7 @@ const CustomBreadcrumbs = ({ array, location }) => {
               </Typography>
             </Link>
           )
-        } else {
+        } else if (item.label) {
           return (
             <Typography
               key={item.label}
@@ -57,6 +56,8 @@ const CustomBreadcrumbs = ({ array, location }) => {
               {item.label}
             </Typography>
           )
+        } else {
+          return null
         }
       })
       setBreadcrumbs(items)

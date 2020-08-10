@@ -15,7 +15,7 @@ const ServicePosts = props => {
   const filteredTags = []
   const usPosts = data.usPosts.edges.filter(edge => {
     const post = edge.node
-    if (post && post.tags) {
+    if (post && post.tags && post.service[0] === service) {
       post.tags.forEach(tag => {
         if (!filteredTags.includes(tag)) {
           filteredTags.push(tag)
@@ -53,13 +53,15 @@ const ServicePosts = props => {
       return edge.node.service[0] === service
     }
   })
-  const breadcrumbArray = [
+  let breadcrumbArray = [
     { label: "Home", link: "/" },
     { label: service, link: `/${service.toLowerCase()}` },
-    { label: category },
   ]
+  if (service === "Sweets" && category) {
+    breadcrumbArray.push({ label: category })
+  }
   return (
-    <MainWrapper>
+    <MainWrapper animation>
       <Header titleStyle="h3" />
       <CustomBreadcrumbs array={breadcrumbArray} location={props.location} />
       <ServicePostsContent

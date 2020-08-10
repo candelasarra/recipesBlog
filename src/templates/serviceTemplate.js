@@ -7,7 +7,6 @@ import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 
 const ServiceTemplate = ({ data, path, pageContext, location }) => {
   const theme = useTheme()
-  console.log(data)
   const service = data.allContentfulBlogPost.edges[0].node.service[0].toLowerCase()
   const category = []
   data.allContentfulBlogPost.edges.map(edge => {
@@ -26,7 +25,7 @@ const ServiceTemplate = ({ data, path, pageContext, location }) => {
     { label: pageContext.title },
   ]
   return (
-    <MainWrapper>
+    <MainWrapper animation>
       <Header titleStyle="h3" />
       <CustomBreadcrumbs array={breadcrumbArray} location={location} />
       <ServiceTemplateContent data={category} path={path} />

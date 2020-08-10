@@ -8,11 +8,47 @@ import {
 } from "@material-ui/core"
 import LanguageContext from "../templates/LanguageContext"
 import { Link } from "gatsby"
-import strawBack from "../images/strawberryBackground.svg"
+import strawBack from "../images/strawberryBackground.png"
+import fingerBack from "../images/fingerSvg.png"
+import drinksBack from "../images/drinksBack.png"
 import Dog from "../vectors/dog.svg"
 import Pagination from "../components/pagination"
 import paperImage from "../images/paperImage.jpg"
 import ServiceCheckbox from "../components/serviceCheckbox"
+import Trace from "../vectors/trace3.svg"
+import Trace1 from "../vectors/trace1.svg"
+import Trace2 from "../vectors/trace2.svg"
+
+const traces = [
+  <Trace
+    style={{
+      position: "absolute",
+      zIndex: 1,
+      transform: "translate(-8%, -27%)",
+    }}
+  />,
+  <Trace1
+    style={{
+      position: "absolute",
+      zIndex: 1,
+      transform: "translate(-14%, -16%)",
+    }}
+  />,
+  <Trace
+    style={{
+      position: "absolute",
+      zIndex: 1,
+      transform: "translate(-8%, -27%)",
+    }}
+  />,
+  <Trace2
+    style={{
+      position: "absolute",
+      zIndex: 1,
+      transform: "translate(-7%, -33%)",
+    }}
+  />,
+]
 
 const useStyles = makeStyles(theme => ({
   postDescriptionText: {
@@ -30,6 +66,7 @@ const useStyles = makeStyles(theme => ({
   },
   dateText: {
     color: theme.palette.primary.light,
+    marginBottom: 5,
   },
   sadFace: {
     alignSelf: "center",
@@ -42,8 +79,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
     padding: 10,
-    backgroundImage: `url(${strawBack})`,
-    backgroundSize: 600,
   },
   searchBar: {
     marginBottom: theme.spacing(5),
@@ -94,6 +129,27 @@ const useStyles = makeStyles(theme => ({
       // border: "none",
     },
   },
+  noNothing: {
+    strokeDashoffset: 900,
+    willChange: "stroke-dashoffset",
+    transition: "stroke-dashoffset 1s",
+    transitionDelay: "0s",
+    "&:hover": {
+      strokeDashoffset: 0,
+    },
+  },
+  checked: {
+    strokeDashoffset: 0,
+  },
+  unchecked: {
+    strokeDashoffset: 900,
+    "&:hover": {
+      strokeDashoffset: 0,
+      transition: "stroke-dashoffset 1s",
+      transitionDelay: "0s",
+      willChange: "stroke-dashoffset",
+    },
+  },
 }))
 
 const ServicePostsContent = ({
@@ -123,11 +179,35 @@ const ServicePostsContent = ({
   const searchWord = data.results.edges.filter(
     edge => edge.node.node_locale === language && edge.node.slug === "search"
   )
+  const tagLabels = {
+    "gluten-free": data.results.edges.filter(
+      edge =>
+        edge.node.node_locale === language && edge.node.slug === "gluten-free"
+    ),
+    salty: data.results.edges.filter(
+      edge => edge.node.node_locale === language && edge.node.slug === "salty"
+    ),
+    sweets: data.results.edges.filter(
+      edge => edge.node.node_locale === language && edge.node.slug === "sweets"
+    ),
+    drinks: data.results.edges.filter(
+      edge => edge.node.node_locale === language && edge.node.slug === "drinks"
+    ),
+  }
   const checkedValuesTrue = Object.values(checked).filter(
     value => value === true
   )
   const handleCheckbox = e => {
     setChecked({ ...checked, [e.target.name]: e.target.checked })
+  }
+  const returnRigthClassName = name => {
+    if (!Object.keys(checked).includes(name)) {
+      return classes.noNothing
+    } else if (checked[name]) {
+      return classes.checked
+    } else {
+      return classes.unchecked
+    }
   }
 
   useEffect(() => {
@@ -244,9 +324,26 @@ const ServicePostsContent = ({
     category,
     serviceNow,
   ])
+  const returnRightBackground = () => {
+    if (serviceNow === "Sweets") {
+      return strawBack
+    } else if (serviceNow === "Salty") {
+      return fingerBack
+    } else if (serviceNow === "Drinks") {
+      return drinksBack
+    } else {
+      return null
+    }
+  }
 
   return (
-    <div className={`${classes.mainContainer} shadow`}>
+    <div
+      className={`${classes.mainContainer} shadow`}
+      style={{
+        backgroundImage: `url(${returnRightBackground()})`,
+        backgroundSize: serviceNow === "Sweets" ? 600 : 500,
+      }}
+    >
       <div
         style={{
           display: "flex",
@@ -269,15 +366,27 @@ const ServicePostsContent = ({
         />
         <FormGroup row className={classes.formGroup}>
           {!!tags.length &&
-            tags.map(value => {
+            tags.map((value, idx) => {
               return (
-                <ServiceCheckbox
-                  checked={checked[value]}
-                  handleCheckbox={handleCheckbox}
-                  name={value}
-                  label={value.toUpperCase()}
-                  key={value.toUpperCase()}
-                />
+                <div
+                  style={{ position: "relative", margin: 10 }}
+                  key={value + idx}
+                >
+                  <span className={returnRigthClassName(value)}>
+                    {traces[idx]}
+                    <ServiceCheckbox
+                      checked={checked[value]}
+                      handleCheckbox={handleCheckbox}
+                      name={value}
+                      label={
+                        tagLabels[value]
+                          ? tagLabels[value][0].node.string
+                          : value.toUpperCase()
+                      }
+                      key={value.toUpperCase()}
+                    />
+                  </span>
+                </div>
               )
             })}
         </FormGroup>

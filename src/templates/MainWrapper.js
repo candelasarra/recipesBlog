@@ -7,9 +7,9 @@ import {
 } from "@material-ui/core/styles"
 import LanguageContext from "./LanguageContext"
 import "../css/global.css"
+import paperImage from "../images/paperImage.jpg"
 import SEO from "../components/seo"
-//greish purple : #644d5b, redhish #c96567, bluish: #324455
-// terracota sheme: blue #4186f6, dark red #5c2118, bright red #bc463a, light red #d4a59b, "white" #f3e0dc
+
 let theme = createMuiTheme({
   typography: {
     fontFamily: "'Inconsolata', monospace;",
@@ -28,8 +28,7 @@ let theme = createMuiTheme({
     MuiPaper: {
       root: {
         //  backgroundColor: "rgb(24,25,26)",
-        backgroundImage:
-          'url("https://cdn.inspirationhut.net/wp-content/uploads/2014/09/light-paper-fibers.jpg")',
+        backgroundImage: `url(${paperImage})`,
       },
     },
     MuiTypography: {
@@ -77,19 +76,34 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     paddingTop: theme.spacing(10),
     paddingBottom: theme.spacing(10),
-    paddingLeft: theme.spacing(4),
-    paddingRight: theme.spacing(4),
+    paddingLeft: 31,
+    paddingRight: 31,
     [theme.breakpoints.down("xs")]: {
       paddingLeft: theme.spacing(1),
       paddingRight: theme.spacing(1),
     },
     marginLeft: `auto`,
     marginRight: `auto`,
-    maxWidth: theme.spacing(13) * 12,
+    maxWidth: 1247,
   },
+  loaded: {
+    animation: `$slide 1000ms ${theme.transitions.easing.easeInOut}`,
+  },
+  "@keyframes slide": {
+    "0%": {
+      // opacity: 0,
+      transform: "translateX(-1000px)",
+    },
+    "100%": {
+      // opacity: 1,
+      transform: "translateX(0)",
+    },
+  },
+  nothing: {},
 }))
-const MainWrapper = ({ children }) => {
+const MainWrapper = ({ children, animation }) => {
   const classes = useStyles()
+  const [loaded, setLoaded] = useState(false)
   function getCookie(name) {
     var nameEQ = name + "="
     var ca = document.cookie.split(";")
@@ -108,20 +122,32 @@ const MainWrapper = ({ children }) => {
     }
   }, [])
 
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
   const value = { language, setLanguage }
-
+  const returnRightClassName = () => {
+    if (loaded && animation) {
+      return classes.loaded
+    } else if (!loaded && animation) {
+      return classes.notLoaded
+    } else {
+      return classes.nothing
+    }
+  }
   return (
     <div
       style={{
-        backgroundImage:
-          'url("https://cdn.inspirationhut.net/wp-content/uploads/2014/09/light-paper-fibers.jpg")',
+        backgroundImage: `url(${paperImage})`,
         minHeight: "100vh",
       }}
     >
       <LanguageContext.Provider value={value}>
         <ThemeProvider theme={theme}>
           <SEO />
-          <div className={classes.deepDiv}>{children}</div>
+          <div className={`${classes.deepDiv} ${returnRightClassName()}`}>
+            {children}
+          </div>
         </ThemeProvider>
       </LanguageContext.Provider>
     </div>

@@ -13,9 +13,11 @@ body {
   margin: 0;
   transform: translate3d(0, 0, 0);
   overflow-y: auto;
+  height: 100%;
+  width: 100%;
+  background-color: #fcfbf9;
 }
 html {
-  background-image: url("https://cdn.inspirationhut.net/wp-content/uploads/2014/09/light-paper-fibers.jpg");
 }
 .walnuts {
   float: left;
