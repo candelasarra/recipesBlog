@@ -187,7 +187,7 @@ const HomeComp = ({ props }) => {
                     <Link to={`${link}/`} style={{ textDecoration: "none" }}>
                       <div
                         key={name}
-                        className={`${classes.rowOneItem}   ${classes.color}`}
+                        className={`${classes.rowOneItem} shadow   ${classes.color}`}
                       >
                         <div
                           className={`${classes.border} stars ${classes.rowOneItemInside}`}
@@ -216,7 +216,7 @@ const HomeComp = ({ props }) => {
               to="/drinks"
               style={{ textDecoration: "none", color: "black" }}
             >
-              <div className={` ${classes.drinks}   ${classes.color}`}>
+              <div className={` ${classes.drinks}  shadow ${classes.color}`}>
                 <div className={` stars ${classes.borderDrinks}`}>
                   <Typography
                     variant="h3"
@@ -264,7 +264,7 @@ const HomeComp = ({ props }) => {
           </Grid>
           <Grid item container xs={12}>
             <Grid item xs={12} sm={12} md={6}>
-              <div className={`${classes.typewriter} ${classes.color} `}>
+              <div className={`${classes.typewriter} ${classes.color} shadow`}>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <Typewriter className={classes.typewriterSvg} />
                   <div style={{ marginLeft: 20, flex: 2 }}>

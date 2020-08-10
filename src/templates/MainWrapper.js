@@ -10,6 +10,11 @@ import "../css/global.css"
 import paperImage from "../images/paperImage.jpg"
 import SEO from "../components/seo"
 import { Slide, Fade } from "@material-ui/core"
+import { Location } from "@reach/router"
+import {
+  TransitionGroup,
+  Transition as ReactTransition,
+} from "react-transition-group"
 //greish purple : #644d5b, redhish #c96567, bluish: #324455
 // terracota sheme: blue #4186f6, dark red #5c2118, bright red #bc463a, light red #d4a59b, "white" #f3e0dc
 let theme = createMuiTheme({
@@ -76,7 +81,7 @@ const useStyles = makeStyles(() => ({
   deepDiv: {
     display: "flex",
     flexDirection: "column",
-    paddingTop: theme.spacing(10),
+    paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(10),
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
@@ -89,9 +94,10 @@ const useStyles = makeStyles(() => ({
     maxWidth: theme.spacing(13) * 12,
   },
 }))
-const MainWrapper = ({ children }) => {
+const MainWrapper = ({ children, location }) => {
   const classes = useStyles()
   const [loaded, setLoaded] = useState(false)
+  const timeout = 200
   function getCookie(name) {
     var nameEQ = name + "="
     var ca = document.cookie.split(";")
@@ -110,6 +116,23 @@ const MainWrapper = ({ children }) => {
     }
   }, [])
 
+  const getTransitionStyles = {
+    entering: {
+      position: `absolute`,
+      opacity: 0,
+    },
+    entered: {
+      transition: `all ${timeout}ms ease-in-out`,
+      opacity: 1,
+      transform: "scale(1, 1) rotate(0deg) translate(0px, 0px)",
+    },
+    exiting: {
+      transition: `all ${timeout}ms ease-in-out`,
+      opacity: 0,
+      transform: "scale(1, 1) rotate(0deg) translate(-15px, 0px)",
+    },
+  }
+
   useEffect(() => {
     setLoaded(true)
   }, [])
@@ -125,13 +148,36 @@ const MainWrapper = ({ children }) => {
       <LanguageContext.Provider value={value}>
         <ThemeProvider theme={theme}>
           <SEO />
-          <Fade
+          {/* <Fade
             in={loaded}
             //  style={{ transitionDelay: loaded ? "500ms" : "0ms" }}
             timeout={{ enter: 1000, exit: 0 }}
-          >
-            <div className={classes.deepDiv}>{children}</div>
-          </Fade>
+          > */}
+          <Location>
+            {({ location }) => (
+              <TransitionGroup>
+                <ReactTransition
+                  key={location.key}
+                  timeout={{
+                    exit: timeout,
+                    enter: timeout,
+                  }}
+                >
+                  {status => (
+                    <div
+                      className={classes.deepDiv}
+                      style={{
+                        ...getTransitionStyles[status],
+                      }}
+                    >
+                      {children}
+                    </div>
+                  )}
+                </ReactTransition>
+              </TransitionGroup>
+            )}
+          </Location>
+          {/* </Fade> */}
         </ThemeProvider>
       </LanguageContext.Provider>
     </div>

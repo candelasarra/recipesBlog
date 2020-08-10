@@ -101,6 +101,7 @@ module.exports = {
     //     // ]
     //   },
     // },
+    `gatsby-plugin-layout`,
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {
