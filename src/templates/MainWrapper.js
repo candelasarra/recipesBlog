@@ -87,7 +87,9 @@ const useStyles = makeStyles(() => ({
     maxWidth: 1247,
     transform: "translateX(-1000px)",
   },
-  notLoaded: {},
+  notLoaded: {
+    transform: "translateX(-1000px)",
+  },
   loaded: {
     animation: `$slide 1000ms ${theme.transitions.easing.easeInOut}`,
     transform: "translateX(0)",
