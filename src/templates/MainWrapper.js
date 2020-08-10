@@ -9,7 +9,9 @@ import LanguageContext from "./LanguageContext"
 import "../css/global.css"
 import paperImage from "../images/paperImage.jpg"
 import SEO from "../components/seo"
-
+import { Slide, Fade } from "@material-ui/core"
+//greish purple : #644d5b, redhish #c96567, bluish: #324455
+// terracota sheme: blue #4186f6, dark red #5c2118, bright red #bc463a, light red #d4a59b, "white" #f3e0dc
 let theme = createMuiTheme({
   typography: {
     fontFamily: "'Inconsolata', monospace;",
@@ -76,53 +78,18 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     paddingTop: theme.spacing(10),
     paddingBottom: theme.spacing(10),
-    paddingLeft: 31,
-    paddingRight: 31,
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
     [theme.breakpoints.down("xs")]: {
       paddingLeft: theme.spacing(1),
       paddingRight: theme.spacing(1),
     },
     marginLeft: `auto`,
     marginRight: `auto`,
-    maxWidth: 1247,
-  },
-  notLoaded: {
-    transform: "translateX(-1000px)",
-    opacity: 0,
-  },
-  loaded: {
-    animation: `$slide 1000ms ${theme.transitions.easing.easeInOut}`,
-    transform: "translateX(0)",
-    opacity: 1,
-  },
-  "@keyframes slide": {
-    "0%": {
-      // opacity: 0,
-      transform: "translateX(-1000px)",
-    },
-    "100%": {
-      // opacity: 1,
-      transform: "translateX(0)",
-    },
-  },
-  nothing: {
-    display: "flex",
-    flexDirection: "column",
-    paddingTop: theme.spacing(10),
-    paddingBottom: theme.spacing(10),
-    paddingLeft: 31,
-    paddingRight: 31,
-    [theme.breakpoints.down("xs")]: {
-      paddingLeft: theme.spacing(1),
-      paddingRight: theme.spacing(1),
-    },
-    marginLeft: `auto`,
-    marginRight: `auto`,
-    maxWidth: 1247,
-    transform: "translateX(0px)",
+    maxWidth: theme.spacing(13) * 12,
   },
 }))
-const MainWrapper = ({ children, animation }) => {
+const MainWrapper = ({ children }) => {
   const classes = useStyles()
   const [loaded, setLoaded] = useState(false)
   function getCookie(name) {
@@ -147,38 +114,7 @@ const MainWrapper = ({ children, animation }) => {
     setLoaded(true)
   }, [])
   const value = { language, setLanguage }
-  const returnRightClassName = () => {
-    if (typeof window === `undefined`) {
-      return null
-    } else if (
-      window.navigator.userAgent.indexOf("Safari") !== -1 &&
-      window.navigator.userAgent.indexOf("Chrome") === -1
-    ) {
-      return null
-    } else if (!loaded && animation) {
-      return classes.notLoaded
-    } else if (loaded && animation) {
-      return classes.loaded
-    } else {
-      return null
-    }
-  }
-  const returnOtherRightClassName = () => {
-    if (typeof window === `undefined`) {
-      return classes.nothing
-    } else if (
-      window.navigator.userAgent.indexOf("Safari") !== -1 &&
-      window.navigator.userAgent.indexOf("Chrome") === -1
-    ) {
-      return classes.nothing
-    } else if (loaded && animation) {
-      return classes.deepDiv
-    } else if (!loaded && animation) {
-      return classes.deepDiv
-    } else {
-      return classes.nothing
-    }
-  }
+
   return (
     <div
       style={{
@@ -189,9 +125,13 @@ const MainWrapper = ({ children, animation }) => {
       <LanguageContext.Provider value={value}>
         <ThemeProvider theme={theme}>
           <SEO />
-          <div className={`${returnRightClassName()}`}>
-            <div className={`${returnOtherRightClassName()}`}>{children}</div>
-          </div>
+          <Fade
+            in={loaded}
+            //  style={{ transitionDelay: loaded ? "500ms" : "0ms" }}
+            timeout={{ enter: 1000, exit: 0 }}
+          >
+            <div className={classes.deepDiv}>{children}</div>
+          </Fade>
         </ThemeProvider>
       </LanguageContext.Provider>
     </div>
