@@ -2,9 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import MainWrapper from "./MainWrapper"
 import Header from "../components/header"
 import ServicePostsContent from "./servicePostsContent"
-import { Breadcrumbs, Typography, useTheme } from "@material-ui/core"
-import { Link } from "gatsby"
-import { NavigateNext, Home } from "@material-ui/icons"
+import { graphql } from "gatsby"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 
 const ServicePosts = props => {

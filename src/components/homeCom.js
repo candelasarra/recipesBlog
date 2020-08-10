@@ -2,7 +2,7 @@ import React from "react"
 import Header from "./header"
 import { makeStyles } from "@material-ui/styles"
 import { Typography, Grid, Hidden } from "@material-ui/core"
-import { useStaticQuery, Link, graphql } from "gatsby"
+import { useStaticQuery, Link } from "gatsby"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 import BurgerHome from "../vectors/burgerHome.svg"
 import TrendyMilkshake from "../vectors/milkshake.svg"
@@ -126,35 +126,9 @@ const HomeComp = ({ props }) => {
   const classes = useStyles()
   const breadcrumbArray = [{ label: "Home" }]
   const rows = {}
-  const query = useStaticQuery(
-    graphql`
-      query {
-        site: site {
-          siteMetadata {
-            menuLinks {
-              name
-              link
-              title
-            }
-          }
-        }
-        strings: allContentfulStrings(
-          filter: { slug: { eq: "documentation" } }
-        ) {
-          edges {
-            node {
-              string
-              slug
-              node_locale
-            }
-          }
-        }
-      }
-    `
-  )
 
   //creating the array of objects with row one data to map over for UI
-  const makeRowOneObjects = query.site.siteMetadata.menuLinks.map(item => {
+  const makeRowOneObjects = props.data.site.siteMetadata.menuLinks.map(item => {
     const { title, link, name } = item
     if (name === "salty" || name === "sweets") {
       return {
@@ -354,5 +328,4 @@ const HomeComp = ({ props }) => {
     </div>
   )
 }
-
 export default HomeComp

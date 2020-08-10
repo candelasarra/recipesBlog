@@ -4,7 +4,7 @@ import Header from "../components/header"
 import ServiceTemplateContent from "./serviceTemplateContent"
 import { useTheme } from "@material-ui/core"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
-
+import { graphql } from "gatsby"
 const ServiceTemplate = ({ data, path, pageContext, location }) => {
   const theme = useTheme()
   const service = data.allContentfulBlogPost.edges[0].node.service[0].toLowerCase()

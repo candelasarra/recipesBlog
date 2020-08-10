@@ -6,7 +6,7 @@ import Subscribe from "../components/subscribe"
 import { Breadcrumbs, Typography, useTheme } from "@material-ui/core"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 import { NavigateNext } from "@material-ui/icons"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 import LanguageContext from "./LanguageContext"
 
 const BlogPostLayout = props => {

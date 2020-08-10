@@ -1,6 +1,7 @@
 import React from "react"
 import MainWrapper from "../templates/MainWrapper"
 import HomeComp from "../components/homeCom"
+import { graphql } from "gatsby"
 
 const Index = props => {
   return (
@@ -9,4 +10,17 @@ const Index = props => {
     </MainWrapper>
   )
 }
+export const query = graphql`
+  query {
+    site: site {
+      siteMetadata {
+        menuLinks {
+          name
+          link
+          title
+        }
+      }
+    }
+  }
+`
 export default Index

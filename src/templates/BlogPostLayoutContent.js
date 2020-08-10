@@ -263,7 +263,6 @@ const BlogPostLayoutContent = ({ edges }) => {
     <div className="shadow" style={{ padding: 20 }}>
       {currentEdge && (
         <div>
-          {/* <Layout location={location} title={siteTitle}> */}
           <div
             style={{
               minHeight: "100vh",
@@ -390,7 +389,6 @@ const BlogPostLayoutContent = ({ edges }) => {
               </li>
             </ul>
           </nav>
-          {/* </Layout> */}
         </div>
       )}
     </div>
