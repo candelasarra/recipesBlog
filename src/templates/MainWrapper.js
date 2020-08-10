@@ -72,6 +72,7 @@ theme = responsiveFontSizes(theme)
 
 const useStyles = makeStyles(() => ({
   deepDiv: {
+    transform: "translateX(-1000px)",
     display: "flex",
     flexDirection: "column",
     paddingTop: theme.spacing(10),
@@ -85,10 +86,10 @@ const useStyles = makeStyles(() => ({
     marginLeft: `auto`,
     marginRight: `auto`,
     maxWidth: 1247,
-    transform: "translateX(-1000px)",
   },
   notLoaded: {
     transform: "translateX(-1000px)",
+    opacity: 0,
   },
   loaded: {
     animation: `$slide 1000ms ${theme.transitions.easing.easeInOut}`,
@@ -96,11 +97,11 @@ const useStyles = makeStyles(() => ({
   },
   "@keyframes slide": {
     "0%": {
-      // opacity: 0,
+      opacity: 0,
       transform: "translateX(-1000px)",
     },
     "100%": {
-      // opacity: 1,
+      opacity: 1,
       transform: "translateX(0)",
     },
   },
