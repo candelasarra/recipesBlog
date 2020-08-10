@@ -85,12 +85,12 @@ const useStyles = makeStyles(() => ({
     marginLeft: `auto`,
     marginRight: `auto`,
     maxWidth: 1247,
-  },
-  notLoaded: {
     transform: "translateX(-1000px)",
   },
+  notLoaded: {},
   loaded: {
     animation: `$slide 1000ms ${theme.transitions.easing.easeInOut}`,
+    transform: "translateX(0)",
   },
   "@keyframes slide": {
     "0%": {
@@ -102,7 +102,22 @@ const useStyles = makeStyles(() => ({
       transform: "translateX(0)",
     },
   },
-  nothing: {},
+  nothing: {
+    display: "flex",
+    flexDirection: "column",
+    paddingTop: theme.spacing(10),
+    paddingBottom: theme.spacing(10),
+    paddingLeft: 31,
+    paddingRight: 31,
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: theme.spacing(1),
+      paddingRight: theme.spacing(1),
+    },
+    marginLeft: `auto`,
+    marginRight: `auto`,
+    maxWidth: 1247,
+    transform: "translateX(0px)",
+  },
 }))
 const MainWrapper = ({ children, animation }) => {
   const classes = useStyles()
@@ -131,23 +146,36 @@ const MainWrapper = ({ children, animation }) => {
   const value = { language, setLanguage }
   const returnRightClassName = () => {
     if (typeof window === `undefined`) {
-      return classes.nothing
+      return null
     } else if (
       window.navigator.userAgent.indexOf("Safari") !== -1 &&
-      window.navigator.userAgent.indexOf("Chrome") === -17 &&
-      window.navigator &&
-      window.navigator.userAgent.toLowerCase().includes("safari")
+      window.navigator.userAgent.indexOf("Chrome") === -1
     ) {
-      return classes.nothing
+      return null
     } else if (loaded && animation) {
       return classes.loaded
     } else if (!loaded && animation) {
       return classes.notLoaded
     } else {
+      return null
+    }
+  }
+  const returnOtherRightClassName = () => {
+    if (typeof window === `undefined`) {
+      return classes.nothing
+    } else if (
+      window.navigator.userAgent.indexOf("Safari") !== -1 &&
+      window.navigator.userAgent.indexOf("Chrome") === -1
+    ) {
+      return classes.nothing
+    } else if (loaded && animation) {
+      return classes.deepDiv
+    } else if (!loaded && animation) {
+      return classes.deepDiv
+    } else {
       return classes.nothing
     }
   }
-  console.log(returnRightClassName())
   return (
     <div
       style={{
@@ -158,7 +186,9 @@ const MainWrapper = ({ children, animation }) => {
       <LanguageContext.Provider value={value}>
         <ThemeProvider theme={theme}>
           <SEO />
-          <div className={`${classes.deepDiv} ${returnRightClassName()}`}>
+          <div
+            className={`${returnOtherRightClassName()} ${returnRightClassName()}`}
+          >
             {children}
           </div>
         </ThemeProvider>
