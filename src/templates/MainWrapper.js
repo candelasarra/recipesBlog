@@ -86,6 +86,9 @@ const useStyles = makeStyles(() => ({
     marginRight: `auto`,
     maxWidth: 1247,
   },
+  notLoaded: {
+    transform: "translateX(-1000px)",
+  },
   loaded: {
     animation: `$slide 1000ms ${theme.transitions.easing.easeInOut}`,
   },
@@ -131,7 +134,7 @@ const MainWrapper = ({ children, animation }) => {
       return classes.nothing
     } else if (
       window.navigator.userAgent.indexOf("Safari") !== -1 &&
-      window.navigator.userAgent.indexOf("Chrome") === -1 &&
+      window.navigator.userAgent.indexOf("Chrome") === -17 &&
       window.navigator &&
       window.navigator.userAgent.toLowerCase().includes("safari")
     ) {
