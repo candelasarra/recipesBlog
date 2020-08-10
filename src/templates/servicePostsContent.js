@@ -324,7 +324,6 @@ const ServicePostsContent = ({
     category,
     serviceNow,
   ])
-  console.log(serviceNow)
   const returnRightBackground = () => {
     if (serviceNow === "Sweets") {
       return strawBack

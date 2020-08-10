@@ -24,7 +24,6 @@ const CustomBreadcrumbs = ({ array, location }) => {
   const urlText = location.pathname === "/posts" ? "CATEGORIES" : "ALL"
   const url = location.pathname === "/posts" ? "/" : "/posts"
   const [breadcrumbs, setBreadcrumbs] = useState([])
-  console.log(location)
 
   useEffect(() => {
     if (array.length) {

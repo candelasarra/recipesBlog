@@ -4,7 +4,7 @@ import HomeComp from "../components/homeCom"
 
 const Index = props => {
   return (
-    <MainWrapper>
+    <MainWrapper animation>
       <HomeComp props={props} />
     </MainWrapper>
   )

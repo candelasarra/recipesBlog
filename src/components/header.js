@@ -117,11 +117,6 @@ const Header = ({ titleStyle }) => {
     `
   )
 
-  //  const handleChange = event => {
-  //     setLanguage(event.target.value)
-  //     console.log(event.target.value)
-  //   }
-
   return (
     <div className={`${classes.mainDiv} header shadow`}>
       {/* <div style={{ display: "flex", justifyContent: "space-between" }}> */}

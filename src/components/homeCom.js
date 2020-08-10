@@ -1,27 +1,17 @@
 import React from "react"
 import Header from "./header"
 import { makeStyles } from "@material-ui/styles"
-import {
-  Typography,
-  Card,
-  Slide,
-  div,
-  createMuiTheme,
-  divList,
-  divListTile,
-  Grid,
-  Hidden,
-} from "@material-ui/core"
-import { navigate, useStaticQuery, Link } from "gatsby"
+import { Typography, Grid, Hidden } from "@material-ui/core"
+import { useStaticQuery, Link } from "gatsby"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 import BurgerHome from "../vectors/burgerHome.svg"
 import TrendyMilkshake from "../vectors/milkshake.svg"
 import Drink from "../vectors/drinks.svg"
+import Coffee from "../vectors/coffee.svg"
 import border from "../images/star.svg"
 import Spices from "../vectors/spices.svg"
 import Typewriter from "../vectors/typewriter.svg"
 import outline from "../images/outline.svg"
-import MainWrapper from "../templates/MainWrapper"
 const useStyles = makeStyles(theme => ({
   font: {
     // fontFamily: " 'Barrio', cursive",
@@ -97,6 +87,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    height: "100%",
+    justifyContent: "center",
   },
   typewriterSvg: {
     width: "50%",
@@ -185,7 +177,7 @@ const HomeComp = ({ props }) => {
       <CustomBreadcrumbs array={breadcrumbArray} location={props.location} />
       {/* </div> */}
       <div>
-        <Grid container spacing={0}>
+        <Grid container spacing={0} className="shadow">
           <>
             {makeRowOneObjects.map(row => {
               const { title, link, name, image } = row
@@ -195,7 +187,7 @@ const HomeComp = ({ props }) => {
                     <Link to={`${link}/`} style={{ textDecoration: "none" }}>
                       <div
                         key={name}
-                        className={`${classes.rowOneItem}  shadow ${classes.color}`}
+                        className={`${classes.rowOneItem}   ${classes.color}`}
                       >
                         <div
                           className={`${classes.border} stars ${classes.rowOneItemInside}`}
@@ -225,7 +217,7 @@ const HomeComp = ({ props }) => {
               to="/drinks"
               style={{ textDecoration: "none", color: "black" }}
             >
-              <div className={` ${classes.drinks} shadow  ${classes.color}`}>
+              <div className={` ${classes.drinks}   ${classes.color}`}>
                 <div className={` stars ${classes.borderDrinks}`}>
                   <Typography
                     variant="h3"
@@ -273,7 +265,7 @@ const HomeComp = ({ props }) => {
           </Grid>
           <Grid item container xs={12}>
             <Grid item xs={12} sm={12} md={6}>
-              <div className={`${classes.typewriter} ${classes.color}  shadow`}>
+              <div className={`${classes.typewriter} ${classes.color} `}>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <Typewriter className={classes.typewriterSvg} />
                   <div style={{ marginLeft: 20, flex: 2 }}>
@@ -315,15 +307,46 @@ const HomeComp = ({ props }) => {
               </div>
             </Grid>
             <Grid item container xs={12} sm={12} md={6}>
-              <Grid item xs={12}>
-                <div className=" shadow">
-                  <Typography>Bread</Typography>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={8}
+                className={` ${classes.color} shadow`}
+                container
+              >
+                <div
+                  style={{
+                    padding: 20,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    width: "100%",
+                  }}
+                >
+                  <Coffee style={{ height: "100%", height: 150 }} />
+                  <Typography
+                    variant="h4"
+                    style={{
+                      width: "fit-content",
+                      textAlign: "center",
+                      color: "#e25a5f",
+                    }}
+                  >
+                    get me a coffee
+                  </Typography>
+
+                  <a
+                    href="https://www.buymeacoffee.com/chronicles"
+                    style={{ textDecoration: "underline", color: "black" }}
+                  >
+                    <Typography variant="h4">here</Typography>
+                  </a>
                 </div>
               </Grid>
-              <Grid item xs={12}>
-                <div className=" shadow">
-                  <Typography>Bread</Typography>
-                </div>
+              <Grid item xs={12} sm={6} md={4}>
+                <div></div>
               </Grid>
             </Grid>
           </Grid>

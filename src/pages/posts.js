@@ -20,7 +20,7 @@ const Posts = ({ data, location }) => {
   }
 
   return (
-    <MainWrapper>
+    <MainWrapper animation>
       <Header titleStyle="h3" />
       <CustomBreadcrumbs array={breadcrumbArray} location={location} />
       <PostsContent data={data} tags={filteredTags} />

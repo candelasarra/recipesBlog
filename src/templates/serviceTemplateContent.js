@@ -94,8 +94,6 @@ const imageStyle = {
 
 const ServiceTemplateContent = ({ data, path }) => {
   const classes = useStyles()
-  console.log(path)
-  console.log(data)
 
   return (
     <div className={`shadow ${classes.divSweets}  `}>

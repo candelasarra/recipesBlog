@@ -180,7 +180,6 @@ const BlogPostLayoutContent = ({ edges }) => {
         }
       },
       [BLOCKS.EMBEDDED_ASSET]: node => {
-        console.log(node)
         if (node.data.target.fields) {
           let { file } = node.data.target.fields
           // console.log(file["en-US"].url)
