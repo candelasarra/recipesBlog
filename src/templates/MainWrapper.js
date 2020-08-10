@@ -147,6 +147,7 @@ const MainWrapper = ({ children, animation }) => {
       return classes.nothing
     }
   }
+  console.log(returnRightClassName())
   return (
     <div
       style={{
