@@ -88,10 +88,12 @@ const useStyles = makeStyles(() => ({
   },
   notLoaded: {
     transform: "translateX(-1000px)",
+    opacity: 0,
   },
   loaded: {
     animation: `$slide 1000ms ${theme.transitions.easing.easeInOut}`,
     transform: "translateX(0)",
+    opacity: 1,
   },
   "@keyframes slide": {
     "0%": {
@@ -153,10 +155,10 @@ const MainWrapper = ({ children, animation }) => {
       window.navigator.userAgent.indexOf("Chrome") === -1
     ) {
       return null
-    } else if (loaded && animation) {
-      return classes.loaded
     } else if (!loaded && animation) {
       return classes.notLoaded
+    } else if (loaded && animation) {
+      return classes.loaded
     } else {
       return null
     }
