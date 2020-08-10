@@ -2,7 +2,7 @@ import React from "react"
 import Header from "./header"
 import { makeStyles } from "@material-ui/styles"
 import { Typography, Grid, Hidden } from "@material-ui/core"
-import { useStaticQuery, Link } from "gatsby"
+import { useStaticQuery, Link, graphql } from "gatsby"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 import BurgerHome from "../vectors/burgerHome.svg"
 import TrendyMilkshake from "../vectors/milkshake.svg"
@@ -354,4 +354,5 @@ const HomeComp = ({ props }) => {
     </div>
   )
 }
+
 export default HomeComp
