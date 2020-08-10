@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const BlogPostLayoutContent = ({ edges }) => {
+const BlogPostLayoutContent = ({ edges, data }) => {
   const classes = useStyles()
   const theme = useTheme()
   const [currentEdge, setCurrentEdge] = useState(null)
@@ -98,42 +98,7 @@ const BlogPostLayoutContent = ({ edges }) => {
   const [previousTitle, setPreviousTitle] = useState(null)
   const [previousPost, setPreviousPost] = useState(null)
   const { language } = useContext(LanguageContext)
-  const query = useStaticQuery(graphql`
-    query {
-      data: allContentfulBlogPost(
-        filter: { node_locale: { eq: "en-US" } }
-        sort: { fields: createdAt, order: ASC }
-      ) {
-        edges {
-          node {
-            blogTitle
-            slug
-            node_locale
-          }
-        }
-      }
-      usTitles: allContentfulBlogPost(
-        filter: { node_locale: { eq: "en-US" } }
-        sort: { fields: createdAt, order: ASC }
-      ) {
-        edges {
-          node {
-            blogTitle
-          }
-        }
-      }
-      esTitles: allContentfulBlogPost(
-        filter: { node_locale: { eq: "es-ES" } }
-        sort: { fields: createdAt, order: ASC }
-      ) {
-        edges {
-          node {
-            blogTitle
-          }
-        }
-      }
-    }
-  `)
+  const query = data
 
   const options = {
     renderNode: {

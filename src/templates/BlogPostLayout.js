@@ -12,7 +12,7 @@ import LanguageContext from "./LanguageContext"
 const BlogPostLayout = props => {
   const theme = useTheme()
   const { data } = props
-  const { edges } = data.allContentfulBlogPost
+  const { edges } = data.blogPost
   const { service, category } = props.pageContext
   const { language } = useContext(LanguageContext)
   let breadcrumbArray = []
@@ -50,7 +50,7 @@ const BlogPostLayout = props => {
     <MainWrapper animation={false}>
       <Header titleStyle="h4" />
       <CustomBreadcrumbs array={breadcrumbArray} location={props.location} />
-      <BlogPostLayoutContent edges={edges} />
+      <BlogPostLayoutContent edges={edges} data={data} />
       {/* <Subscribe /> */}
     </MainWrapper>
   )
@@ -58,7 +58,7 @@ const BlogPostLayout = props => {
 
 export const query = graphql`
   query BlogPost($slug: String!) {
-    allContentfulBlogPost(filter: { slug: { eq: $slug } }) {
+    blogPost: allContentfulBlogPost(filter: { slug: { eq: $slug } }) {
       edges {
         node {
           slug
@@ -77,6 +77,40 @@ export const query = graphql`
         }
       }
     }
+
+    data: allContentfulBlogPost(
+      filter: { node_locale: { eq: "en-US" } }
+      sort: { fields: createdAt, order: ASC }
+    ) {
+      edges {
+        node {
+          blogTitle
+          slug
+          node_locale
+        }
+      }
+    }
+    usTitles: allContentfulBlogPost(
+      filter: { node_locale: { eq: "en-US" } }
+      sort: { fields: createdAt, order: ASC }
+    ) {
+      edges {
+        node {
+          blogTitle
+        }
+      }
+    }
+    esTitles: allContentfulBlogPost(
+      filter: { node_locale: { eq: "es-ES" } }
+      sort: { fields: createdAt, order: ASC }
+    ) {
+      edges {
+        node {
+          blogTitle
+        }
+      }
+    }
   }
 `
+
 export default BlogPostLayout
