@@ -1,16 +1,12 @@
-import React, { useContext, useMemo } from "react"
+import React, { useContext } from "react"
 import MainWrapper from "./MainWrapper"
 import BlogPostLayoutContent from "./BlogPostLayoutContent"
 import Header from "../components/header"
-import Subscribe from "../components/subscribe"
-import { Breadcrumbs, Typography, useTheme } from "@material-ui/core"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
-import { NavigateNext } from "@material-ui/icons"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import LanguageContext from "./LanguageContext"
 
 const BlogPostLayout = props => {
-  const theme = useTheme()
   const { data } = props
   const { edges } = data.blogPost
   const { service, category } = props.pageContext
@@ -51,7 +47,6 @@ const BlogPostLayout = props => {
       <Header titleStyle="h4" />
       <CustomBreadcrumbs array={breadcrumbArray} location={props.location} />
       <BlogPostLayoutContent edges={edges} data={data} />
-      {/* <Subscribe /> */}
     </MainWrapper>
   )
 }

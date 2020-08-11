@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import MainWrapper from "../templates/MainWrapper"
 import PostsContent from "../templates/postsContent"
 import Header from "../components/header"
@@ -6,7 +6,6 @@ import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 import { graphql } from "gatsby"
 const Posts = ({ data, location }) => {
   const breadcrumbArray = [{ label: "Home", link: "/" }, { label: "All Posts" }]
-  // const [tags, setTags] = useState([])
   const filteredTags = []
   for (let i = 0; i < data.usPosts.edges.length; i++) {
     const post = data.usPosts.edges[i].node

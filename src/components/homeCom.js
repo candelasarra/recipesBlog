@@ -2,7 +2,7 @@ import React from "react"
 import Header from "./header"
 import { makeStyles } from "@material-ui/styles"
 import { Typography, Grid, Hidden } from "@material-ui/core"
-import { useStaticQuery, Link } from "gatsby"
+import { Link } from "gatsby"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 import BurgerHome from "../vectors/burgerHome.svg"
 import TrendyMilkshake from "../vectors/milkshake.svg"
@@ -13,16 +13,12 @@ import Spices from "../vectors/spices.svg"
 import Typewriter from "../vectors/typewriter.svg"
 import outline from "../images/outline.svg"
 const useStyles = makeStyles(theme => ({
-  font: {
-    // fontFamily: " 'Barrio', cursive",
-  },
   serviceContainer: {
     textAlign: "center",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    // border: '1px solid white', borderRadius: 2,
     padding: 20,
     width: "100%",
     maxWidth: 100,
@@ -35,7 +31,6 @@ const useStyles = makeStyles(theme => ({
     },
   },
   border: {
-    //271 fill, 19px
     [theme.breakpoints.up("md")]: {
       borderImageSource: `url(${border})`,
       borderImageRepeat: "round",
@@ -313,6 +308,7 @@ const HomeComp = ({ props }) => {
                   <a
                     href="https://www.buymeacoffee.com/chronicles"
                     style={{ textDecoration: "underline", color: "black" }}
+                    target="_blank"
                   >
                     <Typography variant="h4">here</Typography>
                   </a>

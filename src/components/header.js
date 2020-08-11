@@ -1,29 +1,25 @@
 import { Link, useStaticQuery } from "gatsby"
-import React, { useState } from "react"
-import { Typography, makeStyles } from "@material-ui/core"
-import IconButton from "@material-ui/core/IconButton"
-import NavigateNextIcon from "@material-ui/icons/NavigateNext"
-import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore"
+import React, { useContext } from "react"
+import { Typography, makeStyles, Hidden } from "@material-ui/core"
 import { graphql } from "gatsby"
 import paperImage from "../images/paperImage.jpg"
 import Title from "../vectors/title2.svg"
 
-import LangSwitch from "./LangSwitch"
 import HeaderSymbol from "./headerSymbol"
-//import Ce from "../vectors/cece.svg"
+import { localizeStringWithSlug } from "../commons/functions"
+import LanguageContext from "../templates/LanguageContext"
 
 const useStyles = makeStyles(theme => ({
   mainDiv: {
-    //  display: "flex",
-    //  justifyContent: "space-between",
-    // flexDirection: "column",
-    //  marginBottom: theme.spacing(5),
-
+    display: "flex",
     backgroundImage: `url(${paperImage})`,
   },
   headerTitle: {
-    //   marginBottom: theme.spacing(5)
     padding: "10px 0px",
+    flex: 7,
+    [theme.breakpoints.down(800)]: {
+      flex: "auto",
+    },
   },
   title: {
     transition: "color 1s",
@@ -44,13 +40,12 @@ const useStyles = makeStyles(theme => ({
   },
   linksContainer: {
     display: "flex",
-    justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-around",
     textAlign: "center",
     margin: theme.spacing(3),
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down(900)]: {
       display: "none",
     },
   },
@@ -59,6 +54,17 @@ const useStyles = makeStyles(theme => ({
   },
   divider: {
     marginBottom: theme.spacing(2),
+  },
+  headerCherryLogo: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    margin: "20px 0px 10px 0px",
+    cursor: "pointer",
+    display: "flex",
+    [theme.breakpoints.down(800)]: {
+      display: "none",
+    },
   },
 }))
 const WEEK_DAYS = [
@@ -87,24 +93,17 @@ const MONTHS = [
 
 const Header = ({ titleStyle }) => {
   const classes = useStyles()
-  // false means US, true means ES
-  const [open, setOpen] = useState(false)
   const date = new Date()
+  const { language } = useContext(LanguageContext)
   const day = date.toDateString().split(" ")[2]
   const month = MONTHS[date.getMonth()]
   const year = date.getFullYear()
   const weekDay = WEEK_DAYS[date.getDay()]
+
   const query = useStaticQuery(
     graphql`
       query {
-        site: site {
-          siteMetadata {
-            title
-          }
-        }
-        strings: allContentfulStrings(
-          filter: { slug: { eq: "documentation" } }
-        ) {
+        strings: allContentfulStrings {
           edges {
             node {
               string
@@ -116,11 +115,16 @@ const Header = ({ titleStyle }) => {
       }
     `
   )
-
+  const see = localizeStringWithSlug(language, query.strings.edges, "see")
+  const all = localizeStringWithSlug(language, query.strings.edges, "all")
+  const recipes = localizeStringWithSlug(
+    language,
+    query.strings.edges,
+    "recipes"
+  )
   return (
     <div className={`${classes.mainDiv} header shadow`}>
-      {/* <div style={{ display: "flex", justifyContent: "space-between" }}> */}
-      <div className="headerCherryLogo">
+      <div className={`${classes.headerCherryLogo} headerCherryLogo`}>
         <HeaderSymbol />
       </div>
       <div className={`${classes.headerTitle} headerTitle shadow`}>
@@ -142,32 +146,19 @@ const Header = ({ titleStyle }) => {
           <Typography style={{ width: "fit-content" }}>RECIPES</Typography>
         </div>
       </div>
-      <div className={`${classes.linksContainer} linksContainer shadow`}>
-        <Link
-          to="/posts"
-          className={classes.links}
-          activeClassName={classes.activeLink}
-        >
-          {/* <Link
-          to="/"
-          className={classes.links}
-          activeClassName={classes.activeLink}
-        >
-          <Typography variant="button">HOME</Typography>
-        </Link> */}
-
-          {/* <Link
-          to="/lasjd"
-          className={classes.links}
-          activeClassName={classes.activeLink}
-        >
-          <Typography variant="button">...</Typography>
-        </Link> */}
-          <Typography>SEE</Typography>
-          <Typography>ALL</Typography>
-          <Typography>RECIPES</Typography>
-        </Link>
-      </div>
+      <Hidden>
+        <div className={`${classes.linksContainer} linksContainer shadow`}>
+          <Link
+            to="/posts"
+            className={classes.links}
+            activeClassName={classes.activeLink}
+          >
+            <Typography>{see}</Typography>
+            <Typography>{all}</Typography>
+            <Typography>{recipes}</Typography>
+          </Link>
+        </div>
+      </Hidden>
     </div>
   )
 }

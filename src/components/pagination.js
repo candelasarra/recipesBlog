@@ -12,10 +12,7 @@ const Pagination = ({ page, numberOfPages, setPage }) => {
   const [leftButton, setLeftButton] = useState(1)
   const [centerButton, setCenterButton] = useState(1)
   const [rightButton, setRightButton] = useState(1)
-  // useEffect(() => {
-  //   document.body.scrollTop = 0 // For Safari
-  //   document.documentElement.scrollTop = 0
-  // }, [])
+
   useEffect(() => {
     if ((page === 1 || page === 2) & (numberOfPages >= 3)) {
       setRightButton(3)

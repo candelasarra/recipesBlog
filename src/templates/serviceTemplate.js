@@ -6,13 +6,12 @@ import { useTheme } from "@material-ui/core"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 import { graphql } from "gatsby"
 const ServiceTemplate = ({ data, path, pageContext, location }) => {
-  const theme = useTheme()
   const service = data.allContentfulBlogPost.edges[0].node.service[0].toLowerCase()
   const category = []
-  data.allContentfulBlogPost.edges.map(edge => {
+  data.allContentfulBlogPost.edges.forEach(edge => {
     //this if because only sweets have categories
     if (edge && edge.node && edge.node[service]) {
-      edge.node[service].map(element => {
+      edge.node[service].forEach(element => {
         // this if because one recipe can fall into more than one category so filteing to not repeat
         if (!category.includes(element)) {
           category.push(element)

@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext } from "react"
 import { makeStyles } from "@material-ui/styles"
 import { Typography, Grid } from "@material-ui/core"
-import { navigate, Link } from "gatsby"
+import { Link, useStaticQuery } from "gatsby"
 import Cookies from "../vectors/cookies.svg"
 import Cakes from "../vectors/twoCakes.svg"
 import Cupcakes from "../vectors/cupcakes.svg"
 import Dessert from "../vectors/desserts.svg"
 import Breakfast from "../vectors/breakfast.svg"
+import LanguageContext from "./LanguageContext"
+import { localizeStringWithSlug } from "../commons/functions"
 const useStyles = makeStyles(theme => ({
   divSweets: {
-    padding: 20,
+    padding: 21,
     // [theme.breakpoints.down("md")]: {
     //   padding: "20px 50px",
     // },
@@ -32,25 +34,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "3rem",
     },
   },
-  serviceContainer: {
-    textAlign: "center",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    // border: '1px solid white', borderRadius: 2,
-    padding: 20,
 
-    width: "100%",
-    maxWidth: 100,
-    alignSelf: "center",
-    cursor: "pointer",
-    margin: 20,
-    minHeight: 100,
-    "&:hover": {
-      backgroundColor: "rgba(211, 211, 211, 0.1)",
-    },
-  },
   category: {
     display: "flex",
     flexDirection: "column",
@@ -76,6 +60,9 @@ const useStyles = makeStyles(theme => ({
   cookieGrid: {
     height: "100%",
     width: "100%",
+    [theme.breakpoints.only("md")]: {
+      height: "unset",
+    },
     [theme.breakpoints.only("sm")]: {
       maxHeight: 500,
     },
@@ -94,7 +81,22 @@ const imageStyle = {
 
 const ServiceTemplateContent = ({ data, path }) => {
   const classes = useStyles()
-
+  const { language } = useContext(LanguageContext)
+  const query = useStaticQuery(
+    graphql`
+      query {
+        strings: allContentfulStrings {
+          edges {
+            node {
+              string
+              slug
+              node_locale
+            }
+          }
+        }
+      }
+    `
+  )
   return (
     <div className={`shadow ${classes.divSweets}  `}>
       <div className={`shadow`}>
@@ -108,7 +110,11 @@ const ServiceTemplateContent = ({ data, path }) => {
                     className={classes.font}
                     style={{ width: "fit-content", margin: 20 }}
                   >
-                    Cakes
+                    {localizeStringWithSlug(
+                      language,
+                      query.strings.edges,
+                      "cakes"
+                    )}
                   </Typography>
                   <Cakes style={imageStyle} />
                 </div>
@@ -122,7 +128,11 @@ const ServiceTemplateContent = ({ data, path }) => {
                     className={classes.font}
                     style={{ width: "fit-content", margin: 20 }}
                   >
-                    Breakfast
+                    {localizeStringWithSlug(
+                      language,
+                      query.strings.edges,
+                      "breakfast"
+                    )}
                   </Typography>
                   <Breakfast style={imageStyle} />
                 </div>
@@ -140,7 +150,11 @@ const ServiceTemplateContent = ({ data, path }) => {
                     className={classes.font}
                     style={{ width: "fit-content", margin: 20 }}
                   >
-                    Cookies
+                    {localizeStringWithSlug(
+                      language,
+                      query.strings.edges,
+                      "cookies"
+                    )}
                   </Typography>
                   <Cookies style={imageStyle} />
                   {/* </div> */}
@@ -173,7 +187,11 @@ const ServiceTemplateContent = ({ data, path }) => {
                     className={classes.font}
                     style={{ width: "fit-content", margin: 20 }}
                   >
-                    Desserts
+                    {localizeStringWithSlug(
+                      language,
+                      query.strings.edges,
+                      "desserts"
+                    )}
                   </Typography>
                   <Dessert style={imageStyle} />
                 </div>

@@ -103,7 +103,6 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     margin: "20px 18%",
     flexWrap: "wrap",
-    //backgroundImage: `url(${paperImage})`,
     [theme.breakpoints.down("sm")]: {
       margin: "20px 5%",
     },
@@ -119,14 +118,8 @@ const useStyles = makeStyles(theme => ({
     height: 200,
     backgroundImage: `url(${paperImage})`,
     marginBottom: theme.spacing(3),
-    // borderImageSource: `url(${border})`,
-    // borderImageRepeat: "round",
-    // borderImageWidth: "11px",
-    // borderImageSlice: "259 fill",
-    // borderStyle: "solid",
     [theme.breakpoints.down("xs")]: {
       width: "95%",
-      // border: "none",
     },
   },
   noNothing: {

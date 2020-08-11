@@ -5,8 +5,11 @@ export function localizeStringWithSlug(language, array, slug) {
   const string = array.filter(
     item => item.node.node_locale === language && item.node.slug === slug
   )
-
-  return string
+  if (string && string[0] && string[0].node && string[0].node.string) {
+    return string[0].node.string
+  } else {
+    return null
+  }
 }
 
 export function localizeString(language, array) {
@@ -29,7 +32,7 @@ export const useLanguage = () => {
         setLanguage("en-US")
       }
     }
-  }, [])
+  }, [setLanguage])
   function getCookie(name) {
     var nameEQ = name + "="
     var ca = document.cookie.split(";")

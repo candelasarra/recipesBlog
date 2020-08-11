@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useReducer, useRef } from "react"
 import {
   ThemeProvider,
   createMuiTheme,
@@ -83,21 +83,22 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(10),
-    paddingLeft: theme.spacing(4),
-    paddingRight: theme.spacing(4),
+    paddingLeft: 31,
+    paddingRight: 31,
     [theme.breakpoints.down("xs")]: {
       paddingLeft: theme.spacing(1),
       paddingRight: theme.spacing(1),
     },
     marginLeft: `auto`,
     marginRight: `auto`,
-    maxWidth: theme.spacing(13) * 12,
+    maxWidth: 1342,
   },
 }))
 const MainWrapper = ({ children, location }) => {
   const classes = useStyles()
   const [loaded, setLoaded] = useState(false)
   const timeout = 500
+  const keyLocation = useRef()
   function getCookie(name) {
     var nameEQ = name + "="
     var ca = document.cookie.split(";")
@@ -148,36 +149,32 @@ const MainWrapper = ({ children, location }) => {
       <LanguageContext.Provider value={value}>
         <ThemeProvider theme={theme}>
           <SEO />
-          {/* <Fade
-            in={loaded}
-            //  style={{ transitionDelay: loaded ? "500ms" : "0ms" }}
-            timeout={{ enter: 1000, exit: 0 }}
-          > */}
           <Location>
-            {({ location }) => (
-              <TransitionGroup>
-                <ReactTransition
-                  key={location.key}
-                  timeout={{
-                    exit: timeout,
-                    enter: timeout,
-                  }}
-                >
-                  {status => (
-                    <div
-                      className={classes.deepDiv}
-                      style={{
-                        ...getTransitionStyles[status],
-                      }}
-                    >
-                      {children}
-                    </div>
-                  )}
-                </ReactTransition>
-              </TransitionGroup>
-            )}
+            {({ location }) => {
+              return (
+                <TransitionGroup>
+                  <ReactTransition
+                    key={location.pathname}
+                    timeout={{
+                      exit: timeout,
+                      enter: timeout,
+                    }}
+                  >
+                    {status => (
+                      <div
+                        className={classes.deepDiv}
+                        style={{
+                          ...getTransitionStyles[status],
+                        }}
+                      >
+                        {children}
+                      </div>
+                    )}
+                  </ReactTransition>
+                </TransitionGroup>
+              )
+            }}
           </Location>
-          {/* </Fade> */}
         </ThemeProvider>
       </LanguageContext.Provider>
     </div>

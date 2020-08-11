@@ -17,15 +17,7 @@ body {
   width: 100%;
   background-color: #fcfbf9;
 }
-html {
-}
-.walnuts {
-  float: left;
-  height: 175px;
-}
-.homeTextNuts {
-  text-align: center;
-}
+
 .MuiGrid-item {
   box-shadow: 0 0 0 1px #231f20, inset 0 0 0 1px #231f20;
 }
@@ -38,44 +30,7 @@ html {
   fill: #e25a5f !important;
   text-rendering: optimizeSpeed;
 }
-.categoriesContainer {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: minmax(0, 500px) minmax(0, 400px);
-  grid-template-areas:
-    "cakes cakes cakes cakes cakes cakes breakfast breakfast breakfast breakfast breakfast breakfast"
-    "desserts desserts desserts desserts cookies cookies cookies cookies cupcakes cupcakes cupcakes cupcakes";
-}
-.desserts {
-  grid-area: desserts;
-}
-.cookies {
-  grid-area: cookies;
-}
-.cakes {
-  grid-area: cakes;
-}
-.cupcakes {
-  grid-area: cupcakes;
-}
-.breakfast {
-  grid-area: breakfast;
-}
-.container {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-areas:
-    /* "header header header header header header header header header header header header" */
-    "salty salty salty salty salty salty sweets sweets sweets sweets sweets sweets"
-    "dozen dozen dozen dozen dozen drinks drinks drinks drinks drinks drinks drinks"
-    "general general  general  general  general  general  buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee"
-    "general  general  general  general  general  general  contactMe contactMe contactMe contactMe contactMe contactMe";
-}
-.header {
-  display: grid;
-  grid-template-columns: 1fr 7fr auto;
-  grid-template-areas: "headerCherryLogo headerTitle linksContainer";
-}
+
 _::-webkit-full-page-media,
 _:future,
 :root .stars {
@@ -86,19 +41,9 @@ _:future,
     .stars {
       border-image-repeat: repeat;
     }
-    /*
-      Define here the CSS styles applied only to Safari browsers
-      (any version and any device)
-     */
   }
 }
 .headerCherryLogo {
-  cursor: pointer;
-  grid-area: headerCherryLogo;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 20px 0px 10px 0px;
   user-select: none;
   -webkit-user-select: none; /* Chrome/Safari */
   -moz-user-select: none; /* Firefox */
@@ -110,9 +55,7 @@ _:future,
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
 }
-.linksContainer {
-  grid-area: linksContainer;
-}
+
 @media screen and (min-width: 2300px) {
   .homeTextNuts {
     max-height: 600px;
@@ -127,84 +70,16 @@ _:future,
     grid-auto-rows: minmax(0, 900px);
   }
 }
-@media screen and (min-width: 1000px) {
-  .homeTextNuts {
-    line-height: 2;
-  }
-}
-@media screen and (max-width: 900px) {
-  .header {
-    grid-template-rows: 1fr auto;
-    grid-template-areas: "headerCherryLogo headerTitle headerTitle";
-  }
-  .linksContainer {
-    display: none;
-  }
-}
+
 @media screen and (max-width: 800px) {
-  .headerCherryLogo {
-    display: none;
-  }
-  .linksContainer {
-    display: none;
-  }
-  .container {
-    grid-template-areas:
-    /* "header header header header header header header header header header header header" */
-      "salty salty salty salty salty salty sweets sweets sweets sweets sweets sweets"
-      "drinks drinks drinks drinks drinks drinks drinks empty empty empty empty empty"
-      "dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen"
-      "general general  general  general  general  general  buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee"
-      "general  general  general  general  general  general  contactMe contactMe contactMe contactMe contactMe contactMe";
-  }
   .empty {
     display: content;
   }
-  .header {
-    grid-template-rows: auto auto;
-    grid-template-areas: "headerTitle headerTitle headerTitle";
-  }
-
-  .categoriesContainer {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto auto;
-    grid-template-areas:
-      "breakfast"
-      "cakes"
-      "cookies"
-      "cupcakes"
-      "desserts";
-  }
-  .walnuts {
-    height: 150px;
-  }
 }
 @media (max-width: 700px) {
-  .container {
-    grid-template-rows: auto auto auto auto auto auto;
-    grid-template-areas:
-      /* "header header header header header header header header header header header header" */
-      "salty salty salty salty salty salty salty salty salty salty salty salty"
-      "sweets sweets sweets sweets sweets sweets sweets sweets sweets sweets sweets sweets"
-      "drinks drinks drinks drinks drinks drinks drinks drinks drinks drinks drinks drinks"
-      "dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen dozen"
-      "buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee buyMeCoffee  contactMe contactMe contactMe contactMe contactMe contactMe"
-      "general  general  general  general  general  general general  general  general  general  general  general";
-  }
-  .dozen {
-    display: block;
-  }
-  .milkshakeSvg {
-    height: unset !important;
-  }
   .makeStyles-border-2 {
     border-image-width: 20px;
     border-image-slice: 543 fill;
-  }
-}
-@media (max-width: 600px) {
-  .walnuts {
-    height: 110px;
   }
 }
 .milkshakeSvg {
@@ -212,56 +87,8 @@ _:future,
   width: 100%;
 }
 
-.salty {
-  grid-area: salty;
-  /* grid-column: 1 / 7;
-  grid-row: 1 / 2; */
-}
-.sweets {
-  grid-area: sweets;
-  /* grid-column: 7 / 13;
-  grid-row: 1 / 2; */
-}
-.dozen {
-  grid-area: dozen;
-  /* grid-column: 1 / 10;
-  grid-row: 2 / 3; */
-}
-
-.drinks {
-  grid-area: drinks;
-  /* grid-column: 10 / 13;
-  grid-row: 2 / 3; */
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-
-.empty {
-  grid-area: empty;
-  display: none;
-}
-.general {
-  grid-area: general;
-  /* grid-column: 1 / 7;
-  grid-row: 3 / 5; */
-}
-.contactMe {
-  grid-area: contactMe;
-  /* grid-column: 7 / 13;
-  grid-row: 4 / 5; */
-}
-.buyMeCoffee {
-  grid-area: buyMeCoffee;
-  /* grid-column: 7 / 13;
-  grid-row: 3 / 4; */
-}
 .shadow {
   box-shadow: 0 0 0 1px #231f20, inset 0 0 0 1px #231f20;
-}
-
-.headerTitle {
-  grid-area: headerTitle;
 }
 
 @keyframes opacityAnimation {

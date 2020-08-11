@@ -175,7 +175,6 @@ const PostsContent = ({ data, tags }) => {
   const [checked, setChecked] = useState(false)
   const [numberOfPages, setNumberOfPages] = useState(0)
   const itemsPerPage = 8
-  const [clicked, setClicked] = useState([])
   const [page, setPage] = useState(1)
 
   const checkboxesData = [...data.site.siteMetadata.menuLinks, ...tags]
@@ -333,6 +332,8 @@ const PostsContent = ({ data, tags }) => {
     classes.postDescriptionText,
     classes.postTitle,
     theme,
+    classes.color,
+    classes.postDiv,
   ])
   return (
     <div className={`${classes.mainContainer} shadow`}>

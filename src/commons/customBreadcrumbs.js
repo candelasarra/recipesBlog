@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import {
   Breadcrumbs,
   useTheme,
@@ -6,8 +6,10 @@ import {
   makeStyles,
 } from "@material-ui/core"
 import { NavigateNext } from "@material-ui/icons"
-import { Link } from "gatsby"
+import { Link, useStaticQuery } from "gatsby"
 import MenuMobile from "../components/MenuMobile"
+import { localizeStringWithSlug } from "./functions"
+import LanguageContext from "../templates/LanguageContext"
 const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
@@ -21,10 +23,30 @@ const useStyles = makeStyles(theme => ({
 const CustomBreadcrumbs = ({ array, location }) => {
   const classes = useStyles()
   const theme = useTheme()
-  const urlText = location.pathname === "/posts" ? "CATEGORIES" : "ALL"
+  const { language } = useContext(LanguageContext)
+
   const url = location.pathname === "/posts" ? "/" : "/posts"
   const [breadcrumbs, setBreadcrumbs] = useState([])
 
+  const query = useStaticQuery(
+    graphql`
+      query {
+        strings: allContentfulStrings {
+          edges {
+            node {
+              string
+              slug
+              node_locale
+            }
+          }
+        }
+      }
+    `
+  )
+  const urlText =
+    location.pathname === "/posts"
+      ? localizeStringWithSlug(language, query.strings.edges, "categories")
+      : localizeStringWithSlug(language, query.strings.edges, "all-1")
   useEffect(() => {
     if (array.length) {
       const items = array.map((item, index) => {
@@ -40,7 +62,10 @@ const CustomBreadcrumbs = ({ array, location }) => {
                 color: theme.palette.primary.main,
               }}
             >
-              <Typography variant={item.variant ? item.variant : "subtitle1"}>
+              <Typography
+                variant={item.variant ? item.variant : "subtitle1"}
+                style={{ fontStyle: "italic" }}
+              >
                 {" "}
                 {item.label}
               </Typography>
@@ -51,7 +76,11 @@ const CustomBreadcrumbs = ({ array, location }) => {
             <Typography
               key={item.label}
               variant={item.variant ? item.variant : "subtitle1"}
-              style={{ color: theme.palette.primary.main, fontWeight: "bold" }}
+              style={{
+                color: theme.palette.primary.main,
+                fontWeight: "bold",
+                fontStyle: "italic",
+              }}
             >
               {item.label}
             </Typography>
@@ -62,7 +91,7 @@ const CustomBreadcrumbs = ({ array, location }) => {
       })
       setBreadcrumbs(items)
     }
-  }, [array])
+  }, [array, theme.palette.primary.main])
 
   return (
     <div className={`${classes.container} shadow`}>

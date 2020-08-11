@@ -1,13 +1,13 @@
 import React from "react"
-import MainWrapper from "../templates/MainWrapper"
 import HomeComp from "../components/homeCom"
 import { graphql } from "gatsby"
+import Layout from "../layouts"
 
 const Index = props => {
   return (
-    <MainWrapper animation>
+    <Layout animation>
       <HomeComp props={props} />
-    </MainWrapper>
+    </Layout>
   )
 }
 export const query = graphql`

@@ -22,9 +22,7 @@ const LangSwitch = ({ checked, setLanguage, setChecked, usFlag, esFlag }) => {
         "& + $track": {
           background: `url(${esFlag})`,
           backgroundSize: 37,
-          //   backgroundColor: "#52d869",
           opacity: 1,
-          // border: "none",
         },
       },
       "&$focusVisible $thumb": {

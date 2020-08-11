@@ -301,18 +301,7 @@ const BlogPostLayoutContent = ({ edges, data }) => {
                 </Typography>
               </div>
             </div>
-            {/* <section dangerouslySetInnerHTML={{ __html: post.html }} /> */}
-            {/* <footer>
-              <Typography>Footerrrr</Typography>
-        
-            </footer> */}
           </div>
-          {/* <hr
-            style={{
-              marginBottom: theme.spacing(3),
-              marginTop: theme.spacing(3),
-            }}
-          /> */}
           <nav>
             <ul
               style={{
