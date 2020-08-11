@@ -146,19 +146,17 @@ const Header = ({ titleStyle }) => {
           <Typography style={{ width: "fit-content" }}>RECIPES</Typography>
         </div>
       </div>
-      <Hidden>
-        <div className={`${classes.linksContainer} linksContainer shadow`}>
-          <Link
-            to="/posts"
-            className={classes.links}
-            activeClassName={classes.activeLink}
-          >
-            <Typography>{see}</Typography>
-            <Typography>{all}</Typography>
-            <Typography>{recipes}</Typography>
-          </Link>
-        </div>
-      </Hidden>
+      <div className={`${classes.linksContainer} linksContainer shadow`}>
+        <Link
+          to="/posts"
+          className={classes.links}
+          activeClassName={classes.activeLink}
+        >
+          <Typography>{see}</Typography>
+          <Typography>{all}</Typography>
+          <Typography>{recipes}</Typography>
+        </Link>
+      </div>
     </div>
   )
 }
