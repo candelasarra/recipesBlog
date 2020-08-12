@@ -270,37 +270,42 @@ const ServicePostsContent = ({
               key={post.node.slug}
               className={`${classes.postDiv} ${classes.color} shadow`}
             >
-              <div>
-                <Link
-                  to={
-                    category
-                      ? `/${serviceNow.toLowerCase()}/${category.toLowerCase()}/${
-                          post.node.slug
-                        }`
-                      : `/${serviceNow.toLowerCase()}/${post.node.slug}`
-                  }
-                  variant="h5"
-                  style={{
-                    textDecoration: "none",
-                    color: "black",
-                    width: "fit-content",
-                  }}
-                >
+              <Link
+                to={
+                  category
+                    ? `/${serviceNow.toLowerCase()}/${category.toLowerCase()}/${
+                        post.node.slug
+                      }`
+                    : `/${serviceNow.toLowerCase()}/${post.node.slug}`
+                }
+                variant="h5"
+                style={{
+                  textDecoration: "none",
+                  color: "black",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <div>
                   <Typography variant="h4" className={classes.postTitle}>
                     {post.node.blogTitle}
                   </Typography>
-                </Link>
-              </div>
-              <Typography variant="caption" className={classes.dateText}>
-                {" "}
-                {post.node.createdAt}
-              </Typography>
-              <Typography
-                variant="body1"
-                className={classes.postDescriptionText}
-              >
-                {post.node.descriptionOfPost}
-              </Typography>
+                </div>
+                <Typography variant="caption" className={classes.dateText}>
+                  {" "}
+                  {post.node.createdAt}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  className={classes.postDescriptionText}
+                >
+                  {post.node.descriptionOfPost}
+                </Typography>
+              </Link>
             </div>
           )
         })

@@ -213,13 +213,12 @@ const HomeComp = ({ props }) => {
                 >
                   Cherry Chronicles offers an array of plant based recipes in
                   English as well as in Spanish.
-                  <br /> From junk food to every day healthy recipes, Cherry
-                  Chronicles is where I keep all the recipes I love making and
-                  eating. Cherry Chronicles was born from the need to have easy
-                  and constant access to my recipes (both in Spanish and
-                  English) to share with my friends, as well as to not lose
-                  amazing recipes that I would find myself reading from oil
-                  stained papers.
+                  <br /> From junk food to every day healthy recipes, here is
+                  where I keep all the recipes I love making and eating. Cherry
+                  Chronicles was born from the need to have easy and constant
+                  access to my recipes (both in Spanish and English) to share
+                  with my friends, as well as to not lose amazing recipes that I
+                  would find myself reading from oil stained papers.
                   <br />
                   Cherry Chronicles' recipes are full of little secrets that
                   will help you step by step to make them perfectly on the first
@@ -233,8 +232,8 @@ const HomeComp = ({ props }) => {
                 >
                   Cherry Chronicles ofrece una variedad de recetas a base de
                   plantas en español tanto como en inglés.
-                  <br /> Desde comida chatarra a recetas para todos los días, en
-                  Cherry Chronicles guardo todas las recetas que amo hacer y
+                  <br /> Desde comida chatarra a recetas para todos los días,
+                  acá es en donde guardo todas las recetas que amo hacer y
                   comer. Cherry Chronicles nació desde la necesidad de tener
                   acceso fácil y constante a todas mis recetas (en español e
                   inglés) para compartir con mis amigxs y tambien para no perder
