@@ -20,13 +20,12 @@ const Layout = ({ children, location }) => {
     getCookie("darkTheme") ? getCookie("darkTheme") : "light"
   )
   const valueTheme = { darkLightTheme, setDarkLightTheme }
-  if (typeof document !== undefined) {
-    useEffect(() => {
-      if (getCookie("darkTheme")) {
-        setDarkLightTheme(getCookie("darkTheme"))
-      }
-    }, [document])
-  }
+
+  useEffect(() => {
+    if (getCookie("darkTheme")) {
+      setDarkLightTheme(getCookie("darkTheme"))
+    }
+  }, [])
 
   const returnRightStyle = () => {
     if (darkLightTheme === "dark") {
