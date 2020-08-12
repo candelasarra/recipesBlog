@@ -13,7 +13,9 @@ exports.shouldUpdateScroll = ({
   routerProps: { location },
   getSavedScrollPosition,
 }) => {
-  if (location.action === "PUSH") {
+  if (location.hash) {
+    return
+  } else if (location.action === "PUSH") {
     window.setTimeout(() => window.scrollTo(0, 0), transitionDelay)
   } else {
     const savedPosition = getSavedScrollPosition(location)

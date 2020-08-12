@@ -266,13 +266,13 @@ const BlogPostLayoutContent = ({ edges, data }) => {
               </Typography>
 
               <div>
-                <a href="#ingredients" className={classes.aTags}>
+                <Link href="#ingredients" className={classes.aTags}>
                   Ingredients
-                </a>{" "}
+                </Link>{" "}
                 |{" "}
-                <a href="#instructions" className={classes.aTags}>
+                <Link href="#instructions" className={classes.aTags}>
                   Procedure
-                </a>
+                </Link>
               </div>
             </header>
 
