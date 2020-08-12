@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
 const Layout = ({ children, location }) => {
   const classes = useStyles()
   function getCookie(name) {
-    if (document !== undefined) {
+    if (document && document !== undefined) {
       var nameEQ = name + "="
       var ca = document.cookie.split(";")
       for (var i = 0; i < ca.length; i++) {
