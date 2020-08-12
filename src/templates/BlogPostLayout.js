@@ -4,6 +4,7 @@ import BlogPostLayoutContent from "./BlogPostLayoutContent"
 import Header from "../components/header"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 import { graphql } from "gatsby"
+import Footer from "../components/Footer"
 
 const BlogPostLayout = props => {
   const { data } = props
@@ -45,6 +46,7 @@ const BlogPostLayout = props => {
       <Header titleStyle="h4" />
       <CustomBreadcrumbs array={breadcrumbArray} location={props.location} />
       <BlogPostLayoutContent edges={edges} data={data} />
+      <Footer />
     </MainWrapper>
   )
 }

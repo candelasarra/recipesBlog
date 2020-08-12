@@ -4,6 +4,7 @@ import PostsContent from "../templates/postsContent"
 import Header from "../components/header"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 import { graphql } from "gatsby"
+import Footer from "../components/Footer"
 const Posts = ({ data, location }) => {
   const breadcrumbArray = [{ label: "Home", link: "/" }, { label: "All Posts" }]
   const filteredTags = []
@@ -23,6 +24,7 @@ const Posts = ({ data, location }) => {
       <Header titleStyle="h3" />
       <CustomBreadcrumbs array={breadcrumbArray} location={location} />
       <PostsContent data={data} tags={filteredTags} />
+      <Footer />
     </MainWrapper>
   )
 }

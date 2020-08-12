@@ -4,6 +4,7 @@ import Header from "../components/header"
 import ServiceTemplateContent from "./serviceTemplateContent"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 import { graphql } from "gatsby"
+import Footer from "../components/Footer"
 const ServiceTemplate = ({ data, path, pageContext, location }) => {
   const service = data.allContentfulBlogPost.edges[0].node.service[0].toLowerCase()
   const category = []
@@ -27,6 +28,7 @@ const ServiceTemplate = ({ data, path, pageContext, location }) => {
       <Header titleStyle="h3" />
       <CustomBreadcrumbs array={breadcrumbArray} location={location} />
       <ServiceTemplateContent data={category} path={path} />
+      <Footer />
     </MainWrapper>
   )
 }

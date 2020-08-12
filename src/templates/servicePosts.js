@@ -4,6 +4,7 @@ import Header from "../components/header"
 import ServicePostsContent from "./servicePostsContent"
 import { graphql } from "gatsby"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
+import Footer from "../components/Footer"
 
 const ServicePosts = props => {
   const { data } = props
@@ -70,6 +71,7 @@ const ServicePosts = props => {
         category={category}
         tags={filteredTags}
       />
+      <Footer />
     </MainWrapper>
   )
 }

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import Header from "./header"
 import { makeStyles } from "@material-ui/styles"
 import { Typography, Grid, Hidden } from "@material-ui/core"
@@ -12,6 +12,8 @@ import border from "../images/star.svg"
 import Spices from "../vectors/spices.svg"
 import Typewriter from "../vectors/typewriter.svg"
 import outline from "../images/outline.svg"
+import Footer from "./Footer"
+import LanguageContext from "../templates/LanguageContext"
 const useStyles = makeStyles(theme => ({
   serviceContainer: {
     textAlign: "center",
@@ -115,7 +117,7 @@ const returnRightSvg = value => {
 const HomeComp = ({ props }) => {
   const classes = useStyles()
   const breadcrumbArray = [{ label: "Home" }]
-
+  const { language } = useContext(LanguageContext)
   //creating the array of objects with row one data to map over for UI
   const makeRowOneObjects = props.data.site.siteMetadata.menuLinks.map(item => {
     const { title, link, name } = item
@@ -174,7 +176,7 @@ const HomeComp = ({ props }) => {
               }
             })}
           </>
-          <Grid item xs={12} sm={7} md={7} lg={7} xl={7}>
+          <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
             <Link
               to="/drinks"
               style={{ textDecoration: "none", color: "black" }}
@@ -193,40 +195,61 @@ const HomeComp = ({ props }) => {
                   </Typography>
 
                   <Typography style={{ textAlign: "center" }}>
-                    Recipes for drinks, from milkshakes to alcoholic drinks and
-                    juices. Theres also some nut milk recipes and etc.
+                    Drinks recipes: from milkshakes to alcoholic and not
+                    alcoholic drinks and milks.
                   </Typography>
                   <Drink style={{ maxHeight: 409 }} />
                 </div>
               </div>
             </Link>
           </Grid>
-          <Hidden only={["xs", "md", "lg", "xl"]}>
-            <Grid item xs={5}>
-              <div style={{ display: "flex" }}></div>
-            </Grid>
-          </Hidden>
           <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
             <div className={`${classes.dozen}  shadow`}>
-              <Typography
-                variant="body2"
-                className="homeTextNuts"
-                style={{ textAlign: "center" }}
-              >
-                djslfkj sdlfdjslfkj sdlfdjslfkjsdl fdjslfkjsdlf
-                djslfkjsdlfdjslfkjsdlf djslfkjsdlf djslfkjsdlf djslfkjsdlf
-                djslfkjsdlfdjsl fkjsdlfdjslfkj sdlfdjslfkjsdlf djslfkjsdlf
-                djslfkjsdlfddjslfkjsdlf djslfkjsdlf djslfkjsdlfjslfkjsd
-                lfdjslfkjsdlf djslfkjsdlfdjslfkjsdlf djslfkj sdlfdjslfkj
-                sdlfdjslfkjsdl fdjslfkjsdlf djslfkjsdlfdjslfkjsdlf djslfkjsdlf
-                djslfkjsdlf djslfkjsdlf djslfkjsdlfdjsl fkjsdlfdjslfkj
-                sdlfdjslfkjsdlf djslfkjsdlf djslfkjsdlfddjslfkjsdlf djslfkjsdlf
-                djslfkjsdlfjslfkjsd lfdjslfkjsdlf djslfkjsdlfdjslfkjsdlf djslfkj
-                sdlfdjslfkj sdlfdjslfkjsdl fdjslfkjsdlf djslfkjsdlfdjslfkjsdlf
-                djslfkjsdlf djslfkjsdlf djslfkjsdlf djslfkjsdlfdjsl
-                fkjsdlfdjslfkj sdlfdjslfkjsdlf djslfkjsdlf
-              </Typography>
-              <Spices className={` ${classes.color}`} />
+              {language === "en-US" ? (
+                <Typography
+                  variant="body1"
+                  className="homeTextNuts"
+                  style={{ marginBottom: 20 }}
+                >
+                  Cherry Chronicles offers an array of plant based recipes in
+                  English as well as in Spanish.
+                  <br /> From junk food to every day healthy recipes, Cherry
+                  Chronicles is where I keep all the recipes I love making and
+                  eating. Cherry Chronicles was born from the need to have easy
+                  and constant access to my recipes (both in Spanish and
+                  English) to share with my friends, as well as to not lose
+                  amazing recipes that I would find myself reading from oil
+                  stained papers.
+                  <br />
+                  Cherry Chronicles' recipes are full of little secrets that
+                  will help you step by step to make them perfectly on the first
+                  try.
+                </Typography>
+              ) : (
+                <Typography
+                  variant="body1"
+                  className="homeTextNuts"
+                  style={{ marginBottom: 20 }}
+                >
+                  Cherry Chronicles ofrece una variedad de recetas a base de
+                  plantas en español tanto como en inglés.
+                  <br /> Desde comida chatarra a recetas para todos los días, en
+                  Cherry Chronicles guardo todas las recetas que amo hacer y
+                  comer. Cherry Chronicles nació desde la necesidad de tener
+                  acceso fácil y constante a todas mis recetas (en español e
+                  inglés) para compartir con mis amigxs y tambien para no perder
+                  recetas increibles que me encontraba leyendo de papeles
+                  manchados con aceite.
+                  <br />
+                  Las recetas de Cherry Chronicles estan llenas de secretitos
+                  que te van a ayudar paso por paso para que te salgan perfectas
+                  desde el primer intento.
+                </Typography>
+              )}
+              <Spices
+                className={` ${classes.color}`}
+                style={{ margin: "0px 20px" }}
+              />
             </div>
           </Grid>
           <Grid item container xs={12}>
@@ -320,6 +343,7 @@ const HomeComp = ({ props }) => {
           </Grid>
         </Grid>
       </div>
+      <Footer />
     </div>
   )
 }
