@@ -326,7 +326,7 @@ const BlogPostLayoutContent = ({ edges, data }) => {
                   </Link>
                 )}
               </li>
-              <li style={{ marginLeft: "10px" }}>
+              <li style={{ marginLeft: "auto" }}>
                 {nextPost && (
                   <Link
                     to={`/posts/${nextPost}`}

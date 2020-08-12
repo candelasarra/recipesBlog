@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./layout.css"
 import MainWrapper from "../templates/MainWrapper"
 import DarkLightThemeContext from "../templates/DarkLightTheme"
@@ -20,6 +20,11 @@ const Layout = ({ children, location }) => {
     getCookie("darkTheme") ? getCookie("darkTheme") : "light"
   )
   const valueTheme = { darkLightTheme, setDarkLightTheme }
+  useEffect(() => {
+    if (typeof document !== undefined && getCookie("darkTheme")) {
+      setDarkLightTheme(getCookie("darkTheme"))
+    }
+  }, [document])
 
   const returnRightStyle = () => {
     if (darkLightTheme === "dark") {
