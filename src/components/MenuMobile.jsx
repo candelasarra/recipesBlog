@@ -50,8 +50,10 @@ function MenuMobile({ url, urlText }) {
   useEffect(() => {
     if (checkedTheme && darkLightTheme !== "dark") {
       setDarkLightTheme("dark")
+      document.body.style.background = "black"
     } else if (!checkedTheme && darkLightTheme !== "light") {
       setDarkLightTheme("light")
+      document.body.style.background = "#fffff6"
     }
   }, [checkedTheme, darkLightTheme])
 

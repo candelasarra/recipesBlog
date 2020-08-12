@@ -5,6 +5,7 @@ import { Typography } from "@material-ui/core"
 import { Link } from "gatsby"
 import { makeStyles } from "@material-ui/styles"
 import { INLINES, BLOCKS } from "@contentful/rich-text-types"
+import DarkLightThemeContext from "./DarkLightTheme"
 
 const useStyles = makeStyles(theme => ({
   titleText: {
@@ -82,6 +83,20 @@ const useStyles = makeStyles(theme => ({
       filter: "grayscale(0)",
     },
   },
+  dark: {
+    transition: "filter .9s",
+    filter: "grayscale(1) invert(1) hue-rotate(180deg)",
+    "&:hover": {
+      filter: "grayscale(0) invert(1) hue-rotate(180deg)",
+    },
+  },
+  light: {
+    transition: "filter .9s",
+    filter: "grayscale(1) invert(0) hue-rotate(0deg)",
+    "&:hover": {
+      filter: "grayscale(0) invert(0) hue-rotate(0deg)",
+    },
+  },
 }))
 
 const BlogPostLayoutContent = ({ edges, data }) => {
@@ -96,8 +111,15 @@ const BlogPostLayoutContent = ({ edges, data }) => {
   const [previousTitle, setPreviousTitle] = useState(null)
   const [previousPost, setPreviousPost] = useState(null)
   const { language } = useContext(LanguageContext)
+  const { darkLightTheme } = useContext(DarkLightThemeContext)
   const query = data
-
+  const returnRightStyle = () => {
+    if (darkLightTheme === "dark") {
+      return classes.dark
+    } else {
+      return classes.light
+    }
+  }
   const options = {
     renderNode: {
       [INLINES.HYPERLINK]: (node, children) => {
@@ -149,7 +171,7 @@ const BlogPostLayoutContent = ({ edges, data }) => {
             <img
               alt=""
               src={file[language].url}
-              className={`${classes.postImage} ${classes.color} shadow`}
+              className={`${classes.postImage}  ${returnRightStyle()} shadow`}
             />
           )
         }
