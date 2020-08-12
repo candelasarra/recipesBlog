@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Popper from '@material-ui/core/Popper';
@@ -42,11 +42,19 @@ function MenuMobile({ url, urlText }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const { checked, setLanguage, setChecked } = useLanguage()
-  const { checkedTheme, setDarkLightTheme, setCheckedTheme } = useDarkLightTheme()
-  const { darkLightTheme } = useContext(DarkLightThemeContext)
+  const { checkedTheme, setDarkLightTheme, setCheckedTheme, darkLightTheme } = useDarkLightTheme()
+
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
+  useEffect(() => {
+    console.log("in use effect")
+    if (checkedTheme && darkLightTheme !== "dark") {
+      setDarkLightTheme("dark")
+    } else if (!checkedTheme && darkLightTheme !== "light") {
+      setDarkLightTheme("light")
+    }
+  }, [checkedTheme, darkLightTheme])
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -90,7 +98,7 @@ function MenuMobile({ url, urlText }) {
               style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
             >
               <Card raised
-              className={`${returnRightStyle()}`} 
+                className={`${returnRightStyle()}`}
               >
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown} style={{ outline: 'none' }}>
