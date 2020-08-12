@@ -1,16 +1,14 @@
-import React, { useContext } from "react"
+import React from "react"
 import MainWrapper from "./MainWrapper"
 import BlogPostLayoutContent from "./BlogPostLayoutContent"
 import Header from "../components/header"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 import { graphql } from "gatsby"
-import LanguageContext from "./LanguageContext"
 
 const BlogPostLayout = props => {
   const { data } = props
   const { edges } = data.blogPost
   const { service, category } = props.pageContext
-  const { language } = useContext(LanguageContext)
   let breadcrumbArray = []
 
   if (service && category) {

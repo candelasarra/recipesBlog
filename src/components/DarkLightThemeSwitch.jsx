@@ -1,8 +1,7 @@
 import React from "react"
-import { makeStyles } from "@material-ui/styles";
-import { Switch } from "@material-ui/core";
-import usFlag from "../images/usflag.jpg"
-import esFlag from "../images/esFlag1.jpg"
+import { Switch, makeStyles } from "@material-ui/core";
+import sun from "../images/sunIcon.jpg"
+import moon from "../images/moon.jpg"
 const useStyles = makeStyles(theme => ({
   root: {
     //width of entire switch
@@ -13,12 +12,14 @@ const useStyles = makeStyles(theme => ({
   },
   switchBase: {
     padding: 1,
+    transition: "transform 0.6s ease-in",
     "&$checked": {
       //transform controls the circle thaty moves
+      transform: "translateX(20px)",
       color: theme.palette.common.white,
       "& + $track": {
-        background: `url(${esFlag})`,
-        backgroundSize: 37,
+        backgroundColor: "black",
+        backgroundSize: 24,
         opacity: 1,
       },
     },
@@ -27,27 +28,35 @@ const useStyles = makeStyles(theme => ({
       border: "6px solid #fff",
     },
   },
-  thumb: {
+  thumb: props => props.checked ? {
     width: 24,
     height: 24,
     color: "white",
-  },
+    backgroundImage: `url(${moon})`,
+    transition: "background-size 9s ease-in",
+    backgroundSize: 24,
+  } : {
+      width: 24,
+      height: 24,
+      color: "white",
+      backgroundImage: `url(${sun})`,
+      transition: "background-size 9s ease-in",
+      backgroundSize: 24,
+    },
   track: {
     borderRadius: 26 / 2,
     border: `1px solid ${theme.palette.primary.main}`,
-    background: `url(${usFlag})`,
+    backgroundColor: "#888888",
     backgroundSize: 80,
     opacity: 1,
     transition: theme.transitions.create(["background-color", "border"]),
     height: "unset",
   },
-  checked: {
-    color: "red"
-  },
+  checked: {},
   focusVisible: {},
 }))
-function LanguageSwitch(props) {
-  const classes = useStyles(props);
+function ThemeSwitch(props) {
+  const classes = useStyles(props)
   return (
     <Switch
       focusVisibleClassName={classes.focusVisible}
@@ -62,9 +71,9 @@ function LanguageSwitch(props) {
       {...props}
     />
   )
-};
+}
 
-const LangSwitch = ({ checked, setLanguage, setChecked, usFlag, esFlag }) => {
+const DarkLightThemeSwitch = ({ checked, setTheme, setChecked }) => {
 
   function setCookie(name, value, days) {
     var expires = ""
@@ -78,26 +87,23 @@ const LangSwitch = ({ checked, setLanguage, setChecked, usFlag, esFlag }) => {
 
   const handleSwitch = e => {
     setChecked(e.target.checked)
-
+    // on true dark, on false light
     if (e.target.checked) {
-      setCookie("masLang", "es-ES", 365)
-      setLanguage("es-ES")
+      setCookie("darkTheme", "dark", 365)
+      setTheme("dark")
     } else if (!e.target.checked) {
-      setCookie("masLang", "en-US", 365)
-      setLanguage("en-US")
+      setCookie("darkTheme", "light", 365)
+      setTheme("light")
     }
   }
 
-  return (<LanguageSwitch
+  return (<ThemeSwitch
     checked={checked}
     onChange={handleSwitch}
     name="checkedA"
     inputProps={{ "aria-label": "secondary checkbox" }}
-  // esFlag={esFlag}
-  // usFlag={usFlag}
   />)
 }
 
 
-export default LangSwitch;
-
+export default DarkLightThemeSwitch;

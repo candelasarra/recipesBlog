@@ -2,7 +2,6 @@ import React from "react"
 import MainWrapper from "./MainWrapper"
 import Header from "../components/header"
 import ServiceTemplateContent from "./serviceTemplateContent"
-import { useTheme } from "@material-ui/core"
 import CustomBreadcrumbs from "../commons/customBreadcrumbs"
 import { graphql } from "gatsby"
 const ServiceTemplate = ({ data, path, pageContext, location }) => {

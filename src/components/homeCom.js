@@ -70,9 +70,6 @@ const useStyles = makeStyles(theme => ({
   gridRoot: {
     maxHeight: 2450,
   },
-  drinks: {
-    flex: 2,
-  },
   dozen: {
     padding: 20,
     height: "100%",
@@ -108,10 +105,8 @@ const returnRightSvg = value => {
   switch (value) {
     case "sweets":
       return <TrendyMilkshake />
-      break
     case "salty":
       return <BurgerHome />
-      break
     default:
       console.log("no value", value)
   }
@@ -120,7 +115,6 @@ const returnRightSvg = value => {
 const HomeComp = ({ props }) => {
   const classes = useStyles()
   const breadcrumbArray = [{ label: "Home" }]
-  const rows = {}
 
   //creating the array of objects with row one data to map over for UI
   const makeRowOneObjects = props.data.site.siteMetadata.menuLinks.map(item => {
@@ -214,7 +208,11 @@ const HomeComp = ({ props }) => {
           </Hidden>
           <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
             <div className={`${classes.dozen}  shadow`}>
-              <Typography variant="body2" className="homeTextNuts">
+              <Typography
+                variant="body2"
+                className="homeTextNuts"
+                style={{ textAlign: "center" }}
+              >
                 djslfkj sdlfdjslfkj sdlfdjslfkjsdl fdjslfkjsdlf
                 djslfkjsdlfdjslfkjsdlf djslfkjsdlf djslfkjsdlf djslfkjsdlf
                 djslfkjsdlfdjsl fkjsdlfdjslfkj sdlfdjslfkjsdlf djslfkjsdlf
@@ -293,7 +291,7 @@ const HomeComp = ({ props }) => {
                     width: "100%",
                   }}
                 >
-                  <Coffee style={{ height: "100%", height: 150 }} />
+                  <Coffee style={{ height: 150 }} />
                   <Typography
                     variant="h4"
                     style={{
@@ -309,6 +307,7 @@ const HomeComp = ({ props }) => {
                     href="https://www.buymeacoffee.com/chronicles"
                     style={{ textDecoration: "underline", color: "black" }}
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <Typography variant="h4">here</Typography>
                   </a>

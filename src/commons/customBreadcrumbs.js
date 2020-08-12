@@ -6,7 +6,7 @@ import {
   makeStyles,
 } from "@material-ui/core"
 import { NavigateNext } from "@material-ui/icons"
-import { Link, useStaticQuery } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import MenuMobile from "../components/MenuMobile"
 import { localizeStringWithSlug } from "./functions"
 import LanguageContext from "../templates/LanguageContext"
@@ -105,7 +105,7 @@ const CustomBreadcrumbs = ({ array, location }) => {
         {breadcrumbs}
       </Breadcrumbs>
 
-      <div className="langswitch">
+      <div className="langswitch" style={{ position: "relative" }}>
         <MenuMobile url={url} urlText={urlText} />
       </div>
     </div>

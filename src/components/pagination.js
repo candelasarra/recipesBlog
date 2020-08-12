@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Button, IconButton } from "@material-ui/core"
 import {
-  NavigateNext,
   LastPageRounded,
   NavigateNextRounded,
   FirstPageRounded,
@@ -14,6 +13,9 @@ const Pagination = ({ page, numberOfPages, setPage }) => {
   const [rightButton, setRightButton] = useState(1)
 
   useEffect(() => {
+    if (page > numberOfPages) {
+      setPage(1)
+    }
     if ((page === 1 || page === 2) & (numberOfPages >= 3)) {
       setRightButton(3)
       setCenterButton(2)
@@ -46,7 +48,7 @@ const Pagination = ({ page, numberOfPages, setPage }) => {
       setCenterButton(numberOfPages - 1)
       setLeftButton(numberOfPages - 2)
     }
-  }, [page, numberOfPages])
+  }, [page, numberOfPages, setPage])
 
   const firstPage = () => {
     setPage(1)
@@ -75,7 +77,7 @@ const Pagination = ({ page, numberOfPages, setPage }) => {
   }
 
   const firstPrevious = () => {
-    if (page === 1) {
+    if (page === 1 || numberOfPages === 0) {
       return true
     } else {
       return false
@@ -83,7 +85,7 @@ const Pagination = ({ page, numberOfPages, setPage }) => {
   }
 
   const lastNext = () => {
-    if (page === numberOfPages) {
+    if (page === numberOfPages || numberOfPages === 0) {
       return true
     } else {
       return false
@@ -91,7 +93,7 @@ const Pagination = ({ page, numberOfPages, setPage }) => {
   }
 
   const centerButtonDisable = () => {
-    if (centerButton === page) {
+    if (centerButton === page || numberOfPages === 0) {
       return true
     } else {
       return false
@@ -99,7 +101,7 @@ const Pagination = ({ page, numberOfPages, setPage }) => {
   }
 
   const rightButtonDisable = () => {
-    if (rightButton === page) {
+    if (rightButton === page || numberOfPages === 0) {
       return true
     } else {
       return false

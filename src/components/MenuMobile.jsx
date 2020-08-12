@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Popper from '@material-ui/core/Popper';
@@ -9,9 +9,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import LangSwitch from './LangSwitch';
 import { IconButton, Typography, Card } from '@material-ui/core';
 import { Link } from 'gatsby';
-import { useLanguage } from '../commons/functions';
+import { useLanguage, useDarkLightTheme } from '../commons/functions';
 import usFlag from "../images/usflag.jpg"
 import esFlag from "../images/esFlag1.jpg"
+
+import DarkLightThemeContext from '../templates/DarkLightTheme';
+import DarkLightThemeSwitch from './DarkLightThemeSwitch';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -26,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: theme.palette.primary.main,
   },
+  dark: {
+    filter: "invert(1) hue-rotate(180deg)",
+  },
+  light: {
+    filter: "unset",
+  },
 }));
 
 function MenuMobile({ url, urlText }) {
@@ -33,6 +42,8 @@ function MenuMobile({ url, urlText }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const { checked, setLanguage, setChecked } = useLanguage()
+  const { checkedTheme, setDarkLightTheme, setCheckedTheme } = useDarkLightTheme()
+  const { darkLightTheme } = useContext(DarkLightThemeContext)
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -52,7 +63,13 @@ function MenuMobile({ url, urlText }) {
     }
   }
 
-
+  const returnRightStyle = () => {
+    if (darkLightTheme === "dark") {
+      return classes.dark
+    } else {
+      return classes.light
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -66,16 +83,21 @@ function MenuMobile({ url, urlText }) {
         >
           <MenuBookIcon />
         </IconButton>
-        <Popper open={open} anchorEl={anchorRef.current} transition disablePortal placement="bottom-end" style={{ zIndex: 999 }}>
+        <Popper open={open} anchorEl={anchorRef.current} transition disablePortal placement="bottom-left" style={{ zIndex: 999 }}>
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
             >
-              <Card raised>
+              <Card raised
+              className={`${returnRightStyle()}`} 
+              >
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown} style={{ outline: 'none' }}>
-                    <MenuItem style={{ padding: 'unset', display: 'flex', justifyContent: 'center' }} ><LangSwitch checked={checked} setLanguage={setLanguage} setChecked={setChecked} esFlag={esFlag} usFlag={usFlag} /> </MenuItem>
+                    <MenuItem style={{ padding: 'unset', display: 'flex', justifyContent: 'center' }} >
+                      <LangSwitch checked={checked} setLanguage={setLanguage} setChecked={setChecked} esFlag={esFlag} usFlag={usFlag} />
+                    </MenuItem>
+                    <MenuItem style={{ padding: 'unset', display: 'flex', justifyContent: 'center' }} ><DarkLightThemeSwitch checked={checkedTheme} setTheme={setDarkLightTheme} setChecked={setCheckedTheme} /> </MenuItem>
                     <MenuItem style={{ display: 'flex', justifyContent: 'center' }}>
                       <Link
                         to={url}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useRef } from "react"
+import React, { useState, useEffect } from "react"
 import {
   ThemeProvider,
   createMuiTheme,
@@ -9,7 +9,6 @@ import LanguageContext from "./LanguageContext"
 import "../css/global.css"
 import paperImage from "../images/paperImage.jpg"
 import SEO from "../components/seo"
-import { Slide, Fade } from "@material-ui/core"
 import { Location } from "@reach/router"
 import {
   TransitionGroup,
@@ -96,9 +95,7 @@ const useStyles = makeStyles(() => ({
 }))
 const MainWrapper = ({ children, location }) => {
   const classes = useStyles()
-  const [loaded, setLoaded] = useState(false)
   const timeout = 500
-  const keyLocation = useRef()
   function getCookie(name) {
     var nameEQ = name + "="
     var ca = document.cookie.split(";")
@@ -110,6 +107,7 @@ const MainWrapper = ({ children, location }) => {
     return null
   }
   const [language, setLanguage] = useState("en-US")
+
   useEffect(() => {
     const cookie = getCookie("masLang")
     if (cookie) {
@@ -134,9 +132,6 @@ const MainWrapper = ({ children, location }) => {
     },
   }
 
-  useEffect(() => {
-    setLoaded(true)
-  }, [])
   const value = { language, setLanguage }
 
   return (

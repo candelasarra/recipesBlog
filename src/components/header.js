@@ -1,6 +1,6 @@
 import { Link, useStaticQuery } from "gatsby"
 import React, { useContext } from "react"
-import { Typography, makeStyles, Hidden } from "@material-ui/core"
+import { Typography, makeStyles } from "@material-ui/core"
 import { graphql } from "gatsby"
 import paperImage from "../images/paperImage.jpg"
 import Title from "../vectors/title2.svg"

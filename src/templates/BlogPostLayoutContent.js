@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react"
 import LanguageContext from "./LanguageContext"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-import { Typography, useTheme } from "@material-ui/core"
-import { useStaticQuery, Link, graphql } from "gatsby"
+import { Typography } from "@material-ui/core"
+import { Link } from "gatsby"
 import { makeStyles } from "@material-ui/styles"
 import { INLINES, BLOCKS } from "@contentful/rich-text-types"
 
@@ -34,7 +34,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
     maxWidth: "90%",
-    alignItems: "center",
   },
   aTags: {
     textDecoration: "underline",
@@ -87,7 +86,6 @@ const useStyles = makeStyles(theme => ({
 
 const BlogPostLayoutContent = ({ edges, data }) => {
   const classes = useStyles()
-  const theme = useTheme()
   const [currentEdge, setCurrentEdge] = useState(null)
   const [usPost, setUsPost] = useState(null)
   const [esPost, setEsPost] = useState(null)
@@ -147,9 +145,9 @@ const BlogPostLayoutContent = ({ edges, data }) => {
       [BLOCKS.EMBEDDED_ASSET]: node => {
         if (node.data.target.fields) {
           let { file } = node.data.target.fields
-          // console.log(file["en-US"].url)
           return (
             <img
+              alt=""
               src={file[language].url}
               className={`${classes.postImage} ${classes.color} shadow`}
             />

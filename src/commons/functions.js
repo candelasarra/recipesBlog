@@ -1,5 +1,6 @@
 import { useEffect, useContext, useState } from "react"
 import LanguageContext from "../templates/LanguageContext"
+import DarkLightThemeContext from "../templates/DarkLightTheme"
 
 export function localizeStringWithSlug(language, array, slug) {
   const string = array.filter(
@@ -44,4 +45,34 @@ export const useLanguage = () => {
     return null
   }
   return { checked, language, setLanguage, setChecked }
+}
+export const useDarkLightTheme = () => {
+  const [checkedTheme, setCheckedTheme] = useState(false)
+  const { setDarkLightTheme, darkLightTheme } = useContext(
+    DarkLightThemeContext
+  )
+
+  useEffect(() => {
+    const cookie = getCookie("darkTheme")
+    if (cookie) {
+      if (cookie === "dark") {
+        setCheckedTheme(true)
+        setDarkLightTheme("dark")
+      } else if (cookie === "light") {
+        setCheckedTheme(false)
+        setDarkLightTheme("light")
+      }
+    }
+  }, [setDarkLightTheme, setCheckedTheme])
+  function getCookie(name) {
+    var nameEQ = name + "="
+    var ca = document.cookie.split(";")
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i]
+      while (c.charAt(0) == " ") c = c.substring(1, c.length)
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length)
+    }
+    return null
+  }
+  return { checkedTheme, darkLightTheme, setDarkLightTheme, setCheckedTheme }
 }

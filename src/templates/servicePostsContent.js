@@ -316,6 +316,8 @@ const ServicePostsContent = ({
     theme,
     category,
     serviceNow,
+    classes.color,
+    classes.postDiv,
   ])
   const returnRightBackground = () => {
     if (serviceNow === "Sweets") {
@@ -398,13 +400,8 @@ const ServicePostsContent = ({
           )}
         </div>
       </div>
-      {posts && posts.length > itemsPerPage && (
-        <Pagination
-          page={page}
-          setPage={setPage}
-          numberOfPages={numberOfPages}
-        />
-      )}
+
+      <Pagination page={page} setPage={setPage} numberOfPages={numberOfPages} />
     </div>
   )
 }

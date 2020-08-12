@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { makeStyles } from "@material-ui/styles"
 import { Typography, Grid } from "@material-ui/core"
-import { Link, useStaticQuery } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import Cookies from "../vectors/cookies.svg"
 import Cakes from "../vectors/twoCakes.svg"
 import Cupcakes from "../vectors/cupcakes.svg"
