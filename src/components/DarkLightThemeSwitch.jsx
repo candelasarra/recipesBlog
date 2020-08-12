@@ -91,9 +91,12 @@ const DarkLightThemeSwitch = ({ checked, setTheme, setChecked }) => {
     if (e.target.checked) {
       setCookie("darkTheme", "dark", 365)
       setTheme("dark")
+      document.body.style.background = "black"
     } else if (!e.target.checked) {
       setCookie("darkTheme", "light", 365)
       setTheme("light")
+      document.body.style.background = "#fffff6"
+
     }
   }
 

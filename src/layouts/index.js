@@ -19,7 +19,6 @@ const Layout = ({ children, location }) => {
   const [darkLightTheme, setDarkLightTheme] = useState(
     getCookie("darkTheme") ? "dark" : "light"
   )
-  console.log(darkLightTheme)
 
   const valueTheme = { darkLightTheme, setDarkLightTheme }
 

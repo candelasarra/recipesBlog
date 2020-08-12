@@ -48,7 +48,6 @@ function MenuMobile({ url, urlText }) {
     setOpen((prevOpen) => !prevOpen);
   };
   useEffect(() => {
-    console.log("in use effect")
     if (checkedTheme && darkLightTheme !== "dark") {
       setDarkLightTheme("dark")
     } else if (!checkedTheme && darkLightTheme !== "light") {
