@@ -3,7 +3,7 @@ import "./layout.css"
 import MainWrapper from "../templates/MainWrapper"
 import DarkLightThemeContext from "../templates/DarkLightTheme"
 import { makeStyles } from "@material-ui/core"
-import { getCookie } from "../commons/functions"
+import { getCookie, useDarkLightTheme } from "../commons/functions"
 const useStyles = makeStyles(() => ({
   darkTheme: {
     filter: "invert(1) hue-rotate(180deg)",
@@ -17,15 +17,11 @@ const useStyles = makeStyles(() => ({
 const Layout = ({ children, location }) => {
   const classes = useStyles()
   const [darkLightTheme, setDarkLightTheme] = useState(
-    getCookie("darkTheme") ? getCookie("darkTheme") : "light"
+    getCookie("darkTheme") ? "dark" : "light"
   )
-  const valueTheme = { darkLightTheme, setDarkLightTheme }
+  console.log(darkLightTheme)
 
-  useEffect(() => {
-    if (getCookie("darkTheme")) {
-      setDarkLightTheme(getCookie("darkTheme"))
-    }
-  }, [])
+  const valueTheme = { darkLightTheme, setDarkLightTheme }
 
   const returnRightStyle = () => {
     if (darkLightTheme === "dark") {
