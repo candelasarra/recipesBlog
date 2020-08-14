@@ -87,6 +87,9 @@ const useStyles = makeStyles(theme => ({
   typewriterSvg: {
     width: "50%",
     flex: 1,
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: 10,
+    },
   },
   borderDrinks: {
     padding: 20,
@@ -100,6 +103,13 @@ const useStyles = makeStyles(theme => ({
   drinks: {
     height: "100%",
     padding: 20,
+  },
+  typewriterAndText: {
+    display: "flex",
+    alignItems: "center",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column",
+    },
   },
 }))
 
@@ -254,7 +264,7 @@ const HomeComp = ({ props }) => {
           <Grid item container xs={12}>
             <Grid item xs={12} sm={12} md={6}>
               <div className={`${classes.typewriter} ${classes.color} shadow`}>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div className={classes.typewriterAndText}>
                   <Typewriter className={classes.typewriterSvg} />
                   <div style={{ marginLeft: 20, flex: 2 }}>
                     <Typography variant="h4" style={{ textAlign: "center" }}>
@@ -313,25 +323,29 @@ const HomeComp = ({ props }) => {
                     width: "100%",
                   }}
                 >
-                  <Coffee style={{ height: 150 }} />
-                  <Typography
-                    variant="h4"
-                    style={{
-                      width: "fit-content",
-                      textAlign: "center",
-                      color: "#e25a5f",
-                    }}
-                  >
-                    get me a coffee
-                  </Typography>
-
                   <a
                     href="https://www.buymeacoffee.com/chronicles"
-                    style={{ textDecoration: "underline", color: "black" }}
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <Typography variant="h4">here</Typography>
+                    <Coffee style={{ height: 150, marginBottom: 10 }} />
+                    <Typography
+                      variant="h5"
+                      style={{
+                        width: "fit-content",
+                        textAlign: "center",
+                        color: "#e25a5f",
+                      }}
+                    >
+                      get me an iced chocolate milk
+                    </Typography>
+                    {/* <Typography variant="h4">here</Typography> */}
                   </a>
                 </div>
               </Grid>

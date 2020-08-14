@@ -17,6 +17,7 @@ import Dog from "../vectors/dog.svg"
 import Trace from "../vectors/trace3.svg"
 import Trace1 from "../vectors/trace1.svg"
 import Trace2 from "../vectors/trace2.svg"
+import DarkLightThemeContext from "./DarkLightTheme"
 
 const traces = [
   <Trace
@@ -157,6 +158,9 @@ const useStyles = makeStyles(theme => ({
       willChange: "stroke-dashoffset",
     },
   },
+  dropShadow: {
+    filter: "drop-shadow(0px 0px 60px black)",
+  },
 }))
 
 const PostsContent = ({ data, tags }) => {
@@ -164,6 +168,7 @@ const PostsContent = ({ data, tags }) => {
   const classes = useStyles()
   const { language } = useContext(LanguageContext)
   const [posts, setPosts] = useState(null)
+  const { darkLightTheme } = useContext(DarkLightThemeContext)
   const [arrayOfPosts, setArrayOfPosts] = useState([])
   const [searched, setSearched] = useState("")
   const [searchedPosts, setSearchedPosts] = useState(null)
@@ -395,7 +400,11 @@ const PostsContent = ({ data, tags }) => {
       {(searched || checkedValuesTrue.length !== 0) &&
         searchedPosts &&
         searchedPosts.length === 0 && (
-          <div className="opacityAn">
+          <div
+            className={`${
+              darkLightTheme === "dark" ? classes.dropShadow : classes.nothing
+            } opacityAn`}
+          >
             <Dog className={`${classes.sadFace}`} />
             {/* <SentimentVeryDissatisfied className={classes.sadFace} /> */}
             <Typography variant="h3" className={classes.searchResults}>

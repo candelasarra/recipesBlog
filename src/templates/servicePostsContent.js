@@ -18,6 +18,7 @@ import ServiceCheckbox from "../components/serviceCheckbox"
 import Trace from "../vectors/trace3.svg"
 import Trace1 from "../vectors/trace1.svg"
 import Trace2 from "../vectors/trace2.svg"
+import DarkLightThemeContext from "./DarkLightTheme"
 
 const traces = [
   <Trace
@@ -143,6 +144,9 @@ const useStyles = makeStyles(theme => ({
       willChange: "stroke-dashoffset",
     },
   },
+  dropShadow: {
+    filter: "drop-shadow(0px 0px 60px black)",
+  },
 }))
 
 const ServicePostsContent = ({
@@ -154,6 +158,7 @@ const ServicePostsContent = ({
   tags,
 }) => {
   const theme = useTheme()
+  const { darkLightTheme } = useContext(DarkLightThemeContext)
   const classes = useStyles()
   const { language } = useContext(LanguageContext)
   const [posts, setPosts] = useState(null)
@@ -394,7 +399,11 @@ const ServicePostsContent = ({
       <div style={{ width: "100%" }}>
         <div className={classes.postsContainer}>
           {searched && searchedPosts && searchedPosts.length === 0 ? (
-            <div className="opacityAn">
+            <div
+              className={`${
+                darkLightTheme === "dark" ? classes.dropShadow : classes.nothing
+              } opacityAn`}
+            >
               <Dog className={`${classes.sadFace}`} />
               <Typography variant="h4" className={classes.searchResults}>
                 {searchResultString[0].node.string}

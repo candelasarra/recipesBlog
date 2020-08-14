@@ -92,7 +92,7 @@ function MenuMobile({ url, urlText }) {
         >
           <MenuBookIcon />
         </IconButton>
-        <Popper open={open} anchorEl={anchorRef.current} transition disablePortal placement="bottom-left" style={{ zIndex: 999 }}>
+        <Popper open={open} anchorEl={anchorRef.current} transition disablePortal placement="bottom-left" style={{ zIndex: 9999999 }}>
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}

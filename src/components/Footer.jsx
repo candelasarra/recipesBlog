@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
   //
   gridItemFooter: {
-    padding: 5,
+    padding: 10,
     minHeight: 35
   }
 }))
