@@ -255,7 +255,7 @@ const ServicePostsContent = ({
     if (target.value.length !== 0 || target.value.trim()) {
       setSearched(target.value)
     } else if (target.value.length === 0 || !target.value.trim()) {
-      setSearched(null)
+      setSearched("")
     }
   }
 
