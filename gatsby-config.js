@@ -31,7 +31,27 @@ module.exports = {
     ],
   },
   plugins: [
-    `gatsby-plugin-preload-fonts`,
+    // `gatsby-plugin-preload-fonts`,
+    {
+      resolve: `gatsby-plugin-webfonts`,
+      options: {
+        fonts: {
+          google: [
+                  {
+                    family: `Barrio`,
+                  },
+                  {
+                    family: `Shrikhand`,
+                    variants: [`400`],
+                  },
+                  {
+                    family: `Inconsolata`,
+                    variants: [`400`, `700`],
+                  },
+                ],
+        },
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -59,6 +79,9 @@ module.exports = {
           families: ["Barrio", "Shrikhand"],
           urls: ["/fonts/fonts.css"],
         },
+        google: {
+          families: ['Barrio', 'Shrikhand']
+        }
       },
     },
     // {
@@ -77,6 +100,7 @@ module.exports = {
     //         variants: [`400`, `700`],
     //       },
     //     ],
+    //     display: 'swap'
     //   },
     // },
     // {

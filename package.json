@@ -25,6 +25,7 @@
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-sharp": "^2.4.13",
     "gatsby-plugin-web-font-loader": "^1.0.4",
+    "gatsby-plugin-webfonts": "^1.1.4",
     "gatsby-source-contentful": "^2.2.5",
     "gatsby-source-filesystem": "^2.1.56",
     "gatsby-transformer-sharp": "^2.3.19",
