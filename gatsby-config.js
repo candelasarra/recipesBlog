@@ -31,6 +31,7 @@ module.exports = {
     ],
   },
   plugins: [
+    `gatsby-plugin-preload-fonts`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -60,24 +61,24 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
-      options: {
-        fonts: [
-          {
-            family: `Barrio`,
-          },
-          {
-            family: `Shrikhand`,
-            variants: [`400`],
-          },
-          {
-            family: `Inconsolata`,
-            variants: [`400`, `700`],
-          },
-        ],
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-prefetch-google-fonts`,
+    //   options: {
+    //     fonts: [
+    //       {
+    //         family: `Barrio`,
+    //       },
+    //       {
+    //         family: `Shrikhand`,
+    //         variants: [`400`],
+    //       },
+    //       {
+    //         family: `Inconsolata`,
+    //         variants: [`400`, `700`],
+    //       },
+    //     ],
+    //   },
+    // },
     // {
     //   resolve: `gatsby-plugin-manifest`,
     //   options: {
