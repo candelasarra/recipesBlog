@@ -155,9 +155,9 @@ const BlogPostLayoutContent = ({ edges, data }) => {
           return (
             <a
               href={node.data.uri}
-              style={{ color: "white" }}
               target="_blank"
               rel="noopener noreferrer"
+              className={classes.footerLink}
             >
               {children}
             </a>
